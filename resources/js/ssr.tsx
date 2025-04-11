@@ -11,7 +11,19 @@ createServer((page) =>
         page,
         render: ReactDOMServer.renderToString,
         title: (title) => `${title} - ${appName}`,
-        resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx')),
+        resolve: (name: string) => {
+            const [module, page] = name.includes('::') ? name.split('::') : [null, name];
+
+            if (module && page) {
+                return resolvePageComponent(
+                    `../../modules/${module}/resources/${page}.tsx`,
+                    import.meta.glob('../../modules/**/resources/**/*.tsx')
+                );
+
+            }
+
+            return resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx'));
+        },
         setup: ({ App, props }) => {
             /* eslint-disable */
             // @ts-expect-error

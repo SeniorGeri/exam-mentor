@@ -1,0 +1,15 @@
+*Project phases
+
+PHASE 1
+SMALL BOOKING SYSTEM
+ROLES
+ADMIN,INSTRUCTOR,STUDENT
+
+FEATURES
+Register and login as a student ('request for instructor')
+Posting Classes , Articles , Memes
+Filling activities
+Request for booking
+Payment with doc and paypal
+Video call
+...
