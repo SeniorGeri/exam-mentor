@@ -5,35 +5,43 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
-import {FormEventHandler, RefObject, useRef} from 'react';
+import {FormEventHandler, RefObject, useEffect, useRef, useState} from 'react';
 import {toast} from 'sonner';
 import {EditCountryProps} from "./data";
 import {route} from "../../../../vendor/tightenco/ziggy/src/js";
+import { Languages } from '@/components/languages';
+import { useLocale } from '@/contexts/locale';
 
 export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
-    const countryInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+
+    const { currentLocale } = useLocale();
 
     const {data, setData, put, processing, reset, errors, clearErrors} = useForm({
         id: country?.id,
-        country: country?.country,
-        description: country.description,
+        country: country?.country ? country?.country[currentLocale] : '',
+        description: country?.description,
+        // locale: currentLocale ?? null
     });
+
+    // useEffect(() =>setData('country', country?.country[data.locale] || '') , [data.locale]);
 
     const updateCountry: FormEventHandler = (e) => {
         e.preventDefault();
         put(route('country.update', country.id), {
             preserveScroll: true,
             onSuccess: () => updatedCountry(),
+            onError: (error) => console.log('error', error),
+
             // onFinish: () => reset(),
         });
     };
 
     const updatedCountry = () => {
         toast('Shteti u peditesua me sukses', {position: 'top-right', duration: 2000});
-
         clearErrors();
         reset();
         closeModal();
+
     };
 
     return (
@@ -43,7 +51,10 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
                 <DialogDescription>
                     Forma e meposhtme mundeson perditesimin e shtetit
                 </DialogDescription>
+
                 <form className="space-y-6" onSubmit={updateCountry}>
+                    {/* <Languages currentLocale={data.locale} setData={setData}/> */}
+
                     <div className="grid gap-2">
                         <Label htmlFor="country">Shteti</Label>
 
@@ -51,7 +62,6 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
                             id="country"
                             type="text"
                             name="country"
-                            ref={countryInput}
                             value={data.country}
                             onChange={(e) => setData('country', e.target.value)}
                             placeholder="Shteti"

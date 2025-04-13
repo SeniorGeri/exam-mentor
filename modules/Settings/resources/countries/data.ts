@@ -15,7 +15,7 @@ export const countryBreadcrumbs: BreadcrumbItem[] = [
 
 export type Country = {
     id: string;
-    country: string;
+    country: object;
     description: string;
 };
 

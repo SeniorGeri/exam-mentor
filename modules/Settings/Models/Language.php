@@ -4,19 +4,24 @@ declare (strict_types= 1);
 
 namespace Modules\Settings\Models;
 
-use App\Traits\HasTableFilterTrait;
 use App\Traits\HasTranslationsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Translatable\HasTranslations;
 
-final class Country extends Model
+final class Language extends Model
 {
     use SoftDeletes;
-    use HasTableFilterTrait;
     use HasTranslationsTrait;
 
-    protected $fillable = ['country', 'description', 'flag'];
+    protected $fillable = [
+        'language',
+        'language_code',
+        'flag',
+        'description',
+    ];
 
-    protected $translatable = ['country'];
+    protected array $translatable = [
+        'description',
+        'language',
+    ];
 }

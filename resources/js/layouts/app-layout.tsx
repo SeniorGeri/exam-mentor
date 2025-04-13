@@ -2,8 +2,8 @@ import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
 import {type BreadcrumbItem} from '@/types';
 import {type ReactNode} from 'react';
 import i18n from '@/i18n';
-import { I18nextProvider } from 'react-i18next';
 import { Toaster } from "@/components/ui/sonner"
+import { LocaleProvider } from '@/contexts/locale';
 
 interface AppLayoutProps {
     children: ReactNode;
@@ -16,11 +16,10 @@ const changeLanguage = (lng: string) => {
 };
 
 export default ({children, breadcrumbs, ...props}: AppLayoutProps) => (
-    <I18nextProvider i18n={i18n}>
+    <LocaleProvider>
         <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
-        <Toaster />
+            <Toaster />
             {children}
         </AppLayoutTemplate>
-    </I18nextProvider>
-
+    </LocaleProvider>
 );

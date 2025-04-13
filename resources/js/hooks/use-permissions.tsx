@@ -1,9 +1,19 @@
 import { usePage } from '@inertiajs/react';
 
+type Auth = {
+    permissions: string[];
+};
+
+type InertiaPageProps = {
+    auth: Auth;
+};
+
+
 export const usePermissions = () => {
-    const { auth } = usePage().props;
+    const { auth } = usePage<InertiaPageProps>().props;
+    console.log(auth.permissions);
 
     return {
-        hasPermission: (permission: any) => auth?.permissions?.includes(permission)
+        hasPermission: (permission: string) => auth?.permissions?.includes(permission)
     };
 };
