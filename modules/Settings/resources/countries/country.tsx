@@ -1,9 +1,9 @@
 'use client';
 
-import { usePermissions } from '../../../../resources/js/hooks/use-permissions';
+import { usePermissions } from '@/hooks/use-permissions';
 import { ColumnDef } from '@tanstack/react-table';
-import { DataTable } from '../../../../resources/js/components/data-table/data-table';
-import { route } from '../../../../vendor/tightenco/ziggy/src/js';
+import { DataTable } from '@/components/data-table/data-table';
+import { route } from 'ziggy-js';
 import { countryColumns } from './columns';
 import { Country } from './data';
 import { CountryActions } from './actions';

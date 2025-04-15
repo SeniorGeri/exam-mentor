@@ -20,6 +20,10 @@ export interface NavItem {
     href: string;
     icon?: LucideIcon | null;
     isActive?: boolean;
+    type?: 'standalone' | 'dropdown';
+    permission?: string;
+    permissions?: string[];
+    subItems?: NavItem[];
 }
 
 export interface SharedData {

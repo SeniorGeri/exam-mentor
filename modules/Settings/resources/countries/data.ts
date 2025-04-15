@@ -1,6 +1,6 @@
 import type {BreadcrumbItem} from '@/types';
 import {Row} from '@tanstack/react-table';
-import {route} from "../../../../vendor/tightenco/ziggy/src/js";
+import {route} from "ziggy-js";
 
 export const countryBreadcrumbs: BreadcrumbItem[] = [
     {
@@ -8,7 +8,7 @@ export const countryBreadcrumbs: BreadcrumbItem[] = [
         href: route('dashboard'),
     },
     {
-        title: 'Shteti',
+        title: 'Country',
         href: route('country.list'),
     },
 ];

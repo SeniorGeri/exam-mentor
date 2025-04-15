@@ -11,9 +11,15 @@ type InertiaPageProps = {
 
 export const usePermissions = () => {
     const { auth } = usePage<InertiaPageProps>().props;
-    console.log(auth.permissions);
+
+    const hasPermission = (permission: string): boolean =>
+        auth?.permissions?.includes(permission);
+
+    const hasAnyPermission = (permissions: string[]): boolean =>
+        permissions.some((permission) => hasPermission(permission));
 
     return {
-        hasPermission: (permission: string) => auth?.permissions?.includes(permission)
+        hasPermission,
+        hasAnyPermission,
     };
 };

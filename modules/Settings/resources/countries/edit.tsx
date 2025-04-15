@@ -5,14 +5,17 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
-import {FormEventHandler, RefObject, useEffect, useRef, useState} from 'react';
+import {FormEventHandler, useEffect} from 'react';
 import {toast} from 'sonner';
 import {EditCountryProps} from "./data";
-import {route} from "../../../../vendor/tightenco/ziggy/src/js";
-import { Languages } from '@/components/languages';
+import {route} from "ziggy-js";
 import { useLocale } from '@/contexts/locale';
+import { Languages } from '@/components/languages';
+import { useTranslation } from 'react-i18next';
 
 export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
+
+    const { t } = useTranslation('Settings');
 
     const { currentLocale } = useLocale();
 
@@ -20,24 +23,23 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
         id: country?.id,
         country: country?.country ? country?.country[currentLocale] : '',
         description: country?.description,
-        // locale: currentLocale ?? null
+        locale: currentLocale ?? null
     });
 
-    // useEffect(() =>setData('country', country?.country[data.locale] || '') , [data.locale]);
+    useEffect(() =>setData('country', country?.country[data.locale] || '') , [data.locale]);
 
     const updateCountry: FormEventHandler = (e) => {
         e.preventDefault();
         put(route('country.update', country.id), {
             preserveScroll: true,
             onSuccess: () => updatedCountry(),
-            onError: (error) => console.log('error', error),
-
-            // onFinish: () => reset(),
+            onError: (error) => toast(error.description, {position: 'top-right', duration: 2000}),
+            onFinish: () => reset(),
         });
     };
 
     const updatedCountry = () => {
-        toast('Shteti u peditesua me sukses', {position: 'top-right', duration: 2000});
+        toast(t('country_edit_succ'), {position: 'top-right', duration: 2000});
         clearErrors();
         reset();
         closeModal();
@@ -47,16 +49,16 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
     return (
         <Dialog open={isOpen} modal={true}>
             <DialogContent>
-                <DialogTitle>Editimi shtetit</DialogTitle>
+                <DialogTitle>{t('edit_country')}</DialogTitle>
                 <DialogDescription>
-                    Forma e meposhtme mundeson perditesimin e shtetit
+                    {t('edit_country_desc')}
                 </DialogDescription>
 
                 <form className="space-y-6" onSubmit={updateCountry}>
-                    {/* <Languages currentLocale={data.locale} setData={setData}/> */}
+                    <Languages currentLocale={data.locale} setData={setData}/>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="country">Shteti</Label>
+                        <Label htmlFor="country">{t('country')}</Label>
 
                         <Input
                             id="country"
@@ -64,7 +66,7 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
                             name="country"
                             value={data.country}
                             onChange={(e) => setData('country', e.target.value)}
-                            placeholder="Shteti"
+                            placeholder={t('country')}
                             autoComplete="country"
                         />
 
@@ -72,7 +74,7 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="description">Shenime</Label>
+                        <Label htmlFor="description">{t('description')}</Label>
 
                         <Textarea
                             id="description"
@@ -89,12 +91,12 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>
                             <Button variant="secondary" onClick={closeModal}>
-                                Mbyll
+                                {t('close')}
                             </Button>
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">Perditeso shtetin</button>
+                            <button type="submit">{t('edit_country')}</button>
                         </Button>
                     </DialogFooter>
                 </form>

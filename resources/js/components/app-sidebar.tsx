@@ -12,7 +12,24 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+        type: 'standalone'
     },
+    {
+        title: 'Settings',
+        href: 'settings',
+        icon: LayoutGrid,
+        type: 'dropdown',
+        permissions: ['country.read'],
+        subItems: [
+            {
+                title: 'Country',
+                href: route('country.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'country.read',
+            }
+        ]
+    }
 ];
 
 const footerNavItems: NavItem[] = [

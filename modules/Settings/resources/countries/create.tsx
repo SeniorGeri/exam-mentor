@@ -7,13 +7,16 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
-import {FormEventHandler, RefObject, useRef, useState} from 'react';
+import {FormEventHandler, useState} from 'react';
+import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
-import {route} from "../../../../vendor/tightenco/ziggy/src/js";
+import {route} from "ziggy-js";
+
 
 export function CreateCountry() {
 
-    const countryInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+    const { t } = useTranslation('Settings');
+
 
     const [open, setOpen] = useState(false);
 
@@ -38,7 +41,7 @@ export function CreateCountry() {
     };
 
     const countryCreated = () => {
-        toast('Shteti u krijua me sukses', {position: 'top-right', duration: 2000});
+        toast(t('country_created_succ'), {position: 'top-right', duration: 2000});
         closeModal();
     };
 
@@ -46,26 +49,25 @@ export function CreateCountry() {
         <Dialog open={open} modal={true}>
             <DialogTrigger asChild>
                 <Button variant="default" size="sm" onClick={() => setOpen(true)}>
-                    Krijo Shtet
+                    {t('create_country')}
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle>Krijo Shtet</DialogTitle>
+                <DialogTitle>{t('create_country')}</DialogTitle>
                 <DialogDescription>
-                    Meposhte mundesohet krijimi i shteteve
+                    {t('create_country_desc')}
                 </DialogDescription>
                 <form className="space-y-6" onSubmit={storeCountCreateCountry}>
                     <div className="grid gap-2">
-                        <Label htmlFor="country">Shteti</Label>
+                        <Label htmlFor="country">{t('country')}</Label>
 
                         <Input
                             id="country"
                             type="text"
                             name="country"
-                            ref={countryInput}
                             value={data.country}
                             onChange={(e) => setData('country', e.target.value)}
-                            placeholder="Shteti"
+                            placeholder={t('country')}
                             autoComplete="country"
                         />
 
@@ -73,14 +75,14 @@ export function CreateCountry() {
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="description">Shenime</Label>
+                        <Label htmlFor="description">{t('description')}</Label>
 
                         <Textarea
                             id="description"
                             name="description"
                             value={data.description}
                             onChange={(e) => setData('description', e.target.value)}
-                            placeholder="Shenime"
+                            placeholder={t('description')}
                             autoComplete="description"
                         />
 
@@ -90,12 +92,12 @@ export function CreateCountry() {
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>
                             <Button variant="secondary" onClick={closeModal}>
-                                Mbyll
+                                {t('close')}
                             </Button>
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">Shto shtet</button>
+                            <button type="submit">{t('add_country')}</button>
                         </Button>
                     </DialogFooter>
                 </form>

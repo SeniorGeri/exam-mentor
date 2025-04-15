@@ -63,7 +63,7 @@ final class CountryController
     public function update(UpdateCountryRequest $request, Country $Country): RedirectResponse
     {
         $Country->fill($request->validated())
-        // ->setMultipleTranslations($request->translated(), $request->locale)
+        ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
         return to_route('country.list');
