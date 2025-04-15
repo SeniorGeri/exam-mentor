@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/react';
-import { useLocale } from '@/contexts/locale';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 type Languages = {
     data : LanguageData[]
@@ -23,7 +23,7 @@ export function Languages({currentLocale, setData}){
             {languages?.data.map((lang: LanguageData, index: number) => (
                     <label
                     key={lang.language_code}
-                    className={`cursor-pointer max-w-16 max-h-16  border rounded-2xl p-3 flex flex-col items-center justify-center transition-all duration-200 ${
+                    className={`cursor-pointer max-w-16 max-h-16  border rounded-2xl p-1 flex flex-col items-center justify-center transition-all duration-200 ${
                       currentLocale === lang.language_code
                         ? "border-primary ring-2 ring-primary"
                         : "border-muted"
@@ -37,18 +37,13 @@ export function Languages({currentLocale, setData}){
                       onChange={() => setData('locale',lang.language_code)}
                       className="sr-only"
                     />
-                    <img
-                      src={lang.flag}
-                      alt={lang.language_code}
-                      className="w-20 h-20 object-cover rounded-xl mb-2"
-                    />
-                    <span className="text-sm font-medium">{lang.language_code}</span>
-                  </label>
+                    <Avatar className='w-8 h-6'  key={index} >
+                        <AvatarImage src={lang.flag} />
+                        <AvatarFallback>{lang.language_code}</AvatarFallback>
+                    </Avatar>
+                </label>
 
-                // <Avatar  key={index} onClick={() => changeLanguage(lang.language_code)}>
-                //     <AvatarImage src={lang.flag} />
-                //     <AvatarFallback>{lang.language_code}</AvatarFallback>
-                // </Avatar>
+
             ))}
         </div>
     )

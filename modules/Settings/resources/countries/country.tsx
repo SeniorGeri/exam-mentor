@@ -4,7 +4,7 @@ import { usePermissions } from '@/hooks/use-permissions';
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from '@/components/data-table/data-table';
 import { route } from 'ziggy-js';
-import { countryColumns } from './columns';
+import { CountryColumns } from './columns';
 import { Country } from './data';
 import { CountryActions } from './actions';
 import { CreateCountry } from './create';
@@ -16,7 +16,7 @@ export default function CountryTable() {
     const { currentLocale } = useLocale();
 
     const columns: ColumnDef<Country>[] = [
-        ...countryColumns(currentLocale),
+        ...CountryColumns(currentLocale),
         {
             id: 'actions',
             cell: ({ row }) => <CountryActions country={row} />

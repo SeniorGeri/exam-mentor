@@ -9,16 +9,16 @@ use App\Traits\HasTranslationsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-final class Language extends Model
+final class PaymentMethod extends Model
 {
     use SoftDeletes;
     use HasTableFilterTrait;
     use HasTranslationsTrait;
 
     protected $fillable = [
-        'language',
-        'language_code',
-        'flag',
+        'method',
+        'is_primary',
+        'image',
         'description',
     ];
 

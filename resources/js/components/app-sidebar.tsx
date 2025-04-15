@@ -19,7 +19,7 @@ const mainNavItems: NavItem[] = [
         href: 'settings',
         icon: LayoutGrid,
         type: 'dropdown',
-        permissions: ['country.read'],
+        permissions: ['country.read', 'city.read', 'language.read','method.read', 'currency.read'],
         subItems: [
             {
                 title: 'Country',
@@ -27,6 +27,27 @@ const mainNavItems: NavItem[] = [
                 icon: LayoutGrid,
                 type: 'standalone',
                 permission: 'country.read',
+            },
+            {
+                title: 'City',
+                href: route('city.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'city.read',
+            },
+            {
+                title: 'Language',
+                href: route('language.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'language.read',
+            },
+            {
+                title: 'Currency',
+                href: route('currency.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'currency.read',
             }
         ]
     }

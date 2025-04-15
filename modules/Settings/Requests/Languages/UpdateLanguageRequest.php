@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Modules\Settings\Requests;
+namespace Modules\Settings\Requests\Languages;
 
 use App\Traits\HasTranslationRulesTrait;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-final class UpdateCountryRequest extends FormRequest
+final class UpdateLanguageRequest extends FormRequest
 {
     use HasTranslationRulesTrait;
 
@@ -20,9 +20,10 @@ final class UpdateCountryRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'language_code' => ['required', 'string', 'max:100'],
             'description' => ['required', 'string'],
             'flag' => ['nullable', 'string'],
-            // 'locale' => ['required', 'string']
+            'locale' => ['required', 'string']
         ];
     }
 
@@ -34,7 +35,7 @@ final class UpdateCountryRequest extends FormRequest
     public function translationsRules(): array
     {
         return [
-            'country' => ['required', 'string'],
+            'language' => ['required', 'string', 'max:100'],
         ];
     }
 }

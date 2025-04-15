@@ -8,8 +8,8 @@ use App\Http\Requests\Main\FilterTableRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Modules\Settings\Models\Country;
-use Modules\Settings\Requests\StoreCountryRequest;
-use Modules\Settings\Requests\UpdateCountryRequest;
+use Modules\Settings\Requests\Countries\StoreCountryRequest;
+use Modules\Settings\Requests\Countries\UpdateCountryRequest;
 use Inertia\Inertia;
 use Inertia\Response;
 

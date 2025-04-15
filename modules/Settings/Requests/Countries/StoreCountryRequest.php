@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Settings\Requests;
+namespace Modules\Settings\Requests\Countries;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;

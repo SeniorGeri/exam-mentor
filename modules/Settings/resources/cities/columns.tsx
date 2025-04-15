@@ -2,12 +2,12 @@
 
 import {DataTableColumnHeader} from '@/components/data-table/data-table-column-header';
 import {ColumnDef} from '@tanstack/react-table';
-import {Country} from "./data";
-import { useTranslation } from 'react-i18next';
+import {City} from "./data";
+import {useTranslation} from 'react-i18next';
 
 
 
-export const CountryColumns = (currentLocale :string): ColumnDef<Country>[] => {
+export const CityColumns = (currentLocale :string): ColumnDef<City>[] => {
     const { t } = useTranslation('Settings');
 
 
@@ -26,10 +26,24 @@ export const CountryColumns = (currentLocale :string): ColumnDef<Country>[] => {
             },
         },
         {
+            accessorKey: 'city',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('city')}/>,
+            cell: ({row}) => {
+                const city = row.getValue('city')
+                return (
+                    <div className="flex space-x-2">
+                        <span className="max-w-[500px] truncate font-light">{city[currentLocale] || t('not_translated')}</span>
+                    </div>
+                );
+            },
+            enableColumnFilter: true,
+            enableSorting: true,
+        },
+        {
             accessorKey: 'country',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('country')}/>,
             cell: ({row}) => {
-                const country = row.getValue('country')
+                const country = row.getValue('country').country
                 return (
                     <div className="flex space-x-2">
                         <span className="max-w-[500px] truncate font-light">{country[currentLocale] || t('not_translated')}</span>

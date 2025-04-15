@@ -20,5 +20,24 @@ class AdminPermissionsSeeder extends Seeder
         $role->givePermissionTo("country.update");
         $role->givePermissionTo("country.delete");
 
+        $role->givePermissionTo("language.create");
+        $role->givePermissionTo("language.read");
+        $role->givePermissionTo("language.update");
+        $role->givePermissionTo("language.delete");
+
+        $role->givePermissionTo("city.create");
+        $role->givePermissionTo("city.read");
+        $role->givePermissionTo("city.update");
+        $role->givePermissionTo("city.delete");
+
+        $role->givePermissionTo("currency.create");
+        $role->givePermissionTo("currency.read");
+        $role->givePermissionTo("currency.update");
+        $role->givePermissionTo("currency.delete");
+
+        $role->givePermissionTo("payment.create");
+        $role->givePermissionTo("payment.read");
+        $role->givePermissionTo("payment.update");
+        $role->givePermissionTo("payment.delete");
     }
 }
