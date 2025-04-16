@@ -21,6 +21,7 @@ final class UpdatePaymentRequest extends FormRequest
     {
         return [
             'is_primary' => ['required', 'boolean'],
+            'active' => ['required', 'boolean'],
             'image' =>  ['nullable', 'string'],
             'description' =>  ['nullable', 'string'],
             'locale' => ['required', 'string']

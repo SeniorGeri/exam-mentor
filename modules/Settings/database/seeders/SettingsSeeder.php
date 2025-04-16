@@ -3,6 +3,7 @@
 namespace Modules\Settings\database\seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Settings\Models\Gender;
 
 class SettingsSeeder extends Seeder
 {
@@ -13,5 +14,17 @@ class SettingsSeeder extends Seeder
     {
         $this->call(PermissionsSeeder::class);
         $this->call(AdminPermissionsSeeder::class);
+
+        Gender::create(['gender' => [
+            'en' => 'Male',
+            'sq' => 'Mashkull',
+            'it' => 'maschio',
+        ]]);
+
+        Gender::create(['gender' => [
+            'en' => 'Female',
+            'sq' => 'Femer',
+            'it' => 'femmina',
+        ]]);
     }
 }

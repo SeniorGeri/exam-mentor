@@ -9,7 +9,6 @@ import { City } from './data';
 import { CityActions } from './actions';
 import { CreateCity } from './create';
 import { useLocale } from '@/contexts/locale';
-import { Country } from '../countries/data';
 
 export default function CityTable() {
 

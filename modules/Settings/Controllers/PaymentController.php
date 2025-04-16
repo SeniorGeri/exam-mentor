@@ -48,37 +48,45 @@ final class PaymentController
      */
     public function store(StorePaymentRequest $request): RedirectResponse
     {
+        if($request->is_primary) {
+            PaymentMethod::query()->update(['is_primary' => false]);
+        }
+
         PaymentMethod::create($request->validated());
 
-        return to_route('country.list');
+        return to_route('payment.list');
     }
 
     /**
      * Update Payment
      *
      * @param  UpdatePaymentRequest $request
-     * @param  Payment $Payment
+     * @param  PaymentMethod $Payment
      * @return RedirectResponse
      */
     public function update(UpdatePaymentRequest $request, PaymentMethod $Payment): RedirectResponse
     {
+        if($request->is_primary && !$Payment->is_primary) {
+            PaymentMethod::query()->update(['is_primary' => false]);
+        }
+
         $Payment->fill($request->validated())
         ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
-        return to_route('country.list');
+        return to_route('payment.list');
     }
 
     /**
      * Delete Payment
      *
-     * @param  Payment $Payment
+     * @param  PaymentMethod $Payment
      * @return RedirectResponse
      */
     public function destroy(PaymentMethod $Payment): RedirectResponse
     {
         $Payment->delete();
 
-        return to_route('country.list');
+        return to_route('payment.list');
     }
 }

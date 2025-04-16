@@ -49,6 +49,14 @@ const mainNavItems: NavItem[] = [
                 type: 'standalone',
                 permission: 'currency.read',
             }
+            ,
+            {
+                title: 'Payment Method',
+                href: route('payment.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'payment.read',
+            }
         ]
     }
 ];

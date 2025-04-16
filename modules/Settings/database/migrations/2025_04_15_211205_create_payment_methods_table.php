@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('method');
             $table->boolean('is_primary')->default(false);
+            $table->boolean('active')->default(false);
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();

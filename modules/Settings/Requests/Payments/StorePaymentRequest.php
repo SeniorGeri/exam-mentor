@@ -19,6 +19,7 @@ final class StorePaymentRequest extends FormRequest
         return [
             'method' => ['required', 'string', 'max:100'],
             'is_primary' => ['required', 'boolean'],
+            'active' => ['required', 'boolean'],
             'image' =>  ['nullable', 'string'],
             'description' =>  ['nullable', 'string'],
         ];

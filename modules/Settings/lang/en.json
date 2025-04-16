@@ -1,12 +1,17 @@
 {
+    "nr": "NR",
+    "description": "Description",
+    "yes" : "Yes",
+    "no": "No",
+    "close": "Close",
+    "open_menu": "Open menu",
+    "active": "Active",
+
     "country": "Country",
     "create_country": "Create country",
     "create_country_desc": "The form below allows you to create new countries",
     "add_country": "Add country",
-    "description": "Description",
-    "close": "Close",
     "country_created_succ": "The country has been created succesfully",
-    "open_menu": "Open menu",
     "edit_country": "Edit country",
     "delete_country": "Delete country",
     "country_edit_succ": "The country has been updated succesfully",
@@ -39,6 +44,10 @@
     "currency_delete_succ": "The currency has been deleted succesfully",
     "delete_currency_desc": "By proceeding  the currency will be deleted.",
     "select_country": "Select country",
+    "symbol": "Symbol",
+    "is_primary": "Is Primary?",
+    "currency_code": "Code",
+    "exchange": "Exchange",
 
     "language": "Language",
     "create_language": "Create language",
@@ -63,6 +72,6 @@
     "payment_edit_succ": "The payment has been updated succesfully",
     "edit_payment_desc": "The form  below allows you to update the selected payment",
     "payment_delete_succ": "The payment has been deleted succesfully",
-    "delete_payment_desc": "By proceeding  the payment will be deleted."
-
+    "delete_payment_desc": "By proceeding  the payment will be deleted.",
+    "method": "Method"
 }

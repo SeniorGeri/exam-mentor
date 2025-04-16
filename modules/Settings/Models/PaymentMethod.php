@@ -18,11 +18,12 @@ final class PaymentMethod extends Model
     protected $fillable = [
         'method',
         'is_primary',
+        'active',
         'image',
         'description',
     ];
 
     protected array $translatable = [
-        'language',
+        'method',
     ];
 }

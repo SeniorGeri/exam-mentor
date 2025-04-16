@@ -5,20 +5,16 @@ import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
 import {route} from "ziggy-js";
-import { Country } from '../countries/data';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCountries } from './countries-context';
 
 
-export function CreateCity() {
-
-    const countries = useCountries(); // Access directly from context
+export function CreatePayment() {
 
     const { t } = useTranslation('Settings');
 
@@ -26,16 +22,17 @@ export function CreateCity() {
     const [open, setOpen] = useState(false);
 
     const {data, setData, post, processing, reset, errors, clearErrors} = useForm({
-        city: '',
-        country_id: '',
+        method: '',
+        is_primary: false,
+        active: false,
         description: '',
     });
 
-    const storeCountCreateCity: FormEventHandler = (e) => {
+    const storePayment: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('city.store'), {
+        post(route('payment.store'), {
             preserveScroll: true,
-            onSuccess: () => cityCreated(),
+            onSuccess: () => paymentCreated(),
             // onFinish: () => reset(),
         });
     };
@@ -46,8 +43,8 @@ export function CreateCity() {
         setOpen(false);
     };
 
-    const cityCreated = () => {
-        toast(t('city_created_succ'), {position: 'top-right', duration: 2000});
+    const paymentCreated = () => {
+        toast(t('payment_created_succ'), {position: 'top-right', duration: 2000});
         closeModal();
     };
 
@@ -55,55 +52,47 @@ export function CreateCity() {
         <Dialog open={open} modal={true}>
             <DialogTrigger asChild>
                 <Button variant="default" size="sm" onClick={() => setOpen(true)}>
-                    {t('create_city')}
+                    {t('create_payment')}
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle>{t('create_city')}</DialogTitle>
+                <DialogTitle>{t('create_payment')}</DialogTitle>
                 <DialogDescription>
-                    {t('create_city_desc')}
+                    {t('create_payment_desc')}
                 </DialogDescription>
-                <form className="space-y-6" onSubmit={storeCountCreateCity}>
+                <form className="space-y-6" onSubmit={storePayment}>
                     <div className="grid gap-2">
-                        <Label htmlFor="city">{t('city')}</Label>
+                        <Label htmlFor="method">{t('method')}</Label>
 
                         <Input
-                            id="city"
+                            id="method"
                             type="text"
-                            name="city"
-                            value={data.city}
-                            onChange={(e) => setData('city', e.target.value)}
-                            placeholder={t('city')}
-                            autoComplete="city"
+                            name="method"
+                            value={data.method}
+                            onChange={(e) => setData('method', e.target.value)}
+                            placeholder={t('method')}
+                            autoComplete="method"
                         />
 
-                        <InputError message={errors.city}/>
+                        <InputError message={errors.method}/>
                     </div>
+                    <div className="grid grid-cols-2">
+                        <div className="col-span-1">
+                            <div className="flex items-center space-x-2">
+                                <Switch id="is_primary" checked={data.is_primary}
+                                onCheckedChange={(checked: boolean) => setData('is_primary', checked)}/>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="country_id">{t('countries')}</Label>
-                        <Select
-                            name="country_id"
-                            value={data.country_id}
-                            onValueChange={(value) => setData("country_id", value)}
-                        >
-                            <SelectTrigger className="w-full" >
-                                <SelectValue placeholder={t('select_country')}>
-                                    {data.country_id ? countries.find((count: Country) => count.id.toString() === data.country_id)?.country['en'] : t('select_country')}
-                            </SelectValue>
+                                <Label htmlFor="is_primary">{t('is_primary')}</Label>
+                            </div>
+                        </div>
+                        <div className="col-span-1">
+                            <div className="flex items-center space-x-2">
+                                <Switch id="active" checked={data.active}
+                                onCheckedChange={(checked: boolean) => setData('active', checked)}/>
 
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                <SelectLabel>{t('select_country')}</SelectLabel>
-                                {countries.map((country : Country) => (
-                                    <SelectItem key={country.id} value={country.id}>{country.country['en']}</SelectItem>
-                                ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                        <InputError message={errors.country_id}/>
-
+                                <Label htmlFor="active">{t('active')}</Label>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="grid gap-2">
@@ -129,7 +118,7 @@ export function CreateCity() {
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">{t('add_city')}</button>
+                            <button type="submit">{t('add_payment')}</button>
                         </Button>
                     </DialogFooter>
                 </form>

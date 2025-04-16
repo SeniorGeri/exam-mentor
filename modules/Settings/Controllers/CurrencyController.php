@@ -48,6 +48,9 @@ final class CurrencyController
      */
     public function store(StoreCurrencyRequest $request): RedirectResponse
     {
+        if($request->is_primary){
+            Currency::query()->update(['is_primary' => false]);
+        }
         Currency::create($request->validated());
 
         return to_route('currency.list');
@@ -62,9 +65,10 @@ final class CurrencyController
      */
     public function update(UpdateCurrencyRequest $request, Currency $Currency): RedirectResponse
     {
-        $Currency->fill($request->validated())
-        ->setMultipleTranslations($request->translated(), $request->locale)
-        ->save();
+        if($request->is_primary && !$Currency->is_primary) {
+            Currency::query()->update(['is_primary' => false]);
+        }
+        $Currency->update($request->validated());
 
         return to_route('currency.list');
     }
