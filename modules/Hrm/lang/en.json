@@ -1,0 +1,9 @@
+{
+    "nr": "NR",
+    "description": "Description",
+    "yes" : "Yes",
+    "no": "No",
+    "close": "Close",
+    "open_menu": "Open menu",
+    "active": "Active"
+}

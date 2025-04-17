@@ -122,6 +122,9 @@
             "@/*": [
                 "./resources/js/*"
             ],
+            "@modules/*": [
+                "./modules/*"
+            ],
             "ziggy-js": [
                 "./vendor/tightenco/ziggy"
             ]
@@ -132,6 +135,7 @@
         "resources/js/**/*.ts",
         "resources/js/**/*.tsx",
         "modules/**/resources/**/*.ts",
-        "modules/**/resources/**/*.tsx"
+        "modules/**/resources/**/*.tsx",
+        "modules/**/resources/**/*.json"
     ]
 }

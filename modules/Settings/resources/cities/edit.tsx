@@ -15,7 +15,6 @@ import { useTranslation } from 'react-i18next';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Country } from '../countries/data';
 import { useCountries } from './countries-context';
-import { log } from 'console';
 
 export function EditCity({city, isOpen, closeModal}: EditCityProps) {
 

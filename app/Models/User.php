@@ -5,17 +5,22 @@ declare(strict_types= 1);
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use GeriHoxha\LaravelRoleModels\HasRoleBehavior;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
-final class User extends Authenticatable
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, HasPermissions, SoftDeletes;
+
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +32,14 @@ final class User extends Authenticatable
         'email',
         'password',
     ];
+
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value): string => Hash::make($value),
+        );
+    }
 
     /**
      * The attributes that should be hidden for serialization.
