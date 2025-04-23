@@ -7,6 +7,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
+import FileInput from 'modules/Media/resources/js/file-input';
 import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
@@ -71,9 +72,10 @@ export function CreateCountry() {
                             autoComplete="country"
                         />
 
-                        <InputError message={errors.country}/>
+                        <InputError message={errors.country} />
                     </div>
 
+                    <FileInput multiple={false} inputName='flag' setFormData={setData} />
                     <div className="grid gap-2">
                         <Label htmlFor="description">{t('description')}</Label>
 

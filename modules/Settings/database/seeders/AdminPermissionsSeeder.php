@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Settings\database\seeders;
 
 use App\Enums\RolesEnum;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
-class AdminPermissionsSeeder extends Seeder
+final class AdminPermissionsSeeder extends Seeder
 {
     /**
      * Seed the application's database.

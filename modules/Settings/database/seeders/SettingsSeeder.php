@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Settings\database\seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Settings\Models\Gender;
 
-class SettingsSeeder extends Seeder
+final class SettingsSeeder extends Seeder
 {
     /**
      * Seed the application's database.

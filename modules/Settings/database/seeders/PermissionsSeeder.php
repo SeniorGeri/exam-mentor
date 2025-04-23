@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Settings\database\seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-class PermissionsSeeder extends Seeder
+final class PermissionsSeeder extends Seeder
 {
     /**
      * Seed the application's database.

@@ -7,7 +7,7 @@ namespace App\Traits;
 
 trait HasRoleBehaviorTrait
 {
-    protected static string $role;
+    protected static string $role = '';
 
     protected static function booted(): void
     {

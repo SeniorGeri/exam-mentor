@@ -8,11 +8,11 @@ use App\Enums\RolesEnum;
 use App\Models\User;
 // use App\Traits\HasRoleBehaviorTrait;
 use App\Traits\HasTranslationsTrait;
-use GeriHoxha\LaravelRoleModels\HasRoleBehavior;
+use App\Traits\HasRoleBehaviorTrait;
 
 final class Instructor extends User
 {
-    use HasRoleBehavior;
+    use HasRoleBehaviorTrait;
     use HasTranslationsTrait;
     protected static string $role = RolesEnum::INSTRUCTOR->value;
     protected $table = 'users';

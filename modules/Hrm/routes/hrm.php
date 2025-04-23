@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
 use Modules\Hrm\Controllers\Instructor\InstructorController;
 use Modules\Hrm\Controllers\Student\StudentController;
 
