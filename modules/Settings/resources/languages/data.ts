@@ -1,6 +1,7 @@
 import type {BreadcrumbItem} from '@/types';
 import {Row} from '@tanstack/react-table';
 import {route} from "ziggy-js";
+import { TranslatableField } from '@/types/helpers';
 
 export const languageBreadcrumbs: BreadcrumbItem[] = [
     {
@@ -15,9 +16,10 @@ export const languageBreadcrumbs: BreadcrumbItem[] = [
 
 export type Language = {
     id: string;
-    language: object;
-    language_code: object;
+    language: TranslatableField;
+    language_code: string;
     description: string;
+    flag: string;
 };
 
 export type LanguageActionsProps = {

@@ -12,6 +12,7 @@ import {route} from "ziggy-js";
 import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
+import FileInput from 'modules/Media/resources/js/file-input';
 
 export function EditLanguage({language, isOpen, closeModal}: EditLanguageProps) {
 
@@ -24,6 +25,7 @@ export function EditLanguage({language, isOpen, closeModal}: EditLanguageProps) 
         language: language?.language ? language?.language[currentLocale] : '',
         language_code: language?.language_code,
         description: language?.description,
+        flag: language?.flag,
         locale: currentLocale ?? null
     });
 
@@ -90,6 +92,8 @@ export function EditLanguage({language, isOpen, closeModal}: EditLanguageProps) 
                         <InputError message={errors.language_code}/>
                     </div>
 
+                    <FileInput defaultValue={[data.flag]} inputName='flag' setFormData={setData} />
+                    
                     <div className="grid gap-2">
                         <Label htmlFor="description">{t('description')}</Label>
 

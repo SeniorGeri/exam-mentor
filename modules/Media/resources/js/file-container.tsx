@@ -1,23 +1,11 @@
-import {ContainerProps, Image} from './types';
+import {ContainerProps} from './types';
 
-
-function FileContainer({file, setCurrentFile, selectedFiles, setSelectedFile, multiple}: ContainerProps) {
+function FileContainer({file,  selectedFiles, handleSelectFile }: ContainerProps) {
     return (
         <button
             className={`col-span-1 w-full rounded-lg py-1`}
             role="button"
-            onClick={() => {
-                setCurrentFile(file);
-                if (!multiple) {
-                    setSelectedFile([file]);
-                    return;
-                }
-                if (selectedFiles.includes(file)) {
-                    setSelectedFile(selectedFiles.filter((item: Image) => item != file));
-                } else {
-                    setSelectedFile([...selectedFiles, file]);
-                }
-            }}
+            onClick={() => handleSelectFile(file) }
         >
             <div
                 className={`mx-auto overflow-hidden rounded-lg bg-white shadow-lg ${selectedFiles.includes(file) ? 'border-4 border-gray-300' : 'border-none'}`}

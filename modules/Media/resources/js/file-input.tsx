@@ -1,84 +1,67 @@
 import {Button} from '../../../../resources/js/components/ui/button';
 import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from '../../../../resources/js/components/ui/resizable';
 import {Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger} from '../../../../resources/js/components/ui/sheet';
-import axios from 'axios';
-import {useEffect, useState} from 'react';
-import {route} from '../../../../vendor/tightenco/ziggy';
+import { useEffect, useState } from 'react';
 import Dropzone from './drop-zone';
-import FileContainer from './file-container';
 import FileInfo from './file-info';
 import FilePreview from './file-preview';
-import {Image, ImageRequest, InputProp} from './types';
+import {Image, InputProp} from './types';
+import FileGallery from './file-gallery';
+import { useMediaFiles } from './use-media-files';
+import { useUpload } from './use-upload';
 
-export async function fetchImages({pageIndex, filter}: ImageRequest) {
-    const filterKey: string = filter !== '' ? `&filter=${filter}` : '';
-    const response = await fetch(`${route('media.search')}?page=${pageIndex}${filterKey}`);
+function FileInput({multiple = false, inputName = 'image', setFormData, defaultValue = []}: InputProp) {
 
-    const data = await response.json();
-    return data.medias;
-}
-
-function FileInput({multiple = false, inputName = 'image', setFormData}: InputProp) {
-    const [uploadedFiles, setUploadedFiles] = useState<Image[]>([]);
-    const [isUploading, setIsUploading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
     const [currentFile, setCurrentFile] = useState<Image | null>(null);
     const [selectedFiles, setSelectedFile] = useState<Image[]>([]);
-    const loadInitialFiles = async () => {
-        try {
-            const images = await fetchImages({pageIndex: currentPage, filter: ''});
-            setUploadedFiles(uploadedFiles.concat(images.data));
-        } catch (error) {
-            console.log('Failed to fetch initial images:', error);
-        }
-    };
+    const { uploadedFiles, isLoading, loadMore, setUploadedFiles, hasMore } = useMediaFiles({});
+    const { isUploading, uploadFiles } = useUpload();
 
     useEffect(() => {
-        loadInitialFiles();
-    }, [currentPage]);
+        if(defaultValue.length > 0){
+            const mappedValues: Image[] = defaultValue.map((image: string) => {
+                return {
+                    id: 0,
+                    text: '',
+                    original: image,
+                    thumb: image,
+                }
+            })
+            setSelectedFile(mappedValues)
+        }
+    }, []);
+
+    const handleSelectFile = (file: Image) => {
+        setCurrentFile(file);
+        if (!multiple) {
+            setSelectedFile([file]);
+            return;
+        }
+        if (selectedFiles.includes(file)) {
+            setSelectedFile(selectedFiles.filter((item: Image) => item != file));
+        } else {
+            setSelectedFile([...selectedFiles, file]);
+        }
+    }
 
     useEffect(() => {
         if (multiple) {
-            setFormData(inputName, selectedFiles.map((file: Image) => file.original));
+            setFormData(inputName, selectedFiles.map(file => file.original));
         } else {
             setFormData(inputName, selectedFiles[0]?.original);
         }
     }, [selectedFiles]);
 
     const handleUpload = async (files: File[]) => {
-        try {
-            setIsUploading(true);
-            const uploadPromises = files.map((file: File) => {
-                const formData = new FormData();
-                formData.append('file', file);
-
-                return axios.post(route('media.upload'), formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-            });
-
-            const responses = await Promise.all(uploadPromises);
-
-            // Collect all uploaded file data
-            const newUploadedFiles = responses.map((response) => response.data);
-
-            // Update state with all uploaded files (prepend to existing)
-            setUploadedFiles((prev) => [...newUploadedFiles, ...prev]);
-
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsUploading(false);
-        }
+        const uploaded = await uploadFiles(files);
+        setUploadedFiles(prev => [...uploaded, ...prev]);
     };
 
     return (
         <Sheet key={'bottom'}>
             <SheetTrigger asChild>
                 <div>
-                    <FilePreview selectedFiles={selectedFiles} setSelectedFile={setSelectedFile}/>
+                    <FilePreview selectedFiles={selectedFiles} handleSelectFile={handleSelectFile}/>
                 </div>
             </SheetTrigger>
             <SheetContent side={'top'} className="flex flex-col h-full">
@@ -100,19 +83,12 @@ function FileInput({multiple = false, inputName = 'image', setFormData}: InputPr
                             {uploadedFiles.length > 0 && (
                                 <ResizablePanelGroup direction={'horizontal'} className="w-full rounded-lg  flex-1">
                                     <ResizablePanel defaultSize={80}>
-                                        <div className="mx-2 grid grid-cols-4 gap-2 lg:grid-cols-12">
-                                            {uploadedFiles.map((file) => (
-                                                <FileContainer
-                                                    multiple={multiple}
-                                                    file={file}
-                                                    index={file.id}
-                                                    key={file.id}
-                                                    setCurrentFile={setCurrentFile}
-                                                    selectedFiles={selectedFiles}
-                                                    setSelectedFile={setSelectedFile}
-                                                />
-                                            ))}
-                                        </div>
+                                        <FileGallery
+                                            uploadedFiles={uploadedFiles}
+                                            multiple={multiple}
+                                            selectedFiles={selectedFiles}
+                                            handleSelectFile={handleSelectFile}
+                                        />
                                     </ResizablePanel>
                                     <ResizableHandle/>
                                     <ResizablePanel defaultSize={20}>
@@ -126,12 +102,14 @@ function FileInput({multiple = false, inputName = 'image', setFormData}: InputPr
                     )}
                 </div>
                 <SheetFooter>
-                    <>
-                        <Button type="button" onClick={() => setCurrentPage(currentPage => currentPage + 1)}>
-                            Load More
+                    <div className="grid md:grid-cols-4 gap-2">
+                        <Button className="md:col-span-3" type="button" onClick={() => loadMore()}  disabled={!hasMore || isLoading}>
+                            {isLoading ? 'Loading...' : 'Load More'}
                         </Button>
-                        <SheetClose asChild></SheetClose>
-                    </>
+                        <SheetClose asChild className="col-span-1">
+                            <Button>close</Button>
+                        </SheetClose>
+                    </div>
                 </SheetFooter>
             </SheetContent>
         </Sheet>

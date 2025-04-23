@@ -8,6 +8,7 @@ import {Label} from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
+import FileInput from 'modules/Media/resources/js/file-input';
 import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
@@ -26,6 +27,7 @@ export function CreatePayment() {
         is_primary: false,
         active: false,
         description: '',
+        image: ''
     });
 
     const storePayment: FormEventHandler = (e) => {
@@ -95,6 +97,7 @@ export function CreatePayment() {
                         </div>
                     </div>
 
+                    <FileInput inputName='image' setFormData={setData} />
                     <div className="grid gap-2">
                         <Label htmlFor="description">{t('description')}</Label>
 

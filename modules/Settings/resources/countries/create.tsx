@@ -24,6 +24,7 @@ export function CreateCountry() {
     const {data, setData, post, processing, reset, errors, clearErrors} = useForm({
         country: '',
         description: '',
+        flag: ''
     });
 
     const storeCountCreateCountry: FormEventHandler = (e) => {
@@ -75,7 +76,7 @@ export function CreateCountry() {
                         <InputError message={errors.country} />
                     </div>
 
-                    <FileInput multiple={false} inputName='flag' setFormData={setData} />
+                    <FileInput inputName='flag' setFormData={setData} />
                     <div className="grid gap-2">
                         <Label htmlFor="description">{t('description')}</Label>
 

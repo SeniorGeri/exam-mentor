@@ -1,9 +1,8 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { DropzoneProps } from './types';
 
-
-
 const Dropzone = ({ onUpload }: DropzoneProps) => {
+
     const [isDragActive, setIsDragActive] = useState<boolean>(false);
     const fileInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 

@@ -13,6 +13,7 @@ import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
 import { Switch } from '@/components/ui/switch';
+import FileInput from 'modules/Media/resources/js/file-input';
 
 export function EditPayment({payment, isOpen, closeModal}: EditPaymentProps) {
 
@@ -26,6 +27,7 @@ export function EditPayment({payment, isOpen, closeModal}: EditPaymentProps) {
         description: payment?.description,
         is_primary: payment?.is_primary,
         active: payment?.active,
+        image: payment?.image,
         locale: currentLocale ?? null
     });
 
@@ -93,6 +95,8 @@ export function EditPayment({payment, isOpen, closeModal}: EditPaymentProps) {
                             </div>
                         </div>
                     </div>
+
+                    <FileInput defaultValue={[data.image]} inputName='image' setFormData={setData} />
 
                     <div className="grid gap-2">
                         <Label htmlFor="description">{t('description')}</Label>

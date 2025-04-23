@@ -42,7 +42,6 @@ function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoP
 
     const deleteImage: () => void = () => {
 
-
         router.delete(route('media.destroy', file?.id), {
             preserveScroll: true,
             onSuccess: () => {
@@ -50,16 +49,11 @@ function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoP
                 clearErrors();
                 reset()
 
-                // Create new array without the deleted file
                 const filteredFiles = uploadedFiles.filter((item) => item.id !== data.id);
 
-                // Update state with the new list
                 setUploadedFiles(filteredFiles);
 
-                // Set the new current file, if any
                 setCurrentFile(null)
-
-
             },
         });
     };

@@ -6,11 +6,12 @@ namespace Modules\Media\Helpers;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Modules\Media\Models\Media;
-use Modules\Media\Requests\UploadFileRequest;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Modules\Media\Models\Media;
+use Modules\Media\Requests\UploadFileRequest;
 
 final class StorageService
 {
@@ -27,6 +28,10 @@ final class StorageService
 
         $folderPath = 'uploads/' . date('y') . '/' . date('m');
 
+        if (!File::exists(storage_path('app/public/'.$folderPath))) {
+
+            File::makeDirectory(storage_path('app/public/'.$folderPath), 0755, true); // recursive = true for nested folders
+        }
         $convertedNameThumb = Str::beforeLast($request->file('file')->hashName(), '.') . '.webp';
 
         $imageData->pad(200, 200)->toWebp()->save(storage_path('app/public/') . $folderPath . '/thumb_' . $convertedNameThumb);

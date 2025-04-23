@@ -3,10 +3,10 @@ import React from 'react';
 import {FilePreviewProps, Image} from './types';
 
 
-function FilePreview({selectedFiles, setSelectedFile}: FilePreviewProps) {
+function FilePreview({selectedFiles, handleSelectFile}: FilePreviewProps) {
     const removeFile = (event: React.MouseEvent<HTMLElement>, file: Image) => {
         event.preventDefault();
-        setSelectedFile(selectedFiles.filter((item: Image) => item != file));
+        handleSelectFile(file);
     };
 
     return selectedFiles.length === 0 ? (

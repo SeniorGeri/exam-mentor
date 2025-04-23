@@ -12,6 +12,7 @@ import {route} from "ziggy-js";
 import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
+import FileInput from 'modules/Media/resources/js/file-input';
 
 export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
 
@@ -23,6 +24,7 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
         id: country?.id,
         country: country?.country ? country?.country[currentLocale] : '',
         description: country?.description,
+        flag: country?.flag,
         locale: currentLocale ?? null
     });
 
@@ -72,6 +74,8 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
 
                         <InputError message={errors.country}/>
                     </div>
+
+                    <FileInput defaultValue={[data.flag]} inputName='flag' setFormData={setData} />
 
                     <div className="grid gap-2">
                         <Label htmlFor="description">{t('description')}</Label>

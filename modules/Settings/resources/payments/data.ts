@@ -1,4 +1,5 @@
 import type {BreadcrumbItem} from '@/types';
+import { TranslatableField } from '@/types/helpers';
 import {Row} from '@tanstack/react-table';
 import {route} from "ziggy-js";
 
@@ -17,9 +18,11 @@ export const paymentBreadcrumbs: BreadcrumbItem[] = [
 
 export type Payment = {
     id: string;
-    payment: object;
-
+    method: TranslatableField;
     description: string;
+    image: string;
+    is_primary: boolean;
+    active: boolean;
 };
 
 export type PaymentActionsProps = {

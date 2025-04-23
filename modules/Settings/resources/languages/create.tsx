@@ -7,6 +7,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
+import FileInput from 'modules/Media/resources/js/file-input';
 import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
@@ -24,6 +25,8 @@ export function CreateLanguage() {
         language: '',
         language_code: '',
         description: '',
+        flag: ''
+
     });
 
     const storeCountCreateLanguage: FormEventHandler = (e) => {
@@ -75,6 +78,7 @@ export function CreateLanguage() {
                         <InputError message={errors.language}/>
                     </div>
 
+                    <FileInput inputName='flag' setFormData={setData} />
                     <div className="grid gap-2">
                         <Label htmlFor="language_code">{t('language_code')}</Label>
 

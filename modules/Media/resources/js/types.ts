@@ -6,11 +6,8 @@ export type DropzoneProps = {
 
 export type ContainerProps = {
     file: Image;
-    index: number;
-    setCurrentFile: (file: Image) => void;
+    handleSelectFile: (file: Image) => void
     selectedFiles: Image[];
-    setSelectedFile: (files: Image[]) => void;
-    multiple: boolean;
 };
 
 export type InfoProps = {
@@ -34,11 +31,24 @@ export type Image = {
 
 export type FilePreviewProps = {
     selectedFiles: Image[];
-    setSelectedFile: React.Dispatch<React.SetStateAction<Image[]>>;
+    handleSelectFile: (file: Image) => void
 };
 
 export type InputProp = {
+    multiple?: boolean,
+    inputName?: string,
+    defaultValue?: string[],
+    setFormData?: (key: string, value: string | string[]) => void
+}
+
+export type GalleryProps = {
     multiple: boolean,
-    inputName: string,
-    setFormData: (key: string, value: string | string[]) => void
+    selectedFiles: Image[],
+    uploadedFiles: Image[],
+    handleSelectFile: (file: Image) => void
+}
+
+export interface UseMediaFilesProps {
+    initialPage?: number;
+    filter?: string;
 }
