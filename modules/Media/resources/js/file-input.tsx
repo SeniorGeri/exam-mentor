@@ -61,7 +61,7 @@ function FileInput({multiple = false, inputName = 'image', setFormData, defaultV
         <Sheet key={'bottom'}>
             <SheetTrigger asChild>
                 <div>
-                    <FilePreview selectedFiles={selectedFiles} handleSelectFile={handleSelectFile}/>
+                    <FilePreview selectedFiles={selectedFiles} multiple={multiple} handleSelectFile={handleSelectFile}/>
                 </div>
             </SheetTrigger>
             <SheetContent side={'top'} className="flex flex-col h-full">

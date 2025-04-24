@@ -3,11 +3,12 @@ import React from 'react';
 import {FilePreviewProps, Image} from './types';
 
 
-function FilePreview({selectedFiles, handleSelectFile}: FilePreviewProps) {
+function FilePreview({selectedFiles, multiple, handleSelectFile}: FilePreviewProps) {
     const removeFile = (event: React.MouseEvent<HTMLElement>, file: Image) => {
         event.preventDefault();
         handleSelectFile(file);
     };
+    console.log(multiple);
 
     return selectedFiles.length === 0 ? (
         <Button variant="outline" type='button'>Preview</Button>
@@ -16,7 +17,7 @@ function FilePreview({selectedFiles, handleSelectFile}: FilePreviewProps) {
             {selectedFiles.map((file: Image) => (
                 <div
                     key={file.id}
-                    className={`col-span-1 mx-auto overflow-hidden rounded-lg bg-white py-1 shadow-lg`}
+                    className={`${multiple? 'col-span-1':'col-span-3'} mx-auto overflow-hidden rounded-lg bg-white py-1 shadow-lg`}
                     onClick={(event) => removeFile(event, file)}
                 >
                     <img

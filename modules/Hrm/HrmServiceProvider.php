@@ -18,7 +18,7 @@ class HrmServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/settings.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/hrm.php');
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 

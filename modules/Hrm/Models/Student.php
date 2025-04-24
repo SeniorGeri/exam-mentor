@@ -14,6 +14,7 @@ final class Student extends User
 
     protected static string $role = RolesEnum::STUDENT->value;
     protected $table = 'users';
+    protected $guard_name = 'web';
 
     protected $fillable = [
         "name",

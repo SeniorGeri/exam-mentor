@@ -15,3 +15,5 @@ export type LanguageData = {
 export type InertiaLangPageProps = {
     languages: Languages;
 };
+
+

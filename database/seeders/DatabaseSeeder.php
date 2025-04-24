@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Modules\Settings\database\seeders\SettingsSeeder;
+use Modules\Hrm\database\seeders\HrmSeeder;
+use Modules\Settings\Models\Gender;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +22,7 @@ class DatabaseSeeder extends Seeder
             User::factory(10)->create();
             $this->call(RolesSeeder::class);
             $this->call(SettingsSeeder::class);
+            $this->call(HrmSeeder::class);
 
             $user = User::create([
                 'name' => 'admin',

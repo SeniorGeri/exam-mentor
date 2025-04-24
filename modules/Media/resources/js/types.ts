@@ -31,6 +31,7 @@ export type Image = {
 
 export type FilePreviewProps = {
     selectedFiles: Image[];
+    multiple: boolean;
     handleSelectFile: (file: Image) => void
 };
 

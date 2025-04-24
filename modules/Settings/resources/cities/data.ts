@@ -2,6 +2,7 @@ import type {BreadcrumbItem} from '@/types';
 import {Row} from '@tanstack/react-table';
 import {route} from "ziggy-js";
 import { TranslatableField } from '@/types/helpers';
+import { Country } from '@/modules/Settings/resources/countries/data';
 
 export const cityBreadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,6 +19,7 @@ export type City = {
     id: string;
     city: TranslatableField;
     country_id: number;
+    country: Country;
     description: string;
 };
 

@@ -6,15 +6,17 @@ namespace Modules\Hrm\Models;
 
 use App\Enums\RolesEnum;
 use App\Models\User;
-// use App\Traits\HasRoleBehaviorTrait;
 use App\Traits\HasTranslationsTrait;
 use App\Traits\HasRoleBehaviorTrait;
 
 final class Instructor extends User
 {
-    use HasRoleBehaviorTrait;
     use HasTranslationsTrait;
+    use HasRoleBehaviorTrait;
+
     protected static string $role = RolesEnum::INSTRUCTOR->value;
+    protected $guard_name = 'web';
+
     protected $table = 'users';
 
 

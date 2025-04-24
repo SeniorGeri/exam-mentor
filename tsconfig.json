@@ -122,6 +122,9 @@
             "@/*": [
                 "./resources/js/*"
             ],
+            "@/modules/*": [
+                "./modules/*"
+            ],
             "ziggy-js": [
                 "./vendor/tightenco/ziggy"
             ]
