@@ -1,7 +1,7 @@
 import { TranslatableField } from "@/types/helpers";
 
 export type Gender = {
-    id: string;
+    id: number;
     gender: TranslatableField;
     description: string;
 };

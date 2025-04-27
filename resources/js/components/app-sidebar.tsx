@@ -15,6 +15,29 @@ const mainNavItems: NavItem[] = [
         type: 'standalone'
     },
     {
+        title: 'Hrm',
+        href: 'hrm',
+        icon: LayoutGrid,
+        type: 'dropdown',
+        permissions: ['instructor.read', 'student.read'],
+        subItems: [
+            {
+                title: 'Instructor',
+                href: route('instructor.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'instructor.read',
+            },
+            {
+                title: 'Student',
+                href: route('student.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'student.read',
+            }
+        ]
+    },
+    {
         title: 'Settings',
         href: 'settings',
         icon: LayoutGrid,
@@ -59,6 +82,7 @@ const mainNavItems: NavItem[] = [
             }
         ]
     }
+
 ];
 
 const footerNavItems: NavItem[] = [

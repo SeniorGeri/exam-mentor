@@ -8,12 +8,16 @@ use App\Enums\RolesEnum;
 use App\Models\User;
 use App\Traits\HasTranslationsTrait;
 use App\Traits\HasRoleBehaviorTrait;
+use App\Traits\HasTableFilterTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 final class Instructor extends User
 {
     use HasTranslationsTrait;
     use HasRoleBehaviorTrait;
-
+    use SoftDeletes;
+    use HasTableFilterTrait;
+    
     protected static string $role = RolesEnum::INSTRUCTOR->value;
     protected $guard_name = 'web';
 

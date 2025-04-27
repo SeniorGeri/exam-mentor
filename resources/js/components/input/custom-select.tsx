@@ -20,8 +20,8 @@ export default function CustomSelect({
         <Label htmlFor="id">{placeholder}</Label>
         <Select
             name="id"
-            value={value.toString()}
-            onValueChange={(value) => setFormData(id, value)}
+            value={value}
+            onValueChange={(value: string | number) => setFormData(id, value)}
         >
             <SelectTrigger className="w-full" >
                 <SelectValue placeholder={placeholder}>

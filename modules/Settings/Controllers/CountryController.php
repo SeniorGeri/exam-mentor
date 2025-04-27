@@ -57,12 +57,12 @@ final class CountryController
      * Update Country
      *
      * @param  UpdateCountryRequest $request
-     * @param  Country $Country
+     * @param  Country $country
      * @return RedirectResponse
      */
-    public function update(UpdateCountryRequest $request, Country $Country): RedirectResponse
+    public function update(UpdateCountryRequest $request, Country $country): RedirectResponse
     {
-        $Country->fill($request->validated())
+        $country->fill($request->validated())
         ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
@@ -72,12 +72,12 @@ final class CountryController
     /**
      * Delete Country
      *
-     * @param  Country $Country
+     * @param  Country $country
      * @return RedirectResponse
      */
-    public function destroy(Country $Country): RedirectResponse
+    public function destroy(Country $country): RedirectResponse
     {
-        $Country->delete();
+        $country->delete();
 
         return to_route('country.list');
     }

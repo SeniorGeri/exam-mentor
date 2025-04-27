@@ -60,15 +60,15 @@ final class CurrencyController
      * Update Currency
      *
      * @param  UpdateCurrencyRequest $request
-     * @param  Currency $Currency
+     * @param  Currency $currency
      * @return RedirectResponse
      */
-    public function update(UpdateCurrencyRequest $request, Currency $Currency): RedirectResponse
+    public function update(UpdateCurrencyRequest $request, Currency $currency): RedirectResponse
     {
-        if($request->is_primary && !$Currency->is_primary) {
+        if($request->is_primary && !$currency->is_primary) {
             Currency::query()->update(['is_primary' => false]);
         }
-        $Currency->update($request->validated());
+        $currency->update($request->validated());
 
         return to_route('currency.list');
     }
@@ -76,12 +76,12 @@ final class CurrencyController
     /**
      * Delete Currency
      *
-     * @param  Currency $Currency
+     * @param  Currency $currency
      * @return RedirectResponse
      */
-    public function destroy(Currency $Currency): RedirectResponse
+    public function destroy(Currency $currency): RedirectResponse
     {
-        $Currency->delete();
+        $currency->delete();
 
         return to_route('currency.list');
     }

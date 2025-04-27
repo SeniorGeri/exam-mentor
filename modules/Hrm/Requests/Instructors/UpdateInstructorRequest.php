@@ -25,11 +25,12 @@ final class UpdateInstructorRequest extends FormRequest
             'active' => ['required','boolean'],
             'name' => ['required','string'],
             'email' => ['required','string'],
-            'password' => ['required','string'],
             'city_id' => ['nullable', 'integer', 'exists:cities,id'],
             'country_id' => ['nullable', 'integer', 'exists:countries,id'],
             'gender_id' => ['nullable', 'integer', 'exists:genders,id'],
             'address' => ['nullable','string'],
+            'bio' =>  ['nullable', 'string'],
+            'description' =>  ['nullable', 'string'],
         ];
     }
 

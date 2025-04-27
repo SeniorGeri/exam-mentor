@@ -5,5 +5,42 @@
     "no": "No",
     "close": "Close",
     "open_menu": "Open menu",
-    "active": "Active"
+    "active": "Active",
+    "delete": "Delete",
+
+    "profile_pic": "Profile Picture",
+    "name": "Name",
+    "email": "Email",
+    "student" : "Student",
+    "password": "Password",
+    "country" : "Country",
+    "gender" : "Gender",
+    "city" : "City",
+    "address" : "Address",
+    "bio" : "Bio",
+
+    "create_student": "Create student",
+    "create_student_desc": "The form below allows you to create new students",
+    "add_student": "Add student",
+    "student_created_succ": "The student has been created succesfully",
+    "edit_student": "Edit student",
+    "delete_student": "Delete student",
+    "student_edit_succ": "The student has been updated succesfully",
+    "edit_student_desc": "The form  below allows you to update the selected student",
+    "student_delete_succ": "The student has been deleted succesfully",
+    "delete_student_desc": "By proceeding  the student will be deleted.",
+
+
+    "create_instructor": "Create instructor",
+    "create_instructor_desc": "The form below allows you to create new instructors",
+    "add_instructor": "Add instructor",
+    "instructor_created_succ": "The instructor has been created succesfully",
+    "edit_instructor": "Edit instructor",
+    "delete_instructor": "Delete instructor",
+    "instructor_edit_succ": "The instructor has been updated succesfully",
+    "edit_instructor_desc": "The form  below allows you to update the selected instructor",
+    "instructor_delete_succ": "The instructor has been deleted succesfully",
+    "delete_instructor_desc": "By proceeding  the instructor will be deleted."
+   
+
 }

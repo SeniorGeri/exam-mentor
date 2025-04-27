@@ -46,7 +46,7 @@ final class StudentController
      */
     public function show(FilterTableRequest $request): JsonResponse
     {
-        $students = Student::filter($request)->with(['country:id,country'])->paginate($request->limit);
+        $students = Student::filter($request)->paginate($request->limit);
 
         return response()->json(['data' => $students]);
     }
@@ -68,12 +68,12 @@ final class StudentController
      * Update Student
      *
      * @param  UpdateStudentRequest $request
-     * @param  Student $Student
+     * @param  Student $student
      * @return RedirectResponse
      */
-    public function update(UpdateStudentRequest $request, Student $Student): RedirectResponse
+    public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
     {
-        $Student->fill($request->validated())
+        $student->fill($request->validated())
         ->save();
 
         return to_route('student.list');
@@ -82,12 +82,12 @@ final class StudentController
     /**
      * Delete Student
      *
-     * @param  Student $Student
+     * @param  Student $student
      * @return RedirectResponse
      */
-    public function destroy(Student $Student): RedirectResponse
+    public function destroy(Student $student): RedirectResponse
     {
-        $Student->delete();
+        $student->delete();
 
         return to_route('student.list');
     }

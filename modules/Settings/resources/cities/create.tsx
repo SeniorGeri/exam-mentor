@@ -82,7 +82,7 @@ export function CreateCity() {
                     >   
                         <>
                             {countries.map((country : Country) => (
-                                <SelectItem key={country.id} value={country.id}>{country.country['en']}</SelectItem>
+                                <SelectItem key={country.id} value={country.id.toString()}>{country.country['en']}</SelectItem>
                             ))}
                         </>
                     </CustomSelect>

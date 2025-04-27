@@ -15,7 +15,7 @@ export const countryBreadcrumbs: BreadcrumbItem[] = [
 ];
 
 export type Country = {
-    id: string;
+    id: number;
     country: TranslatableField;
     description: string;
     flag: string;

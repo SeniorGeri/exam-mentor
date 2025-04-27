@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 export function StudentActions({student}: StudentActionsProps) {
 
-    const { t } = useTranslation('Settings');
+    const { t } = useTranslation('Hrm');
 
     const [selectedStudent, setSelectedStudent] = useState<Student| undefined>(undefined);
 

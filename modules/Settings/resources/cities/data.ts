@@ -16,7 +16,7 @@ export const cityBreadcrumbs: BreadcrumbItem[] = [
 ];
 
 export type City = {
-    id: string;
+    id: number;
     city: TranslatableField;
     country_id: number;
     country: Country;

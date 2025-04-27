@@ -72,7 +72,7 @@ export function EditCity({city, isOpen, closeModal}: EditCityProps) {
                     <CustomSelect
                         id="country_id"
                         value={data.country_id}
-                        text = {countries.find((count: Country) => count.id.toString() === data.country_id.toString())?.country['en'] || t('select_country')}
+                        text = {countries.find((count: Country) => count.id === data.country_id)?.country['en'] || t('select_country')}
                         setFormData={setData}
                         placeholder={t('country')}
                         errorMessage={errors.country_id}

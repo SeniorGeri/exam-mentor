@@ -1,30 +1,29 @@
 'use client';
 
-import InputError from '@/components/input-error';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
 import {route} from "ziggy-js";
 import { Country } from '@/modules/Settings/resources/countries/data';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { SelectItem } from '@/components/ui/select';
 import { useStudentData } from './student-data-context';
 import { City } from '@/modules/Settings/resources/cities/data';
 import { Gender } from '@/modules/Settings/resources/genders/data';
 import FileInput from 'modules/Media/resources/js/file-input';
-import { Switch } from '@/components/ui/switch';
+import CustomInput from '@/components/input/custom-input';
+import CustomSelect from '@/components/input/custom-select';
+import CustomSwitch from '@/components/input/switch-input';
+import CustomTextarea from '@/components/input/custom-textarea';
 
 
 export function CreateStudent() {
 
     const studentData = useStudentData(); // Access directly from context
 
-    const { t } = useTranslation('Settings');
+    const { t } = useTranslation('Hrm');
 
 
     const [open, setOpen] = useState(false);
@@ -70,142 +69,94 @@ export function CreateStudent() {
                     {t('create_student')}
                 </Button>
             </DialogTrigger>
-            <DialogContent className="w-full max-w-6xl">
+            <DialogContent className="sm:max-w-4xl">
                 <DialogTitle>{t('create_student')}</DialogTitle>
                 <DialogDescription>
                     {t('create_student_desc')}
                 </DialogDescription>
                 <form className="space-y-6" onSubmit={storeCountCreateStudent}>
                     <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3">
-                        <div className="grid col-span-1">
-                            <Label htmlFor="name">{t('name')}</Label>
 
-                            <Input
-                                id="name"
-                                type="text"
-                                name="name"
-                                value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
-                                placeholder={t('name')}
-                                autoComplete="name"
-                            />
+                        <CustomInput
+                            id="name"
+                            value={data.name}
+                            setFormData={setData}
+                            placeholder={t('name')}
+                            errorMessage={errors.name}
+                            className='col-span-1'
+                        />
 
-                            <InputError message={errors.name}/>
-                        </div>
+                        <CustomInput 
+                            id="email"
+                            type="email"
+                            value={data.email}
+                            setFormData={setData}
+                            placeholder={t('email')}
+                            errorMessage={errors.email}
+                            className='col-span-1'
+                        />    
                       
-                        <div className="grid col-span-1">
-                            <Label htmlFor="email">{t('email')}</Label>
+                        <CustomInput 
+                            id="password"
+                            type="password"
+                            value={data.password}
+                            setFormData={setData}
+                            placeholder={t('password')}
+                            errorMessage={errors.password}
+                            className='col-span-1'
+                        />    
 
-                            <Input
-                                id="email"
-                                type="email"
-                                name="email"
-                                value={data.email}
-                                onChange={(e) => setData('email', e.target.value)}
-                                placeholder={t('email')}
-                                autoComplete="email"
-                            />
-
-                            <InputError message={errors.email}/>
-                        </div>
-
-                        <div className="grid col-span-1">
-                            <Label htmlFor="password">{t('password')}</Label>
-
-                            <Input
-                                id="password"
-                                type="password"
-                                name="password"
-                                value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
-                                placeholder={t('password')}
-                                autoComplete="password"
-                            />
-
-                            <InputError message={errors.password}/>
-                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3">
-                        <div className="grid col-span-1">
- 
-                        <Label htmlFor="country_id">{t('countries')}</Label>
-                        <Select
-                            name="country_id"
+
+                        <CustomSelect
+                            id="country_id"
+                            className='col-span-1'
                             value={data.country_id}
-                            onValueChange={(value) => setData("country_id", value)}
-                        >
-                            <SelectTrigger className="w-full" >
-                                <SelectValue placeholder={t('select_country')}>
-                                    {data.country_id ? studentData.countries.find((count: Country) => count.id.toString() === data.country_id)?.country['en'] : t('select_country')}
-                            </SelectValue>
-
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                <SelectLabel>{t('select_country')}</SelectLabel>
+                            text = {studentData.countries.find((count: Country) => count.id.toString() === data.country_id)?.country['en'] || t('select_country')}
+                            setFormData={setData}
+                            placeholder={t('country')}
+                            errorMessage={errors.country_id}
+                        >   
+                            <>
                                 {studentData.countries.map((country : Country) => (
-                                    <SelectItem key={country.id} value={country.id}>{country.country['en']}</SelectItem>
+                                    <SelectItem key={country.id} value={country.id.toString()}>{country.country['en']}</SelectItem>
                                 ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                        <InputError message={errors.country_id}/>
+                            </>
+                        </CustomSelect>
 
-                        </div>
-                        <div className="grid col-span-1">
- 
-                            <Label htmlFor="city_id">{t('cities')}</Label>
-                            <Select
-                                name="city_id"
-                                value={data.city_id}
-                                onValueChange={(value) => setData("city_id", value)}
-                            >
-                                <SelectTrigger className="w-full" >
-                                    <SelectValue placeholder={t('select_city')}>
-                                        {data.city_id ? studentData.cities.find((city: City) => city.id.toString() === data.city_id)?.city['en'] : t('select_city')}
-                                </SelectValue>
+                        <CustomSelect
+                            id="city_id"
+                            className='col-span-1'
+                            value={data.city_id}
+                            text = {studentData.cities.find((city: City) => city.id.toString() === data.city_id)?.city['en'] || t('select_city')}
+                            setFormData={setData}
+                            placeholder={t('city')}
+                            errorMessage={errors.city_id}
+                        >   
+                            <>
+                                {studentData.cities.map((city : City) => (
+                                    <SelectItem key={city.id} value={city.id.toString()}>{city.city['en']}</SelectItem>
+                                ))}
+                            </>
+                        </CustomSelect>
 
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                    <SelectLabel>{t('select_city')}</SelectLabel>
-                                    {studentData.cities.map((city : City) => (
-                                        <SelectItem key={city.id} value={city.id}>{city.city['en']}</SelectItem>
-                                    ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                            <InputError message={errors.city_id}/>
-
-                        </div>
-
-                        <div className="grid col-span-1">
-
-                            <Label htmlFor="gender_id">{t('cities')}</Label>
-                            <Select
-                                name="gender_id"
-                                value={data.gender_id}
-                                onValueChange={(value) => setData("gender_id", value)}
-                            >
-                                <SelectTrigger className="w-full" >
-                                    <SelectValue placeholder={t('select_gender')}>
-                                        {data.gender_id ? studentData.genders.find((gender: Gender) => gender.id.toString() === data.gender_id)?.gender['en'] : t('select_gender')}
-                                </SelectValue>
-
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                    <SelectLabel>{t('select_gender')}</SelectLabel>
-                                    {studentData.genders.map((gender : Gender) => (
-                                        <SelectItem key={gender.id} value={gender.id}>{gender.gender['en']}</SelectItem>
-                                    ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                            <InputError message={errors.gender_id}/>
-
-                        </div>
+                        <CustomSelect
+                            id="gender_id"
+                            className='col-span-1'
+                            value={data.gender_id}
+                            text = {studentData.genders.find((gender: Gender) => gender.id.toString() === data.gender_id)?.gender['en'] || t('select_gender')}
+                            setFormData={setData}
+                            placeholder={t('gender')}
+                            errorMessage={errors.gender_id}
+                        >   
+                            <>
+                                {studentData.genders.map((gender : Gender) => (
+                                    <SelectItem key={gender.id} value={gender.id.toString()}>{gender.gender['en']}</SelectItem>
+                                ))}
+                            </>
+                        </CustomSelect>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3 gap-1">
@@ -215,59 +166,42 @@ export function CreateStudent() {
                         <FileInput inputName='profile_pic' setFormData={setData} />
 
                         </div>
+
                         <div className="grid col-span-1 gap-2">
-                            <div className="flex items-center">
-                                <Switch id="active" checked={data.active}
-                                onCheckedChange={(checked: boolean) => setData('active', checked)}/>
-
-                                <Label htmlFor="active">{t('active')}</Label>
-                            </div>
-                            <div>
-                                <Label htmlFor="address">{t('address')}</Label>
-
-                                <Input
-                                    id="address"
-                                    type="text"
-                                    name="address"
-                                    value={data.address}
-                                    onChange={(e) => setData('address', e.target.value)}
-                                    placeholder={t('address')}
-                                    autoComplete="address"
-                                />
-
-                                <InputError message={errors.address}/>
-                            </div>
-                        
+                            <CustomInput   
+                                id="address"
+                                value={data.address}
+                                setFormData={setData}
+                                placeholder={t('address')}
+                                errorMessage={errors.address}
+                            />
+                            
+                            <CustomSwitch
+                                id="active"
+                                is_checked={data.active}
+                                setFormData={setData}
+                                placeholder={t('active')}
+                            />
                         </div>
 
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:gap-3 gap-1">
-                        <div className="grid col-span-1">
-                            <Textarea
-                                id="description"
-                                name="description"
-                                value={data.description}
-                                onChange={(e) => setData('description', e.target.value)}
-                                placeholder={t('description')}
-                                autoComplete="description"
-                            />
-
-                            <InputError message={errors.description}/>
-                        </div>
-
-                        <div className="grid col-span-1">
-                            <Textarea
-                                id="bio"
-                                name="bio"
-                                value={data.bio}
-                                onChange={(e) => setData('bio', e.target.value)}
-                                placeholder={t('bio')}
-                                autoComplete="bio"
-                            />
-
-                            <InputError message={errors.bio}/>
-                        </div>
+                        <CustomTextarea 
+                            id="description"
+                            value={data.description}
+                            setFormData={setData}
+                            placeholder={t('description')}
+                            errorMessage={errors.description}
+                        />
+                        
+                        <CustomTextarea 
+                            id="bio"
+                            value={data.bio}
+                            setFormData={setData}
+                            placeholder={t('bio')}
+                            errorMessage={errors.bio}
+                        />
                     </div>
 
                     <DialogFooter className="gap-2">
@@ -278,7 +212,7 @@ export function CreateStudent() {
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">{t('add_city')}</button>
+                            <button type="submit">{t('add_student')}</button>
                         </Button>
                     </DialogFooter>
                 </form>

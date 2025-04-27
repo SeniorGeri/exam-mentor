@@ -59,12 +59,12 @@ final class CityController
      * Update City
      *
      * @param  UpdateCityRequest $request
-     * @param  City $City
+     * @param  City $city
      * @return RedirectResponse
      */
-    public function update(UpdateCityRequest $request, City $City): RedirectResponse
+    public function update(UpdateCityRequest $request, City $city): RedirectResponse
     {
-        $City->fill($request->validated())
+        $city->fill($request->validated())
         ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
@@ -74,12 +74,12 @@ final class CityController
     /**
      * Delete City
      *
-     * @param  City $City
+     * @param  City $city
      * @return RedirectResponse
      */
-    public function destroy(City $City): RedirectResponse
+    public function destroy(City $city): RedirectResponse
     {
-        $City->delete();
+        $city->delete();
 
         return to_route('city.list');
     }

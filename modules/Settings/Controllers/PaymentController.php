@@ -61,16 +61,16 @@ final class PaymentController
      * Update Payment
      *
      * @param  UpdatePaymentRequest $request
-     * @param  PaymentMethod $Payment
+     * @param  PaymentMethod $payment
      * @return RedirectResponse
      */
-    public function update(UpdatePaymentRequest $request, PaymentMethod $Payment): RedirectResponse
+    public function update(UpdatePaymentRequest $request, PaymentMethod $payment): RedirectResponse
     {
-        if($request->is_primary && !$Payment->is_primary) {
+        if($request->is_primary && !$payment->is_primary) {
             PaymentMethod::query()->update(['is_primary' => false]);
         }
 
-        $Payment->fill($request->validated())
+        $payment->fill($request->validated())
         ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
@@ -80,12 +80,12 @@ final class PaymentController
     /**
      * Delete Payment
      *
-     * @param  PaymentMethod $Payment
+     * @param  PaymentMethod $payment
      * @return RedirectResponse
      */
-    public function destroy(PaymentMethod $Payment): RedirectResponse
+    public function destroy(PaymentMethod $payment): RedirectResponse
     {
-        $Payment->delete();
+        $payment->delete();
 
         return to_route('payment.list');
     }

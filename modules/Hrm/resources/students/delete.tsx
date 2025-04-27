@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 export function DeleteStudent({student, isOpen, closeModal}: DeleteStudentProps) {
 
-    const { t } = useTranslation('Settings');
+    const { t } = useTranslation('Hrm');
 
     const destroyStudent = () => {
         router.delete(route('student.destroy', student.id), {
@@ -20,7 +20,7 @@ export function DeleteStudent({student, isOpen, closeModal}: DeleteStudentProps)
     };
 
     const studentDeleted = () => {
-        toast(t('city_delete_succ'), {position: 'top-right', duration: 2000});
+        toast(t('student_delete_succ'), {position: 'top-right', duration: 2000});
         closeModal();
     };
 

@@ -57,12 +57,12 @@ final class LanguageController
      * Update Language
      *
      * @param  UpdateLanguageRequest $request
-     * @param  Language $Language
+     * @param  Language $language
      * @return RedirectResponse
      */
-    public function update(UpdateLanguageRequest $request, Language $Language): RedirectResponse
+    public function update(UpdateLanguageRequest $request, Language $language): RedirectResponse
     {
-        $Language->fill($request->validated())
+        $language->fill($request->validated())
         ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
@@ -72,12 +72,12 @@ final class LanguageController
     /**
      * Delete Language
      *
-     * @param  Language $Language
+     * @param  Language $language
      * @return RedirectResponse
      */
-    public function destroy(Language $Language): RedirectResponse
+    public function destroy(Language $language): RedirectResponse
     {
-        $Language->delete();
+        $language->delete();
 
         return to_route('language.list');
     }

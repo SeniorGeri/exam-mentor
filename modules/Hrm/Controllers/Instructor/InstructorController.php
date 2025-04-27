@@ -46,7 +46,7 @@ final class InstructorController
      */
     public function show(FilterTableRequest $request): JsonResponse
     {
-        $instructors = Instructor::filter($request)->with(['country:id,country'])->paginate($request->limit);
+        $instructors = Instructor::filter($request)->paginate($request->limit);
 
         return response()->json(['data' => $instructors]);
     }
@@ -68,13 +68,13 @@ final class InstructorController
      * Update Instructor
      *
      * @param  UpdateInstructorRequest $request
-     * @param  Instructor $Instructor
+     * @param  Instructor $instructor
      * @return RedirectResponse
      */
-    public function update(UpdateInstructorRequest $request, Instructor $Instructor): RedirectResponse
+    public function update(UpdateInstructorRequest $request, Instructor $instructor): RedirectResponse
     {
-        $Instructor->fill($request->validated())
-        ->setMultipleTranslations($request->translated(), $request->locale)
+        $instructor->fill($request->validated())
+        // ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
         return to_route('instructor.list');
@@ -83,12 +83,12 @@ final class InstructorController
     /**
      * Delete Instructor
      *
-     * @param  Instructor $Instructor
+     * @param  Instructor $instructor
      * @return RedirectResponse
      */
-    public function destroy(Instructor $Instructor): RedirectResponse
+    public function destroy(Instructor $instructor): RedirectResponse
     {
-        $Instructor->delete();
+        $instructor->delete();
 
         return to_route('instructor.list');
     }

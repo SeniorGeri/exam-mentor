@@ -4,11 +4,12 @@ import {DataTableColumnHeader} from '@/components/data-table/data-table-column-h
 import {ColumnDef} from '@tanstack/react-table';
 import {Student} from "./data";
 import {useTranslation} from 'react-i18next';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
 
 
-export const StudentColumns = (currentLocale :string): ColumnDef<Student>[] => {
-    const { t } = useTranslation('Settings');
+export const StudentColumns = (): ColumnDef<Student>[] => {
+    const { t } = useTranslation('Hrm');
 
 
     return [
@@ -25,45 +26,34 @@ export const StudentColumns = (currentLocale :string): ColumnDef<Student>[] => {
                 );
             },
         },
+    
         {
-            accessorKey: 'student',
+            accessorKey: 'profile_pic',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('profile_pic')}/>,
+            cell: ({row}) => {
+                return (
+                    <Avatar>
+                        <AvatarImage className="h-12 w-12" src={row.getValue('profile_pic')} alt={row.getValue('name')} />
+                    </Avatar>
+                )
+            },
+            enableColumnFilter: false,
+            enableSorting: false,
+        },
+
+        {
+            accessorKey: 'name',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('student')}/>,
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('student')}</span>
+                        <span className="max-w-[500px] truncate font-light">{row.getValue('name')}</span>
                     </div>
                 );
             },
             enableColumnFilter: true,
             enableSorting: true,
         },
-        // {
-        //     accessorKey: 'country',
-        //     header: ({column}) => <DataTableColumnHeader column={column} title={t('country')}/>,
-        //     cell: ({row}) => {
-        //         const country = row.getValue('country').country
-        //         return (
-        //             <div className="flex space-x-2">
-        //                 <span className="max-w-[500px] truncate font-light">{country[currentLocale] || t('not_translated')}</span>
-        //             </div>
-        //         );
-        //     },
-        //     enableColumnFilter: true,
-        //     enableSorting: true,
-        // },
-        {
-            accessorKey: 'description',
-            header: ({column}) => <DataTableColumnHeader column={column} title={t('description')}/>,
-            cell: ({row}) => {
-                return (
-                    <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('description')}</span>
-                    </div>
-                );
-            },
-            enableColumnFilter: true,
-            enableSorting: false,
-        },
+
     ];
 }
