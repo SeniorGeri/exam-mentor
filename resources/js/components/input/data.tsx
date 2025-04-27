@@ -43,3 +43,12 @@ export type SelectInterface = {
     text?: string,
     setFormData?: (key: string, value: string | number) => void
 }
+
+export type CheckboxInterface = {
+    id : string,
+    className?: string,
+    is_checked? : boolean,
+    value?: string| object,
+    placeholder?: string,
+    setFormData?: (key: string, checked: boolean, value: string| object) => void
+}

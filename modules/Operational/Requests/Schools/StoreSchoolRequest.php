@@ -17,7 +17,7 @@ final class StoreSchoolRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:100'],
+            'title' => ['required', 'string', 'max:100'],
             'image' => ['nullable', 'string'],
             'country_id' => ['required', 'integer'],
             'description' =>  ['nullable', 'string'],

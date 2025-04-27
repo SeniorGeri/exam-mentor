@@ -8,7 +8,7 @@ import {route} from "ziggy-js";
 import { useTranslation } from 'react-i18next';
 import CustomTextarea from '@/components/input/custom-textarea';
 import CustomInput from '@/components/input/custom-input';
-import CustomSwitch from '@/components/input/switch-input';
+import CustomSwitch from '@/components/input/custom-switch';
 
 
 export function EditCurrency({currency, isOpen, closeModal}: EditCurrencyProps) {

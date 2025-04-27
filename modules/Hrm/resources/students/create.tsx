@@ -15,7 +15,7 @@ import { Gender } from '@/modules/Settings/resources/genders/data';
 import FileInput from 'modules/Media/resources/js/file-input';
 import CustomInput from '@/components/input/custom-input';
 import CustomSelect from '@/components/input/custom-select';
-import CustomSwitch from '@/components/input/switch-input';
+import CustomSwitch from '@/components/input/custom-switch';
 import CustomTextarea from '@/components/input/custom-textarea';
 
 

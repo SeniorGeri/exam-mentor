@@ -17,6 +17,6 @@ final class Grade extends Model
 
     protected $fillable = ['title', 'description'];
 
-    protected $translatable = ['title', 'description'];
+    protected $translatable = ['title'];
 
 }

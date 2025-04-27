@@ -14,6 +14,43 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
         type: 'standalone'
     },
+        {
+            title: 'Operational',
+            href: 'operational',
+            icon: LayoutGrid,
+            type: 'dropdown',
+            permissions: ['school.read','subject.read','course.read','grade.read'],
+            subItems: [
+                {
+                    title: 'School',
+                    href: route('school.list'),
+                    icon: LayoutGrid,
+                    type: 'standalone',
+                    permission: 'school.read',
+                },
+                {
+                    title: 'Subject',
+                    href: route('subject.list'),
+                    icon: LayoutGrid,
+                    type: 'standalone',
+                    permission: 'subject.read',
+                },
+                {
+                    title: 'Course',
+                    href: route('course.list'),
+                    icon: LayoutGrid,
+                    type: 'standalone',
+                    permission: 'course.read',
+                },
+                {
+                    title: 'Grade',
+                    href: route('grade.list'),
+                    icon: LayoutGrid,
+                    type: 'standalone',
+                    permission: 'grade.read',
+                }
+            ]
+        },
     {
         title: 'Hrm',
         href: 'hrm',

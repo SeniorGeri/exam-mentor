@@ -14,10 +14,10 @@ final class PermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        // Permission::create(["name" => "country.create"]);
-        // Permission::create(["name" => "country.read"]);
-        // Permission::create(["name" => "country.update"]);
-        // Permission::create(["name" => "country.delete"]);
+        Permission::create(["name" => "country.create"]);
+        Permission::create(["name" => "country.read"]);
+        Permission::create(["name" => "country.update"]);
+        Permission::create(["name" => "country.delete"]);
 
         Permission::create(["name" => "language.create"]);
         Permission::create(["name" => "language.read"]);

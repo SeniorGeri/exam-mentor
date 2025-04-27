@@ -37,7 +37,7 @@ final class SchoolController
      */
 public function show(FilterTableRequest $request): JsonResponse
 {
-    $schools = School::filter($request)->paginate($request->limit);
+    $schools = School::filter($request)->with(['country'])->paginate($request->limit);
 
     return response()->json(['data' => $schools]);
 }

@@ -17,6 +17,6 @@ final class Subject extends Model
 
     protected $fillable = ['title', 'description', 'image'];
 
-    protected $translatable = ['title', 'description'];
+    protected $translatable = ['title'];
 
 }

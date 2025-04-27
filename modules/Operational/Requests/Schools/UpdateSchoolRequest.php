@@ -35,7 +35,7 @@ final class UpdateSchoolRequest extends FormRequest
     public function translationsRules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:100'],
+            'title' => ['required', 'string', 'max:100'],
         ];
     }
 }

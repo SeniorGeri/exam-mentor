@@ -2,7 +2,7 @@
 
 import CustomInput from '@/components/input/custom-input';
 import CustomTextarea from '@/components/input/custom-textarea';
-import CustomSwitch from '@/components/input/switch-input';
+import CustomSwitch from '@/components/input/custom-switch';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
 import {useForm} from '@inertiajs/react';

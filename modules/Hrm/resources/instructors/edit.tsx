@@ -10,7 +10,7 @@ import {SelectItem} from '@/components/ui/select';
 import { Country } from '@/modules/Settings/resources/countries/data';    
 import CustomSelect from '@/components/input/custom-select';
 import CustomTextarea from '@/components/input/custom-textarea';
-import CustomSwitch from '@/components/input/switch-input';
+import CustomSwitch from '@/components/input/custom-switch';
 import CustomInput from '@/components/input/custom-input';
 import FileInput from 'modules/Media/resources/js/file-input';
 import { City } from '@/modules/Settings/resources/cities/data';

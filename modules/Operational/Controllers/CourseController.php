@@ -7,11 +7,16 @@ namespace Modules\Operational\Controllers;
 use App\Http\Requests\Main\FilterTableRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Modules\Operational\Models\Course;
 use Modules\Operational\Requests\Courses\StoreCourseRequest;
 use Modules\Operational\Requests\Courses\UpdateCourseRequest;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Operational\Models\CourseClassification;
+use Modules\Operational\Models\Grade;
+use Modules\Operational\Models\School;
+use Modules\Operational\Models\Subject;
 
 final class CourseController
 {
@@ -23,7 +28,17 @@ final class CourseController
      */
     public function index(): Response
     {
-        return Inertia::render('Operational::courses/index');
+        $schools = School::all(['id', 'title', DB::raw("'" . School::class . "' as className")]);
+        $subjects = Subject::all(['id', 'title', DB::raw("'" . Subject::class . "' as className")]);
+        $grades = Grade::all(['id', 'title', DB::raw("'" . Grade::class . "' as className")]);
+
+        return Inertia::render('Operational::courses/index',[
+            'classifications' => [
+                ...$schools,
+                ...$subjects,
+                ...$grades
+            ]
+        ]);
 
     }
 
@@ -32,7 +47,7 @@ final class CourseController
      *
      * @param  FilterTableRequest $request
      * @return JsonResponse
-     */
+    */
     public function show(FilterTableRequest $request): JsonResponse
     {
         $courses = Course::filter($request)->paginate($request->limit);
@@ -48,11 +63,25 @@ final class CourseController
      */
     public function store(StoreCourseRequest $request): RedirectResponse
     {
-        Course::create($request->validated());
+        $course = Course::create($request->validated());
+        if($request->has('classifications')) {
+            
+            $classifications = array_map(function($classification) use ($course) {
+                return [
+                    'course_id' => $course->id,
+                    'classificable_id' => $classification['id'],
+                    'classificable_type' => $classification['className'],
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }, $request->classifications);
+            
 
+            CourseClassification::insert($classifications);
+        }
         return to_route('course.list');
     }
-
+    
     /**
      * Update Course
      *

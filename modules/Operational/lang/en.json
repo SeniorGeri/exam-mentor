@@ -9,6 +9,8 @@
     "delete": "Delete",
     "title": "Title",
     "image": "Image",
+    "country": "Country",
+    "select_country": "Select country",
 
     "subject": "Subject",
     "create_subject": "Create subject",
