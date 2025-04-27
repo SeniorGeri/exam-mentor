@@ -1,12 +1,10 @@
 'use client';
 
-import InputError from '@/components/input-error';
+import CustomInput from '@/components/input/custom-input';
+import CustomTextarea from '@/components/input/custom-textarea';
+import CustomSwitch from '@/components/input/switch-input';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
@@ -63,77 +61,49 @@ export function CreateCurrency() {
                     {t('create_currency_desc')}
                 </DialogDescription>
                 <form className="space-y-6" onSubmit={storeCountCreateCurrency}>
-                    <div className="grid gap-2">
-                        <Label htmlFor="symbol">{t('symbol')}</Label>
 
-                        <Input
-                            id="symbol"
-                            type="text"
-                            name="symbol"
-                            value={data.symbol}
-                            onChange={(e) => setData('symbol', e.target.value)}
-                            placeholder={t('symbol')}
-                            autoComplete="symbol"
-                        />
+                    <CustomInput
+                        id="symbol"
+                        value={data.symbol}
+                        setFormData={setData}
+                        placeholder={t('symbol')}
+                        errorMessage={errors.symbol}
+                    />
+            
 
-                        <InputError message={errors.symbol}/>
-                    </div>
+                    <CustomInput
+                        id="currency_code"
+                        value={data.currency_code}
+                        setFormData={setData}
+                        placeholder={t('currency_code')}
+                        errorMessage={errors.currency_code}
+                    />
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="currency_code">{t('currency_code')}</Label>
+                    <CustomSwitch
+                        id="is_primary"
+                        is_checked={data.is_primary}
+                        setFormData={setData}
+                        placeholder={t('is_primary')}
+                    />
 
-                        <Input
-                            id="currency_code"
-                            type="string"
-                            name="currency_code"
-                            value={data.currency_code}
-                            onChange={(e) => setData('currency_code', e.target.value)}
-                            placeholder={t('currency_code')}
-                            autoComplete="currency_code"
-                        />
-
-                        <InputError message={errors.symbol}/>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Switch id="is_primary" checked={data.is_primary}
-                        onCheckedChange={(checked: boolean) => setData('is_primary', checked)}/>
-
-                        <Label htmlFor="is_primary">{t('is_primary')}</Label>
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="exchange">{t('exchange')}</Label>
-
-                        <Input
-                            id="exchange"
-                            type="number"
-                            step={0.01}
-                            name="exchange"
-                            value={data.exchange}
-                            onChange={(e) => setData('exchange', parseFloat(e.target.value))}
-                            placeholder={t('exchange')}
-                            autoComplete="exchange"
-                        />
-
-                        <InputError message={errors.symbol}/>
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
-
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder={t('description')}
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomInput
+                        id="exchange"
+                        value={data.exchange}
+                        setFormData={setData}
+                        placeholder={t('exchange')}
+                        errorMessage={errors.exchange}
+                        type="number"
+                        step={0.01}
+                    />
 
 
+                    <CustomTextarea
+                        id="description"
+                        value={data.description}
+                        setFormData={setData}
+                        placeholder={t('description')}
+                        errorMessage={errors.description}
+                    />
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

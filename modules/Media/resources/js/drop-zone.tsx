@@ -1,7 +1,10 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { DropzoneProps } from './types';
+import { useTranslation } from 'react-i18next';
 
 const Dropzone = ({ onUpload }: DropzoneProps) => {
+
+    const {t} = useTranslation('Media');
 
     const [isDragActive, setIsDragActive] = useState<boolean>(false);
     const fileInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -41,7 +44,7 @@ const Dropzone = ({ onUpload }: DropzoneProps) => {
             />
 
             <p className={`text-sm ${isDragActive ? 'text-sky-800' : 'text-gray-400'} `}>
-                {isDragActive ? 'Leave Your File Here' : 'Drag and drop your files here'}
+                {isDragActive ? t('leave_file_here'): t('drag_drop_files')}
             </p>
         </div>
     );

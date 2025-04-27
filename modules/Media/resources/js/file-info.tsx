@@ -1,14 +1,17 @@
-import {Avatar, AvatarImage} from '../../../../resources/js/components/ui/avatar';
-import {Button} from '../../../../resources/js/components/ui/button';
-import {Textarea} from '../../../../resources/js/components/ui/textarea';
+import {Avatar, AvatarImage} from '@/components/ui/avatar';
+import {Button} from '@/components/ui/button';
+import {Textarea} from '@/components/ui/textarea';
 import {router, useForm} from '@inertiajs/react';
-import {route} from '../../../../vendor/tightenco/ziggy';
+import {route} from 'ziggy-js';
 import {toast} from 'sonner';
-import InputError from '../../../../resources/js/components/input-error';
+import InputError from '@/components/input-error';
 import {useEffect} from 'react';
 import {Image, InfoProps} from './types';
+import { useTranslation } from 'react-i18next';
 
 function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoProps) {
+
+    const {t} = useTranslation('Media');
 
     const {data, setData, put, processing, reset, errors, clearErrors} = useForm({
         id: file?.id,
@@ -31,7 +34,7 @@ function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoP
         put(route('media.update', file?.id), {
             preserveScroll: true,
             onSuccess: () => {
-                toast('Imazhi u perditesua me sukses', {position: 'top-right', duration: 2000});
+                toast(t('image_update_succ'), {position: 'top-right', duration: 2000});
                 clearErrors();
                 setUploadedFiles(
                     uploadedFiles.map((item: Image) => item.id === data.id ? data : item)
@@ -45,7 +48,7 @@ function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoP
         router.delete(route('media.destroy', file?.id), {
             preserveScroll: true,
             onSuccess: () => {
-                toast('Imazhi u fshi me sukses', {position: 'top-right', duration: 2000});
+                toast(t('image_delete_succ'), {position: 'top-right', duration: 2000});
                 clearErrors();
                 reset()
 
@@ -59,8 +62,8 @@ function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoP
     };
     return (
         <div className="p-2">
-            <h1>Te dhenat e imazhit</h1>
-            <p>Me poshte shfaqen te dhenat e imazhit</p>
+            <h1>{t('image_data')}</h1>
+            <p>{t('image_data_desc')}</p>
             <div className="flex justify-center">
                 <Avatar className={'size-28'}>
                     <AvatarImage src={file?.thumb} alt="@shadcn"/>
@@ -83,10 +86,10 @@ function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoP
 
             <div className="flex gap-x-3">
                 <Button className="w-1/2" onClick={updateImage} disabled={processing}>
-                    Edito
+                    {t('edit')}
                 </Button>
                 <Button className="w-1/2" onClick={deleteImage}>
-                    Fshi
+                    {t('delete')}
                 </Button>
             </div>
         </div>

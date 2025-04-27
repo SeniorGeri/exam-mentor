@@ -19,6 +19,7 @@ final class StoreCountryRequest extends FormRequest
         return [
             'country' => ['required', 'string', 'max:100'],
             'description' => ['nullable', 'string'],
+            'flag' => ['nullable', 'string'],
         ];
     }
 }

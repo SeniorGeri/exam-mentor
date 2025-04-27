@@ -1,9 +1,5 @@
-import InputError from '@/components/input-error';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler, useEffect} from 'react';
 import {toast} from 'sonner';
@@ -12,9 +8,12 @@ import {route} from "ziggy-js";
 import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {SelectItem} from '@/components/ui/select';
 import { Country } from '../countries/data';
 import { useCountries } from './countries-context';
+import CustomInput from '@/components/input/custom-input';
+import CustomSelect from '@/components/input/custom-select';
+import CustomTextarea from '@/components/input/custom-textarea';
 
 export function EditCity({city, isOpen, closeModal}: EditCityProps) {
 
@@ -61,62 +60,38 @@ export function EditCity({city, isOpen, closeModal}: EditCityProps) {
                 <form className="space-y-6" onSubmit={updateCity}>
                     <Languages currentLocale={data.locale} setData={setData}/>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="city">{t('city')}</Label>
+                    <CustomInput
+                        id="city"
+                        value={data.city}
+                        setFormData={setData}
+                        placeholder={t('city')}
+                        errorMessage={errors.city}
+                    />
 
-                        <Input
-                            id="city"
-                            type="text"
-                            name="city"
-                            value={data.city}
-                            onChange={(e) => setData('city', e.target.value)}
-                            placeholder={t('city')}
-                            autoComplete="city"
-                        />
 
-                        <InputError message={errors.city}/>
-                    </div>
+                    <CustomSelect
+                        id="country_id"
+                        value={data.country_id}
+                        text = {countries.find((count: Country) => count.id.toString() === data.country_id.toString())?.country['en'] || t('select_country')}
+                        setFormData={setData}
+                        placeholder={t('country')}
+                        errorMessage={errors.country_id}
+                    >   
+                        <>
+                            {countries.map((country : Country) => (
+                                <SelectItem key={country.id} value={country.id.toString()}>{country.country['en']}</SelectItem>
+                            ))}
+                        </>
+                    </CustomSelect>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="country_id">{t('countries')}</Label>
-                        <Select
-                            name="country_id"
-                            value={data.country_id}
-                            onValueChange={(value) => setData("country_id", value)}
-                        >
-                            <SelectTrigger className="w-full" >
-                                <SelectValue placeholder={t('select_country')}>
-                                    {data.country_id ? countries.find((country: Country) => country.id.toString() === data.country_id)?.country['en'] : t('select_country')}
-                            </SelectValue>
-
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                <SelectLabel>{t('select_country')}</SelectLabel>
-                                {countries.map((country : Country) => (
-                                    <SelectItem key={country.id} value={country.id}>{country.country['en']}</SelectItem>
-                                ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                        <InputError message={errors.country_id}/>
-
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
-
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder="Shenime"
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomTextarea
+                        id="description"
+                        value={data.description}
+                        setFormData={setData}
+                        placeholder={t('description')}
+                        errorMessage={errors.description}
+                    />              
+                    
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

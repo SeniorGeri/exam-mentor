@@ -1,0 +1,16 @@
+{
+    "preview": "Preview",
+    "leave_file_here": "Drop files here",
+    "drag_drop_files": "Drag and drop files here",
+    "media": "Media",
+    "media_description": "Upload files",
+    "loading": "Loading",
+    "load_more": "Load more",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "image_data": "Image data",
+    "image_data_desc": "Below you can edit the image data",
+    "image_update_succ": "Image updated successfully",
+    "image_delete_succ": "Image deleted successfully"
+}

@@ -4,6 +4,9 @@ import {DataTableColumnHeader} from '@/components/data-table/data-table-column-h
 import {ColumnDef} from '@tanstack/react-table';
 import {Payment} from "./data";
 import { useTranslation } from 'react-i18next';
+import { TranslatableField } from '@/types/helpers';
+import { Avatar } from '@radix-ui/react-avatar';
+import { AvatarImage } from '@/components/ui/avatar';
 
 
 
@@ -25,11 +28,26 @@ export const PaymentColumns = (currentLocale :string): ColumnDef<Payment>[] => {
                 );
             },
         },
+
+        {
+            accessorKey: 'image',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('image')}/>,
+            cell: ({row}) => {
+                return (
+                    <Avatar>
+                        <AvatarImage className="h-12 w-12" src={row.getValue('image')} alt={(row.getValue('method') as Record<string, string>)[currentLocale]} />
+                    </Avatar>
+                )
+            },
+            enableColumnFilter: false,
+            enableSorting: false,
+        },
+
         {
             accessorKey: 'method',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('method')}/>,
             cell: ({row}) => {
-                const method = row.getValue('method')
+                const method : TranslatableField = row.getValue('method')
                 return (
                     <div className="flex space-x-2">
                         <span className="max-w-[500px] truncate font-light">{method[currentLocale] || t('not_translated')}</span>

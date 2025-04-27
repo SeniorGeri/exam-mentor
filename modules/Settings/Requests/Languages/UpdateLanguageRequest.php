@@ -21,7 +21,7 @@ final class UpdateLanguageRequest extends FormRequest
     {
         return [
             'language_code' => ['required', 'string', 'max:100'],
-            'description' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
             'flag' => ['nullable', 'string'],
             'locale' => ['required', 'string']
         ];

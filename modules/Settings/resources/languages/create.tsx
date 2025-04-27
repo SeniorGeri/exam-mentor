@@ -1,11 +1,9 @@
 'use client';
 
-import InputError from '@/components/input-error';
+import CustomInput from '@/components/input/custom-input';
+import CustomTextarea from '@/components/input/custom-textarea';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import FileInput from 'modules/Media/resources/js/file-input';
 import {FormEventHandler, useState} from 'react';
@@ -62,53 +60,32 @@ export function CreateLanguage() {
                     {t('create_language_desc')}
                 </DialogDescription>
                 <form className="space-y-6" onSubmit={storeCountCreateLanguage}>
-                    <div className="grid gap-2">
-                        <Label htmlFor="language">{t('language')}</Label>
 
-                        <Input
-                            id="language"
-                            type="text"
-                            name="language"
-                            value={data.language}
-                            onChange={(e) => setData('language', e.target.value)}
-                            placeholder={t('language')}
-                            autoComplete="language"
-                        />
-
-                        <InputError message={errors.language}/>
-                    </div>
+                    <CustomInput
+                        id="language"
+                        value={data.language}
+                        setFormData={setData}
+                        placeholder={t('language')}
+                        errorMessage={errors.language}
+                    />
 
                     <FileInput inputName='flag' setFormData={setData} />
-                    <div className="grid gap-2">
-                        <Label htmlFor="language_code">{t('language_code')}</Label>
 
-                        <Input
-                            id="language_code"
-                            type="text"
-                            name="language_code"
-                            value={data.language_code}
-                            onChange={(e) => setData('language_code', e.target.value)}
-                            placeholder={t('language_code')}
-                            autoComplete="language_code"
-                        />
+                    <CustomInput
+                        id="language_code"
+                        value={data.language_code}
+                        setFormData={setData}
+                        placeholder={t('language_code')}
+                        errorMessage={errors.language_code}
+                    />
 
-                        <InputError message={errors.language_code}/>
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
-
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder={t('description')}
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomTextarea
+                        id="description"
+                        value={data.description}
+                        setFormData={setData}
+                        placeholder={t('description')}
+                        errorMessage={errors.description}
+                    />
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

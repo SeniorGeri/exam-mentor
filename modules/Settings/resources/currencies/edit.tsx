@@ -1,17 +1,14 @@
-import InputError from '@/components/input-error';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
-import {FormEventHandler, useEffect} from 'react';
+import {FormEventHandler} from 'react';
 import {toast} from 'sonner';
 import {EditCurrencyProps} from "./data";
 import {route} from "ziggy-js";
-import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
-import { Switch } from '@/components/ui/switch';
+import CustomTextarea from '@/components/input/custom-textarea';
+import CustomInput from '@/components/input/custom-input';
+import CustomSwitch from '@/components/input/switch-input';
 
 
 export function EditCurrency({currency, isOpen, closeModal}: EditCurrencyProps) {
@@ -55,75 +52,49 @@ export function EditCurrency({currency, isOpen, closeModal}: EditCurrencyProps) 
                 </DialogDescription>
 
                 <form className="space-y-6" onSubmit={updateCurrency}>
-                    <div className="grid gap-2">
-                        <Label htmlFor="symbol">{t('symbol')}</Label>
+                  
+                    <CustomInput
+                        id="symbol"
+                        value={data.symbol}
+                        setFormData={setData}
+                        placeholder={t('symbol')}
+                        errorMessage={errors.symbol}
+                    />
+            
 
-                        <Input
-                            id="symbol"
-                            type="text"
-                            name="symbol"
-                            value={data.symbol}
-                            onChange={(e) => setData('symbol', e.target.value)}
-                            placeholder={t('symbol')}
-                            autoComplete="symbol"
-                        />
+                    <CustomInput
+                        id="currency_code"
+                        value={data.currency_code}
+                        setFormData={setData}
+                        placeholder={t('currency_code')}
+                        errorMessage={errors.currency_code}
+                    />
 
-                        <InputError message={errors.symbol}/>
-                    </div>
+                    <CustomSwitch
+                        id="is_primary"
+                        is_checked={data.is_primary}
+                        setFormData={setData}
+                        placeholder={t('is_primary')}
+                    />
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="currency_code">{t('currency_code')}</Label>
+                    <CustomInput
+                        id="exchange"
+                        value={data.exchange}
+                        setFormData={setData}
+                        placeholder={t('exchange')}
+                        errorMessage={errors.exchange}
+                        type="number"
+                        step={0.01}
+                    />
 
-                        <Input
-                            id="currency_code"
-                            type="string"
-                            name="currency_code"
-                            value={data.currency_code}
-                            onChange={(e) => setData('currency_code', e.target.value)}
-                            placeholder={t('currency_code')}
-                            autoComplete="currency_code"
-                        />
 
-                        <InputError message={errors.symbol}/>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Switch id="is_primary" checked={data.is_primary}
-                        onCheckedChange={(checked: boolean) => setData('is_primary', checked)}/>
-
-                        <Label htmlFor="is_primary">{t('is_primary')}</Label>
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="exchange">{t('exchange')}</Label>
-
-                        <Input
-                            id="exchange"
-                            type="number"
-                            step={0.01}
-                            name="exchange"
-                            value={data.exchange}
-                            onChange={(e) => setData('exchange', parseFloat(e.target.value))}
-                            placeholder={t('exchange')}
-                            autoComplete="exchange"
-                        />
-
-                        <InputError message={errors.symbol}/>
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
-
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder="Shenime"
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomTextarea
+                        id="description"
+                        value={data.description}
+                        setFormData={setData}
+                        placeholder={t('description')}
+                        errorMessage={errors.description}
+                    />    
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

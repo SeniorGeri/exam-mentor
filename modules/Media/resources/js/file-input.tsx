@@ -1,6 +1,6 @@
-import {Button} from '../../../../resources/js/components/ui/button';
-import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from '../../../../resources/js/components/ui/resizable';
-import {Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger} from '../../../../resources/js/components/ui/sheet';
+import {Button} from '@/components/ui/button';
+import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from '@/components/ui/resizable';
+import {Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger} from '@/components/ui/sheet';
 import { useEffect, useState } from 'react';
 import Dropzone from './drop-zone';
 import FileInfo from './file-info';
@@ -9,8 +9,12 @@ import {Image, InputProp} from './types';
 import FileGallery from './file-gallery';
 import { useMediaFiles } from './use-media-files';
 import { useUpload } from './use-upload';
+import { FileSkeleton } from './file-skeleton';
+import { useTranslation } from 'react-i18next';
 
 function FileInput({multiple = false, inputName = 'image', setFormData, defaultValue = []}: InputProp) {
+
+    const {t} = useTranslation('Media');
 
     const [currentFile, setCurrentFile] = useState<Image | null>(null);
     const [selectedFiles, setSelectedFile] = useState<Image[]>([]);
@@ -18,6 +22,7 @@ function FileInput({multiple = false, inputName = 'image', setFormData, defaultV
     const { isUploading, uploadFiles } = useUpload();
 
     useEffect(() => {
+
         if(defaultValue.length > 0){
             const mappedValues: Image[] = defaultValue.map((image: string) => {
                 return {
@@ -61,53 +66,53 @@ function FileInput({multiple = false, inputName = 'image', setFormData, defaultV
         <Sheet key={'bottom'}>
             <SheetTrigger asChild>
                 <div>
-                    <FilePreview selectedFiles={selectedFiles} multiple={multiple} handleSelectFile={handleSelectFile}/>
+                    <FilePreview selectedFiles={selectedFiles} handleSelectFile={handleSelectFile} />
                 </div>
             </SheetTrigger>
-            <SheetContent side={'top'} className="flex flex-col h-full">
+            <SheetContent side={'top'} className="flex h-full flex-col">
                 <SheetHeader>
-                    <SheetTitle>Media</SheetTitle>
-                    <SheetDescription>Perzgjidh imazh</SheetDescription>
+                    <SheetTitle>{t('media')}</SheetTitle>
+                    <SheetDescription>{t('media_description')}</SheetDescription>
                 </SheetHeader>
-                <div className="flex-1  overflow-y-auto w-full">
-                    {isUploading ? (
-                        <div className="flex h-48 w-1/3 items-center justify-center rounded-lg border-2 border-dashed p-4">
-                            <p>Loading...</p>
+                {isUploading ? (
+                    <FileSkeleton />
+                ) : (
+                    <div className="w-full flex-1 overflow-y-auto">
+                        <div className="mb-5 flex items-center justify-center">
+                            <Dropzone onUpload={handleUpload} />
                         </div>
-                    ) : (
-                        <>
-                            <div className="flex items-center justify-center">
-                                <Dropzone onUpload={handleUpload}/>
-
-                            </div>
-                            {uploadedFiles.length > 0 && (
-                                <ResizablePanelGroup direction={'horizontal'} className="w-full rounded-lg  flex-1">
-                                    <ResizablePanel defaultSize={80}>
-                                        <FileGallery
+                        {uploadedFiles.length > 0 && (
+                            <ResizablePanelGroup direction={'horizontal'} className="w-full flex-1 rounded-lg">
+                                <ResizablePanel defaultSize={80}>
+                                    <FileGallery
+                                        uploadedFiles={uploadedFiles}
+                                        multiple={multiple}
+                                        selectedFiles={selectedFiles}
+                                        handleSelectFile={handleSelectFile}
+                                    />
+                                </ResizablePanel>
+                                <ResizableHandle />
+                                <ResizablePanel defaultSize={20} className="hidden sm:block">
+                                    {currentFile && (
+                                        <FileInfo
+                                            file={currentFile}
+                                            setUploadedFiles={setUploadedFiles}
                                             uploadedFiles={uploadedFiles}
-                                            multiple={multiple}
-                                            selectedFiles={selectedFiles}
-                                            handleSelectFile={handleSelectFile}
+                                            setCurrentFile={setCurrentFile}
                                         />
-                                    </ResizablePanel>
-                                    <ResizableHandle/>
-                                    <ResizablePanel defaultSize={20}>
-                                        {currentFile &&
-                                            <FileInfo file={currentFile} setUploadedFiles={setUploadedFiles} uploadedFiles={uploadedFiles} setCurrentFile={setCurrentFile}/>
-                                        }
-                                    </ResizablePanel>
-                                </ResizablePanelGroup>
-                            )}
-                        </>
-                    )}
-                </div>
+                                    )}
+                                </ResizablePanel>
+                            </ResizablePanelGroup>
+                        )}
+                    </div>
+                )}
                 <SheetFooter>
-                    <div className="grid md:grid-cols-4 gap-2">
-                        <Button className="md:col-span-3" type="button" onClick={() => loadMore()}  disabled={!hasMore || isLoading}>
-                            {isLoading ? 'Loading...' : 'Load More'}
+                    <div className="grid gap-2 md:grid-cols-4">
+                        <Button className="md:col-span-3" type="button" onClick={() => loadMore()} disabled={!hasMore || isLoading}>
+                            {isLoading ? t('loading') : t('load_more')}
                         </Button>
                         <SheetClose asChild className="col-span-1">
-                            <Button>close</Button>
+                            <Button>{t('close')}</Button>
                         </SheetClose>
                     </div>
                 </SheetFooter>

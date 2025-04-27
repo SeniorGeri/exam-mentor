@@ -4,6 +4,7 @@ import {DataTableColumnHeader} from '@/components/data-table/data-table-column-h
 import {ColumnDef} from '@tanstack/react-table';
 import {City} from "./data";
 import {useTranslation} from 'react-i18next';
+import { TranslatableField } from '@/types/helpers';
 
 
 
@@ -29,7 +30,7 @@ export const CityColumns = (currentLocale :string): ColumnDef<City>[] => {
             accessorKey: 'city',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('city')}/>,
             cell: ({row}) => {
-                const city = row.getValue('city')
+                const city : TranslatableField = row.getValue('city')
                 return (
                     <div className="flex space-x-2">
                         <span className="max-w-[500px] truncate font-light">{city[currentLocale] || t('not_translated')}</span>
@@ -43,12 +44,18 @@ export const CityColumns = (currentLocale :string): ColumnDef<City>[] => {
             accessorKey: 'country',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('country')}/>,
             cell: ({row}) => {
-                const country = row.getValue('country').country
-                return (
-                    <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{country[currentLocale] || t('not_translated')}</span>
-                    </div>
-                );
+                if( row.getValue('country')){
+                    const country: TranslatableField = row.getValue('country')?.country
+                    return (
+                        <div className="flex space-x-2">
+                            <span className="max-w-[500px] truncate font-light">{country[currentLocale] || t('not_translated')}</span>
+                        </div>
+                    );
+                }  
+               else {
+                    return ('-')
+               }
+              
             },
             enableColumnFilter: true,
             enableSorting: true,

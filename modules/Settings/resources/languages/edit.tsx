@@ -13,6 +13,8 @@ import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
 import FileInput from 'modules/Media/resources/js/file-input';
+import CustomInput from '@/components/input/custom-input';
+import CustomTextarea from '@/components/input/custom-textarea';
 
 export function EditLanguage({language, isOpen, closeModal}: EditLanguageProps) {
 
@@ -60,54 +62,31 @@ export function EditLanguage({language, isOpen, closeModal}: EditLanguageProps) 
                 <form className="space-y-6" onSubmit={updateLanguage}>
                     <Languages currentLocale={data.locale} setData={setData}/>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="language">{t('language')}</Label>
+                    <CustomInput
+                        id="language"
+                        value={data.language}
+                        setFormData={setData}
+                        placeholder={t('language')}
+                        errorMessage={errors.language}
+                    />
 
-                        <Input
-                            id="language"
-                            type="text"
-                            name="language"
-                            value={data.language}
-                            onChange={(e) => setData('language', e.target.value)}
-                            placeholder={t('language')}
-                            autoComplete="language"
-                        />
+                    <FileInput inputName='flag' setFormData={setData} defaultValue={[data.flag]} />
 
-                        <InputError message={errors.language}/>
-                    </div>
+                    <CustomInput
+                        id="language_code"
+                        value={data.language_code}
+                        setFormData={setData}
+                        placeholder={t('language_code')}
+                        errorMessage={errors.language_code}
+                    />
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="language_code">{t('language_code')}</Label>
-
-                        <Input
-                            id="language_code"
-                            type="text"
-                            name="language_code"
-                            value={data.language_code}
-                            onChange={(e) => setData('language_code', e.target.value)}
-                            placeholder={t('language_code')}
-                            autoComplete="language_code"
-                        />
-
-                        <InputError message={errors.language_code}/>
-                    </div>
-
-                    <FileInput defaultValue={[data.flag]} inputName='flag' setFormData={setData} />
-                    
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
-
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder="Shenime"
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomTextarea
+                        id="description"
+                        value={data.description}
+                        setFormData={setData}
+                        placeholder={t('description')}
+                        errorMessage={errors.description}
+                    />
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

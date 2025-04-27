@@ -1,12 +1,10 @@
 'use client';
 
-import InputError from '@/components/input-error';
+import CustomInput from '@/components/input/custom-input';
+import CustomTextarea from '@/components/input/custom-textarea';
+import CustomSwitch from '@/components/input/switch-input';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import FileInput from 'modules/Media/resources/js/file-input';
 import {FormEventHandler, useState} from 'react';
@@ -63,55 +61,45 @@ export function CreatePayment() {
                     {t('create_payment_desc')}
                 </DialogDescription>
                 <form className="space-y-6" onSubmit={storePayment}>
-                    <div className="grid gap-2">
-                        <Label htmlFor="method">{t('method')}</Label>
 
-                        <Input
-                            id="method"
-                            type="text"
-                            name="method"
-                            value={data.method}
-                            onChange={(e) => setData('method', e.target.value)}
-                            placeholder={t('method')}
-                            autoComplete="method"
-                        />
+                    <CustomInput
+                        id="method"
+                        value={data.method}
+                        setFormData={setData}
+                        placeholder={t('method')}
+                        errorMessage={errors.method}
+                    />
 
-                        <InputError message={errors.method}/>
-                    </div>
                     <div className="grid grid-cols-2">
                         <div className="col-span-1">
-                            <div className="flex items-center space-x-2">
-                                <Switch id="is_primary" checked={data.is_primary}
-                                onCheckedChange={(checked: boolean) => setData('is_primary', checked)}/>
-
-                                <Label htmlFor="is_primary">{t('is_primary')}</Label>
-                            </div>
+                                <CustomSwitch
+                                    id="is_primary"
+                                    is_checked={data.is_primary}
+                                    setFormData={setData}
+                                    placeholder={t('is_primary')}
+                                />
                         </div>
                         <div className="col-span-1">
                             <div className="flex items-center space-x-2">
-                                <Switch id="active" checked={data.active}
-                                onCheckedChange={(checked: boolean) => setData('active', checked)}/>
-
-                                <Label htmlFor="active">{t('active')}</Label>
+                                    <CustomSwitch
+                                        id="active"
+                                        is_checked={data.active}
+                                        setFormData={setData}
+                                        placeholder={t('active')}
+                                    />
                             </div>
                         </div>
                     </div>
 
                     <FileInput inputName='image' setFormData={setData} />
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
 
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder={t('description')}
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomTextarea
+                        id="description"
+                        value={data.description}
+                        setFormData={setData}
+                        placeholder={t('description')}
+                        errorMessage={errors.description}
+                    />
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

@@ -1,11 +1,9 @@
 'use client';
 
-import InputError from '@/components/input-error';
+import CustomInput from '@/components/input/custom-input';
+import CustomTextarea from '@/components/input/custom-textarea';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import FileInput from 'modules/Media/resources/js/file-input';
 import {FormEventHandler, useState} from 'react';
@@ -60,37 +58,24 @@ export function CreateCountry() {
                     {t('create_country_desc')}
                 </DialogDescription>
                 <form className="space-y-6" onSubmit={storeCountCreateCountry}>
-                    <div className="grid gap-2">
-                        <Label htmlFor="country">{t('country')}</Label>
 
-                        <Input
-                            id="country"
-                            type="text"
-                            name="country"
-                            value={data.country}
-                            onChange={(e) => setData('country', e.target.value)}
-                            placeholder={t('country')}
-                            autoComplete="country"
-                        />
-
-                        <InputError message={errors.country} />
-                    </div>
+                    <CustomInput
+                        id="country"
+                        value={data.country}
+                        setFormData={setData}
+                        placeholder={t('country')}
+                        errorMessage={errors.country}
+                    />
 
                     <FileInput inputName='flag' setFormData={setData} />
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
 
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder={t('description')}
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomTextarea
+                           id="description"
+                           value={data.description}
+                           setFormData={setData}
+                           placeholder={t('description')}
+                           errorMessage={errors.description}
+                     />
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

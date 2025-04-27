@@ -14,6 +14,9 @@ import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
 import { Switch } from '@/components/ui/switch';
 import FileInput from 'modules/Media/resources/js/file-input';
+import CustomTextarea from '@/components/input/custom-textarea';
+import CustomSwitch from '@/components/input/switch-input';
+import CustomInput from '@/components/input/custom-input';
 
 export function EditPayment({payment, isOpen, closeModal}: EditPaymentProps) {
 
@@ -62,56 +65,44 @@ export function EditPayment({payment, isOpen, closeModal}: EditPaymentProps) {
                 <form className="space-y-6" onSubmit={updatePayment}>
                     <Languages currentLocale={data.locale} setData={setData}/>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="method">{t('method')}</Label>
+                    <CustomInput
+                        id="method"
+                        value={data.method}
+                        setFormData={setData}
+                        placeholder={t('method')}
+                        errorMessage={errors.method}
+                    />
 
-                        <Input
-                            id="method"
-                            type="text"
-                            name="method"
-                            value={data.method}
-                            onChange={(e) => setData('method', e.target.value)}
-                            placeholder={t('method')}
-                            autoComplete="method"
-                        />
-
-                        <InputError message={errors.method}/>
-                    </div>
                     <div className="grid grid-cols-2">
                         <div className="col-span-1">
-                            <div className="flex items-center space-x-2">
-                                <Switch id="is_primary" checked={data.is_primary}
-                                onCheckedChange={(checked: boolean) => setData('is_primary', checked)}/>
-
-                                <Label htmlFor="is_primary">{t('is_primary')}</Label>
-                            </div>
+                                <CustomSwitch
+                                    id="is_primary"
+                                    is_checked={data.is_primary}
+                                    setFormData={setData}
+                                    placeholder={t('is_primary')}
+                                />
                         </div>
                         <div className="col-span-1">
                             <div className="flex items-center space-x-2">
-                                <Switch id="active" checked={data.active}
-                                onCheckedChange={(checked: boolean) => setData('active', checked)}/>
-
-                                <Label htmlFor="active">{t('active')}</Label>
+                                    <CustomSwitch
+                                        id="active"
+                                        is_checked={data.active}
+                                        setFormData={setData}
+                                        placeholder={t('active')}
+                                    />
                             </div>
                         </div>
                     </div>
 
-                    <FileInput defaultValue={[data.image]} inputName='image' setFormData={setData} />
+                    <FileInput inputName='image' setFormData={setData} defaultValue={[data.image]}/>
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="description">{t('description')}</Label>
-
-                        <Textarea
-                            id="description"
-                            name="description"
-                            value={data.description}
-                            onChange={(e) => setData('description', e.target.value)}
-                            placeholder="Shenime"
-                            autoComplete="description"
-                        />
-
-                        <InputError message={errors.description}/>
-                    </div>
+                    <CustomTextarea
+                        id="description"
+                        value={data.description}
+                        setFormData={setData}
+                        placeholder={t('description')}
+                        errorMessage={errors.description}
+                    />
 
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>

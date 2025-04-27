@@ -4,6 +4,8 @@ import {DataTableColumnHeader} from '@/components/data-table/data-table-column-h
 import {ColumnDef} from '@tanstack/react-table';
 import {Country} from "./data";
 import { useTranslation } from 'react-i18next';
+import { TranslatableField } from '@/types/helpers';
+import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 
 
 
@@ -26,10 +28,23 @@ export const CountryColumns = (currentLocale :string): ColumnDef<Country>[] => {
             },
         },
         {
+            accessorKey: 'flag',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('flag')}/>,
+            cell: ({row}) => {
+                return (
+                    <Avatar>
+                        <AvatarImage className="h-12 w-12" src={row.getValue('flag')} alt={(row.getValue('country') as Record<string, string>)[currentLocale]} />
+                    </Avatar>
+                )
+            },
+            enableColumnFilter: false,
+            enableSorting: false,
+        },
+        {
             accessorKey: 'country',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('country')}/>,
             cell: ({row}) => {
-                const country = row.getValue('country')
+                const country : TranslatableField = row.getValue('country')
                 return (
                     <div className="flex space-x-2">
                         <span className="max-w-[500px] truncate font-light">{country[currentLocale] || t('not_translated')}</span>
