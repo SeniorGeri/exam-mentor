@@ -52,3 +52,10 @@ export type CheckboxInterface = {
     placeholder?: string,
     setFormData?: (key: string, checked: boolean, value: string| object) => void
 }
+
+export type TextEditorInterface = {
+    id: string;
+    defaultValue?: string;
+    setFormData?: (key: string, value: string | object) => void;
+};
+
