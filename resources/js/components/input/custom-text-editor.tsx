@@ -40,7 +40,7 @@ export default function CustomTextEditor({
                     toolbar: "undo redo | bold italic underline strikethrough | blocks fontsizeinput | align numlist bullist | link image media emoticons charmap table insertfile template | lineheight outdent indent | forecolor backcolor removeformat | code fullscreen preview save print | pagebreak anchor codesample footnotes | addtemplate inserttemplate | ltr rtl fontfamily fontsize",
                     toolbar_mode: 'sliding',
                     typography_ignore: ['code'],
-                    height: 550,
+                    height: 250,
                     image_caption: true,
                     promotion: false,
                     branding: false,

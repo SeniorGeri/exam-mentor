@@ -6,4 +6,5 @@ return [
     Modules\Media\MediaServiceProvider::class,
     Modules\Hrm\HrmServiceProvider::class,
     Modules\Operational\OperationalServiceProvider::class,
+    Modules\Finance\FinanceServiceProvider::class,
 ];
