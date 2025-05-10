@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Modules\Operational\Controllers\ActiveCourseController;
 use Modules\Operational\Controllers\SchoolController;
 use Modules\Operational\Controllers\SubjectController;
 use Modules\Operational\Controllers\GradeController;
@@ -43,4 +44,13 @@ Route::prefix('course')->as('course.')->middleware(['web',  'auth:sanctum'])->gr
     Route::post('/list', [CourseController::class, 'store'])->name('store')->permission('course.create');
     Route::put('/list/{course}', [CourseController::class, 'update'])->name('update')->permission('course.update');
     Route::delete('/list/{course}', [CourseController::class, 'destroy'])->name('destroy')->permission('course.delete');
+});
+
+
+Route::prefix('active-course')->as('active-course.')->middleware(['web',  'auth:sanctum'])->group(function () {
+
+    Route::get('/list', [ActiveCourseController::class, 'index'])->name('list')->permission('active-course.read');
+    Route::get('load', [ActiveCourseController::class, 'show'])->name('load')->permission('active-course.read');
+    Route::put('/list/{activeCourse}', [ActiveCourseController::class, 'update'])->name('update')->permission('active-course.update');
+    Route::delete('/list/{activeCourse}', [ActiveCourseController::class, 'destroy'])->name('destroy')->permission('active-course.delete');
 });

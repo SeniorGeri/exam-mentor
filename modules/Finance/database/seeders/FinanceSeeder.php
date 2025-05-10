@@ -6,7 +6,7 @@ namespace Modules\Finance\database\seeders;
 
 use Illuminate\Database\Seeder;
 
-final class OperationalSeeder extends Seeder
+final class FinanceSeeder extends Seeder
 {
     /**
      * Seed the application's database.

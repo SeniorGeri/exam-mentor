@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Enums\RolesEnum;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Modules\Finance\database\seeders\FinanceSeeder;
 use Modules\Settings\database\seeders\SettingsSeeder;
 use Modules\Hrm\database\seeders\HrmSeeder;
 use Modules\Operational\database\seeders\OperationalSeeder;
@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             $this->call(SettingsSeeder::class);
             $this->call(HrmSeeder::class);
             $this->call(OperationalSeeder::class);
+            $this->call(FinanceSeeder::class);
 
     }
 }

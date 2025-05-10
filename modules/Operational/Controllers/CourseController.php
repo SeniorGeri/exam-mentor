@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Modules\Operational\Models\Course;
 use Modules\Operational\Requests\Courses\StoreCourseRequest;
 use Modules\Operational\Requests\Courses\UpdateCourseRequest;
-use Inertia\Inertia;
-use Inertia\Response;
 use Modules\Operational\Models\CourseClassification;
 use Modules\Operational\Models\Grade;
 use Modules\Operational\Models\School;
 use Modules\Operational\Models\Subject;
+use Inertia\Inertia;
+use Inertia\Response;
 
 final class CourseController
 {

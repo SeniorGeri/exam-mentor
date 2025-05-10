@@ -14,43 +14,80 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
         type: 'standalone'
     },
-        {
-            title: 'Operational',
-            href: 'operational',
-            icon: LayoutGrid,
-            type: 'dropdown',
-            permissions: ['school.read','subject.read','course.read','grade.read'],
-            subItems: [
-                {
-                    title: 'School',
-                    href: route('school.list'),
-                    icon: LayoutGrid,
-                    type: 'standalone',
-                    permission: 'school.read',
-                },
-                {
-                    title: 'Subject',
-                    href: route('subject.list'),
-                    icon: LayoutGrid,
-                    type: 'standalone',
-                    permission: 'subject.read',
-                },
-                {
-                    title: 'Course',
-                    href: route('course.list'),
-                    icon: LayoutGrid,
-                    type: 'standalone',
-                    permission: 'course.read',
-                },
-                {
-                    title: 'Grade',
-                    href: route('grade.list'),
-                    icon: LayoutGrid,
-                    type: 'standalone',
-                    permission: 'grade.read',
-                }
-            ]
-        },
+    {
+        title: 'Operational',
+        href: 'operational',
+        icon: LayoutGrid,
+        type: 'dropdown',
+        permissions: ['school.read','subject.read','course.read','grade.read'],
+        subItems: [
+            {
+                title: 'School',
+                href: route('school.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'school.read',
+            },
+            {
+                title: 'Subject',
+                href: route('subject.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'subject.read',
+            },
+            {
+                title: 'Course',
+                href: route('course.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'course.read',
+            },
+            {
+                title: 'Grade',
+                href: route('grade.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'grade.read',
+            }
+        ]
+    },
+    {
+        title: 'Finance',
+        href: 'finance',
+        icon: LayoutGrid,
+        type: 'dropdown',
+        permissions: ['course-pricing.read','liquidation.read','expense.read','transaction.read'],
+        subItems: [
+            {
+                title: 'Course Pricing',
+                href: route('course-pricing.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'course-pricing.read',
+            },
+            {
+                title: 'Liquidation',
+                href: route('liquidation.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'liquidation.read',
+            },
+            {
+                title: 'Expense',
+                href: route('expense.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'expense.read',
+            },
+            {
+                title: 'Transaction',
+                href: route('transaction.list'),
+                icon: LayoutGrid,
+                type: 'standalone',
+                permission: 'transaction.read',
+            }
+        ]
+    },
     {
         title: 'Hrm',
         href: 'hrm',

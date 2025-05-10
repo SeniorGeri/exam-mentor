@@ -18,7 +18,7 @@ import { useCountries } from 'modules/Settings/resources/cities/countries-contex
 
 export function EditSchool({school, isOpen, closeModal}: EditSchoolProps) {
 
-        const countries = useCountries(); // Access directly from context
+    const countries = useCountries(); // Access directly from context
     
     const { t } = useTranslation('Operational');
 

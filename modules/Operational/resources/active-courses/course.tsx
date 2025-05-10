@@ -1,0 +1,29 @@
+'use client';
+
+import { ColumnDef } from '@tanstack/react-table';
+import { DataTable } from '@/components/data-table/data-table';
+import { route } from 'ziggy-js';
+import { ActiveCourseColumns } from './columns';
+import { ActiveCourse } from './data';
+import { ActiveCourseActions } from './actions';
+import { useLocale } from '@/contexts/locale';
+
+export default function ActiveCourseTable() {
+
+    const { currentLocale } = useLocale();
+
+    const columns: ColumnDef<ActiveCourse>[] = [
+        ...ActiveCourseColumns(currentLocale),
+        {
+            id: 'actions',
+            cell: ({ row }) => <ActiveCourseActions activeCourse={row} />
+        }
+    ];
+    return (
+
+        <DataTable urlPath={route('active-course.load')} columns={columns}>
+            <></>
+        </DataTable>
+
+    );
+}

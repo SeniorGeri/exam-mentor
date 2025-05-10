@@ -10,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use Modules\Operational\Models\ActiveCourse;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Operational\Models\ActiveCourseStatus;
+use Modules\Operational\Requests\ActiveCourses\UpdateActiveCourseRequest;
 
 final class ActiveCourseController
 {
@@ -21,8 +23,11 @@ final class ActiveCourseController
      */
     public function index(): Response
     {
-
-        return Inertia::render('Operational::active-courses/index');
+        
+        $activeCourseStatuses = ActiveCourseStatus::all();
+        return Inertia::render('Operational::active-courses/index', [
+            'activeCourseStatuses' => $activeCourseStatuses
+        ]);
 
     }
 
@@ -39,6 +44,20 @@ final class ActiveCourseController
         ->paginate($request->limit);
 
         return response()->json(['data' => $activeCourses]);
+    }
+
+    /**
+     * Update Active Course
+     *
+     * @param  UpdateActiveCourseRequest $request
+     * @param  ActiveCourse $activeCourse
+     * @return RedirectResponse
+     */
+    public function update(UpdateActiveCourseRequest $request, ActiveCourse $activeCourse): RedirectResponse
+    {
+        $activeCourse->fill($request->validated())->save();
+
+        return to_route('active-course.list');
     }
 
     /**

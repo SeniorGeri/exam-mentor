@@ -5,6 +5,7 @@ import EnSettings from '../../modules/Settings/lang/en.json';
 import EnHrm from '../../modules/Hrm/lang/en.json'
 import EnMedia from '../../modules/Media/lang/en.json'
 import EnOperational from '../../modules/Operational/lang/en.json'
+import EnFinance from '../../modules/Finance/lang/en.json'
 
 
 i18n
@@ -15,7 +16,8 @@ i18n
                 Settings: EnSettings,
                 Hrm: EnHrm,
                 Media: EnMedia,
-                Operational: EnOperational
+                Operational: EnOperational,
+                Finance: EnFinance
             },
             sq: {
             }
