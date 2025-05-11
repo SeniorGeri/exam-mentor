@@ -7,4 +7,5 @@ return [
     Modules\Hrm\HrmServiceProvider::class,
     Modules\Operational\OperationalServiceProvider::class,
     Modules\Finance\FinanceServiceProvider::class,
+    Modules\Frontend\FrontendServiceProvider::class,
 ];
