@@ -6,7 +6,7 @@ import EnHrm from '../../modules/Hrm/lang/en.json'
 import EnMedia from '../../modules/Media/lang/en.json'
 import EnOperational from '../../modules/Operational/lang/en.json'
 import EnFinance from '../../modules/Finance/lang/en.json'
-
+import EnFrontend from '../../modules/Frontend/lang/en.json'
 
 i18n
     .use(initReactI18next)
@@ -17,7 +17,8 @@ i18n
                 Hrm: EnHrm,
                 Media: EnMedia,
                 Operational: EnOperational,
-                Finance: EnFinance
+                Finance: EnFinance,
+                Frontend: EnFrontend
             },
             sq: {
             }
