@@ -30,7 +30,7 @@ const featuredPrompts = [
   },
 ]
 
-export function FeaturedPrompts() {
+export function FeaturedCourses() {
   return (
     <section className="py-16 px-6">
       <div className="mx-auto max-w-7xl">

@@ -1,18 +1,20 @@
 import { Button } from "@/components/ui/button"
 import { Link } from "@inertiajs/react" 
 import { Github, Twitter, DiscIcon as Discord } from "lucide-react"
+import { useTranslation } from 'react-i18next';
 
 export function Footer() {
+    const { t } = useTranslation('Frontend');
   return (
     <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container py-10">
+      <div className="container px-10 py-10">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div>
-            <h3 className="text-lg font-semibold mb-4">About</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('about')}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">
-                  About Us
+                  {t('about_us')}
                 </Link>
               </li>
               <li>

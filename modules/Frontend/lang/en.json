@@ -2,5 +2,12 @@
     "exam_mentor": "Exam Mentor",
     "exam_mentor_description": "\n 📚 Learn smarter. Pass faster.\n🩺 Rooted in excellence from Our Lady of Good Counsel\n🎯 Medical & professional courses by top mentors\n🌍 From Albania — made for students everywhere\n#ExamMentor",
     "learn": "Learn",
-    "teach": "Teach"
+    "teach": "Teach",
+    "browse": "Browse",
+    "browse_description": "Explore a wide range of courses and resources to enhance your knowledge and skills.",
+    "about": "About",
+    "about_us":"About Us",
+    "resources": "Resources",
+    "connect": "Connect",
+    "search_course": "I want to learn about ...."
 }
