@@ -36,17 +36,23 @@ export function Navigation() {
           </SheetTrigger>
           <SheetContent side="left" className="pr-0">
             <nav className="grid gap-6 px-2 py-6">
-              <Link href="/browse" className="hover:text-foreground/80">
-                Browse
+              <Link href={route('frontend.browse')} className="hover:text-foreground/80">
+                {t('browse')}
               </Link>
-              <Link href="/sell" className="hover:text-foreground/80">
-                Sell
+              <Link href={route('frontend.about')} className="hover:text-foreground/80">
+                {t('about')}
               </Link>
-              <Link href="/governance" className="hover:text-foreground/80">
-                Governance
+              <Link href={route('frontend.team')} className="hover:text-foreground/80">
+                {t('team')}
               </Link>
-              <Link href="/profile" className="hover:text-foreground/80">
-                Profile
+              <Link href={route('frontend.contact')} className="hover:text-foreground/80">
+                {t('contact')}
+              </Link>
+              <Link href={route('frontend.privacy')} className="hover:text-foreground/80">
+                {t('privacy')}
+              </Link>
+              <Link href={route('frontend.terms')} className="hover:text-foreground/80">
+                {t('terms')}
               </Link>
             </nav>
           </SheetContent>

@@ -21,7 +21,7 @@ export function Hero() {
           {t('exam_mentor_description')}
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link href="/browse">
+            <Link href={route('frontend.browse')}>
               <Button size="lg" className="rounded-full">
                 {t('learn')}
               </Button>

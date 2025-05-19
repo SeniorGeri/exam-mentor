@@ -160,7 +160,10 @@ export default function Browse() {
                 <div className="flex items-center justify-center gap-2">
                     <img src={faviconSVG} alt="" width={50} height={50}/> 
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight text-center mb-12">{t('browse')}</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-center">{t('browse')}</h2>
+                <p className="text-lg leading-8 text-muted-foreground text-center mb-5">
+                  {t('browse_description')}
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {courses.map((course, index) => (
                         <CourseCard key={index} {...course} />

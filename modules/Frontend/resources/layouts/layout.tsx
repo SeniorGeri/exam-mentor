@@ -11,7 +11,7 @@ const changeLanguage = (lng: string) => {
 export default ({ children }: { children: React.ReactNode }) => 
   (
       <LocaleProvider>
-        <div className="min-h-screen flex flex-col px-4">
+        <div className="min-h-screen flex flex-col px-4 justify-between">
           <Navigation />
           {children}
           <Footer />

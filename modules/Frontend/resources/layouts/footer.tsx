@@ -1,50 +1,30 @@
 import { Button } from "@/components/ui/button"
 import { Link } from "@inertiajs/react" 
-import { Github, Twitter, DiscIcon as Discord } from "lucide-react"
+import { Facebook, Instagram, Youtube } from "lucide-react"
 import { useTranslation } from 'react-i18next';
 
 export function Footer() {
     const { t } = useTranslation('Frontend');
   return (
     <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container px-10 py-10">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+      <div className="px-10 py-10">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
           <div>
             <h3 className="text-lg font-semibold mb-4">{t('about')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">
+                <Link href={route('frontend.about')} className="text-sm text-muted-foreground hover:text-foreground">
                   {t('about_us')}
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="text-sm text-muted-foreground hover:text-foreground">
-                  Team
+                <Link href={route('frontend.team')} className="text-sm text-muted-foreground hover:text-foreground">
+                  {t('team')}
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-sm text-muted-foreground hover:text-foreground">
-                  Careers
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/docs" className="text-sm text-muted-foreground hover:text-foreground">
-                  Documentation
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/support" className="text-sm text-muted-foreground hover:text-foreground">
-                  Support
+                <Link href={route('frontend.contact')} className="text-sm text-muted-foreground hover:text-foreground">
+                  {t('contact')}
                 </Link>
               </li>
             </ul>
@@ -53,13 +33,13 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">
-                  Privacy Policy
+                <Link href={route('frontend.privacy')} className="text-sm text-muted-foreground hover:text-foreground">
+                  {t('privacy')}
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">
-                  Terms of Service
+                <Link href={route('frontend.terms')} className="text-sm text-muted-foreground hover:text-foreground">
+                  {t('terms')}
                 </Link>
               </li>
             </ul>
@@ -67,15 +47,21 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect</h3>
             <div className="flex space-x-4">
-              <Button variant="ghost" size="icon">
-                <Twitter className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Discord className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Github className="h-4 w-4" />
-              </Button>
+              <Link href="https://www.facebook.com/ExamMentor" target="_blank">
+                <Button variant="ghost" size="icon">
+                  <Facebook className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="https://www.instagram.com/ExamMentor" target="_blank">
+                <Button variant="ghost" size="icon">
+                  <Instagram className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="https://www.youtube.com/ExamMentor" target="_blank">
+                <Button variant="ghost" size="icon">
+                  <Youtube className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
