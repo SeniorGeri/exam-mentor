@@ -10,14 +10,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Operational\Models\Course;
 use Modules\Settings\Models\Language;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 final class CoursePricing extends Model
 {
     use SoftDeletes;
     use HasTableFilterTrait;
+    use HasFactory;
+
     protected $fillable = [
         'course_id',
-        'professor_id',
+        'instructor_id',
         'pricing_type_id',
         'language_id',
         'price',
@@ -30,7 +33,7 @@ final class CoursePricing extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function professor()
+    public function instructor()
     {
         return $this->belongsTo(User::class);
     }

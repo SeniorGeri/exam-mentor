@@ -32,7 +32,7 @@ final class MainController
         $courses = CoursePricing::with([
             'course:id,title,image',
             'pricingType:id,name',
-            'professor:id,name',
+            'instructor:id,name',
             'language:id,language'
         ])
         ->whereHas('course', function ($query) use ($searchKey) {
@@ -40,7 +40,7 @@ final class MainController
             $query->where('title', 'like', "%{$searchKey}%");
             }
         })
-        ->orWhereHas('professor', function ($query) use ($searchKey) {
+        ->orWhereHas('instructor', function ($query) use ($searchKey) {
             if($searchKey !== ''){
             $query->where('name', 'like', "%{$searchKey}%");
             }
@@ -48,7 +48,7 @@ final class MainController
         ->paginate(24);
 
         return Inertia::render('Frontend::browse', [
-            'courses' => $courses,
+            'coursePaginate' => $courses,
         ]);
     }
 
