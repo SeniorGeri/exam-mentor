@@ -15,4 +15,5 @@ Route::middleware('web')->group(function () {
     Route::get('/frontend/about', [AboutController::class, 'index'])->name('frontend.about');
     Route::get('/frontend/privacy', [AboutController::class, 'privacy'])->name('frontend.privacy');
     Route::get('/frontend/terms', [AboutController::class, 'terms'])->name('frontend.terms');
+    Route::get('/frontend/course/{course}', [MainController::class, 'show'])->name('frontend.course');
 });

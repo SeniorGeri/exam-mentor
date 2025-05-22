@@ -18,7 +18,20 @@ final class MainController
      */
     public function index(): Response
     {
-        return Inertia::render('Frontend::main');
+
+        $courses = CoursePricing::with([
+            'course:id,title,image',
+            'pricingType:id,name',
+            'instructor:id,name',
+            'language:id,language'
+        ])
+        ->orderBy('created_at', 'desc')
+        ->limit(4)
+        ->get();
+
+        return Inertia::render('Frontend::main', [
+            'courses' => $courses,
+        ]);
 
     }
 
@@ -45,10 +58,25 @@ final class MainController
             $query->where('name', 'like', "%{$searchKey}%");
             }
         })
+        ->orderBy('created_at', 'desc')
         ->paginate(24);
 
-        return Inertia::render('Frontend::browse', [
+        return Inertia::render('Frontend::browse', [    
             'coursePaginate' => $courses,
+        ]);
+    }
+
+    public function show(CoursePricing $coursePricing): Response
+    {
+        $course = $coursePricing->with([
+            'course:id,title,image,description',
+            'pricingType:id,name',
+            'instructor:id,name',
+            'language:id,language'
+        ])->first();
+
+        return Inertia::render('Frontend::show', [
+            'course' => $course,
         ]);
     }
 

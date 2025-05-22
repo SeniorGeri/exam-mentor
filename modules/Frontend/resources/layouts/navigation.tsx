@@ -7,6 +7,7 @@ import { Menu, Search } from "lucide-react"
 import { Link } from '@inertiajs/react';
 import {faviconSVG} from '@/assets/images'
 import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from "../components/language-selector"
 
 export function Navigation() {
     const { t } = useTranslation('Frontend');
@@ -69,6 +70,8 @@ export function Navigation() {
                 {t('login')}
               </Link>
           </Button>
+
+          <LanguageSelector />
         </div>
       </div>
     </header>

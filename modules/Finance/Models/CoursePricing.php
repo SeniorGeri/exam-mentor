@@ -32,7 +32,7 @@ final class CoursePricing extends Model
     {
         return $this->belongsTo(Course::class);
     }
-
+ 
     public function instructor()
     {
         return $this->belongsTo(User::class);

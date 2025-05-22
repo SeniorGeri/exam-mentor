@@ -56,7 +56,22 @@
     "terms_h3": "3. Account Registration",
     "terms_h4": "4. Intellectual Property",
     "terms_h5": "5. Termination",
-    "terms_h6": "6. Limitation of Liability"
+    "terms_h6": "6. Limitation of Liability",
+
+    "about_course": "About this course",
+    "course_curriculum": "Course Curriculum",
+    "register_now": "Register now",
+    "whatsapp_us": "WhatsApp Us",
+    "this_course_includes": "This course includes",
+    "name": "Name",
+    "your_name": "Your name",
+    "email": "Email",
+    "your_email": "Your email address",
+    "subject": "Subject",
+    "what_is_this_regarding": "What is this regarding?",
+    "message": "Message",
+    "your_message": "Your message...",
+    "send_message": "Send Message"
 
     
 }

@@ -51,4 +51,5 @@ export type Course = {
     id: number;
     title: TranslatableField;
     image:string;
+    description?: string;
 }
