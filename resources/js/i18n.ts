@@ -7,6 +7,7 @@ import EnMedia from '../../modules/Media/lang/en.json'
 import EnOperational from '../../modules/Operational/lang/en.json'
 import EnFinance from '../../modules/Finance/lang/en.json'
 import EnFrontend from '../../modules/Frontend/lang/en.json'
+import SqFrontend from '../../modules/Frontend/lang/sq.json'
 
 i18n
     .use(initReactI18next)
@@ -21,6 +22,7 @@ i18n
                 Frontend: EnFrontend
             },
             sq: {
+                Frontend: SqFrontend
             }
         },
         lng: 'en',

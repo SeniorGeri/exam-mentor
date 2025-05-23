@@ -9,6 +9,7 @@ export type Languages = {
 
 export type LanguageData = {
     language_code : string
+    language : TranslatableField
     flag : string
 }
 

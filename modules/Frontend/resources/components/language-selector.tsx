@@ -3,32 +3,30 @@
 import * as React from "react"
 import { Check, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
-import { InertiaLangPageProps } from "@/types/helpers"
+import { InertiaLangPageProps, LanguageData } from "@/types/helpers"
 import { usePage } from "@inertiajs/react"
+import i18n from '@/i18n';
 
-type Language = {
-    language_code: string
-    flag: string
-}
 
 export function LanguageSelector() {
+
     const { languages } = usePage<InertiaLangPageProps>().props;
-    const [selectedLanguage, setSelectedLanguage] = React.useState(languages.data[0])
+    const currentLanguage = languages.data.find((language) => language.language_code === (localStorage.getItem('language') ?? languages.main)); 
+    const [selectedLanguage, setSelectedLanguage] = React.useState(currentLanguage)
     const [isOpen, setIsOpen] = React.useState(false)
+    i18n.changeLanguage(currentLanguage.language_code);
 
-
-    console.log(languages);
-    const handleSelectLanguage = (language: Language) => {
+    const handleSelectLanguage = (language: LanguageData) => {
         setSelectedLanguage(language)
         setIsOpen(false)
-        // Here you would typically handle the language change in your application
-        // For example: i18n.changeLanguage(language.code)
+        i18n.changeLanguage(language.language_code);
+        localStorage.setItem('language', language.language_code)
     }
 
+    // handleSelectLanguage(languages.data.find((language) => language.language_code === (localStorage.getItem('language') ?? languages.main)) as LanguageData)
     return (
         <div className="relative">
             <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
@@ -45,7 +43,7 @@ export function LanguageSelector() {
                                 className="w-full h-full object-cover"
                             />
                         </div>
-                        <span className="font-medium text-sm hidden sm:inline">{selectedLanguage.language_code}</span>
+                        <span className="font-medium text-sm hidden sm:inline">{selectedLanguage.language[selectedLanguage.language_code]}</span>
                         <ChevronDown
                             className={cn("h-4 w-4 text-gray-500 transition-transform duration-200", isOpen ? "rotate-180" : "")}
                         />
@@ -75,7 +73,7 @@ export function LanguageSelector() {
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <span className="font-medium text-sm flex-1">{language.language_code}</span>
+                                    <span className="font-medium text-sm flex-1">{language.language[language.language_code]}</span>
                                     {selectedLanguage.language_code === language.language_code && <Check className="h-4 w-4 text-green-500" />}
                                 </DropdownMenuItem>
                             </motion.div>
