@@ -8,7 +8,7 @@ const changeLanguage = (lng: string) => {
     localStorage.setItem('language', lng); // Store language preference
 };
 
-export default ({ children }: { children: React.ReactNode }) => 
+export default ({ children , ...props }: { children: React.ReactNode }) => 
   (
       <LocaleProvider>
         <div className="min-h-screen flex flex-col px-4 justify-between">
@@ -16,6 +16,5 @@ export default ({ children }: { children: React.ReactNode }) =>
           {children}
           <Footer />
         </div>
-    </LocaleProvider>
+      </LocaleProvider>
 );
-

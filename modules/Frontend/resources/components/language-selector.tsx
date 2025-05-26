@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useEffect, useState } from "react"
 import { Check, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -15,18 +15,19 @@ export function LanguageSelector() {
 
     const { languages } = usePage<InertiaLangPageProps>().props;
     const currentLanguage = languages.data.find((language) => language.language_code === (localStorage.getItem('language') ?? languages.main)); 
-    const [selectedLanguage, setSelectedLanguage] = React.useState(currentLanguage)
-    const [isOpen, setIsOpen] = React.useState(false)
-    i18n.changeLanguage(currentLanguage.language_code);
+    const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage)
+    const [isOpen, setIsOpen] = useState(false)
+
+    useEffect(() => {
+        i18n.changeLanguage(selectedLanguage.language_code);
+      }, [selectedLanguage.language_code]);
 
     const handleSelectLanguage = (language: LanguageData) => {
         setSelectedLanguage(language)
         setIsOpen(false)
-        i18n.changeLanguage(language.language_code);
         localStorage.setItem('language', language.language_code)
     }
 
-    // handleSelectLanguage(languages.data.find((language) => language.language_code === (localStorage.getItem('language') ?? languages.main)) as LanguageData)
     return (
         <div className="relative">
             <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
