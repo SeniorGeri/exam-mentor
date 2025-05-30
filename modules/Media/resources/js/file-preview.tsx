@@ -1,12 +1,10 @@
-import {Button} from '@/components/ui/button';
+import { Upload } from 'lucide-react';
 import React from 'react';
-import {FilePreviewProps, Image} from './types';
 import { useTranslation } from 'react-i18next';
+import { FilePreviewProps, Image } from './types';
 
-
-function FilePreview({selectedFiles, handleSelectFile}: FilePreviewProps) {
-
-    const {t} = useTranslation('Media');
+function FilePreview({ selectedFiles, handleSelectFile }: FilePreviewProps) {
+    const { t } = useTranslation('Media');
 
     const removeFile = (event: React.MouseEvent<HTMLElement>, file: Image) => {
         event.preventDefault();
@@ -14,11 +12,12 @@ function FilePreview({selectedFiles, handleSelectFile}: FilePreviewProps) {
     };
 
     return selectedFiles.length === 0 ? (
-        <Button variant="outline" type="button">
-            {t('preview')}
-        </Button>
+        <div className={`mb-2 flex h-32 w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-5`}>
+            <Upload className="text-muted-foreground mb-2 h-8 w-8" />
+            <p className={`text-sm text-gray-400`}>{t('click_to_select_image')}</p>
+        </div>
     ) : (
-        <div className="mx-2 mb-2 grid w-full grid-cols-3 gap-2 rounded-lg border-2 border-dashed p-5 lg:grid-cols-4">
+        <div className="mb-2 grid w-full grid-cols-3 gap-2 rounded-lg border-2 border-dashed p-5 lg:grid-cols-4">
             {selectedFiles.map((file: Image) => (
                 <div
                     key={file.id}

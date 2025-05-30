@@ -12,5 +12,8 @@
     "image_data": "Image data",
     "image_data_desc": "Below you can edit the image data",
     "image_update_succ": "Image updated successfully",
-    "image_delete_succ": "Image deleted successfully"
+    "image_delete_succ": "Image deleted successfully",
+    "click_to_select_image": "Click to select image"
+
+    
 }

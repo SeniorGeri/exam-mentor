@@ -67,5 +67,10 @@
     "what_is_this_regarding": "Për çfarë bëhet fjalë?",
     "message": "Mesazhi",
     "your_message": "Mesazhi juaj...",
-    "send_message": "Dërgo Mesazh"
+    "send_message": "Dërgo Mesazh",
+    "phone": "Telefoni",
+    "your_phone": "Numri i telefonit juaj",
+    "company_address": "Remote Europe",
+    "company_email": "exammentoring@gmail.com",
+    "company_phone": "+1 (555) 123-4567\nMon-Fri, 9AM-5PM"
   }

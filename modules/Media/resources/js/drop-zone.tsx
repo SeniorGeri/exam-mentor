@@ -1,10 +1,10 @@
+import { Upload } from 'lucide-react';
 import React, { RefObject, useRef, useState } from 'react';
-import { DropzoneProps } from './types';
 import { useTranslation } from 'react-i18next';
+import { DropzoneProps } from './types';
 
 const Dropzone = ({ onUpload }: DropzoneProps) => {
-
-    const {t} = useTranslation('Media');
+    const { t } = useTranslation('Media');
 
     const [isDragActive, setIsDragActive] = useState<boolean>(false);
     const fileInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -26,7 +26,7 @@ const Dropzone = ({ onUpload }: DropzoneProps) => {
 
     return (
         <div
-            className={`mb-2 flex h-32 w-2/3 items-center justify-center rounded-lg border-2 border-dashed p-5 ${isDragActive ? 'border-sky-400 bg-sky-50' : 'border-gray-300'}`}
+            className={`mb-2 flex h-32 w-2/3 flex-col items-center justify-center rounded-lg border-2 border-dashed p-5 ${isDragActive ? 'border-sky-400 bg-sky-50' : 'border-gray-300'}`}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
             onDragOver={(e) => e.preventDefault()}
@@ -42,9 +42,9 @@ const Dropzone = ({ onUpload }: DropzoneProps) => {
                 ref={fileInput}
                 onChange={(e) => onUpload(Array.from(e.target.files))}
             />
-
+            <Upload className="text-muted-foreground mb-2 h-8 w-8" />
             <p className={`text-sm ${isDragActive ? 'text-sky-800' : 'text-gray-400'} `}>
-                {isDragActive ? t('leave_file_here'): t('drag_drop_files')}
+                {isDragActive ? t('leave_file_here') : t('drag_drop_files')}
             </p>
         </div>
     );

@@ -9,6 +9,7 @@ use App\Traits\HasTableFilterTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Operational\Models\ActiveCourse;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Liquidation extends Model
 {
@@ -25,17 +26,17 @@ final class Liquidation extends Model
         'description',
     ];
 
-    public function activeCourse()
+    public function activeCourse(): BelongsTo
     {
         return $this->belongsTo(ActiveCourse::class);
     }
 
-    public function createdBy()
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function winner()
+    public function winner(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

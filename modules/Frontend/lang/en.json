@@ -71,7 +71,12 @@
     "what_is_this_regarding": "What is this regarding?",
     "message": "Message",
     "your_message": "Your message...",
-    "send_message": "Send Message"
+    "send_message": "Send Message",
+    "phone": "Phone",
+    "your_phone": "Your phone number",
+    "company_address": "Remote Europe",
+    "company_email": "exammentoring@gmail.com",
+    "company_phone": "+1 (555) 123-4567\nMon-Fri, 9AM-5PM"
 
     
 }

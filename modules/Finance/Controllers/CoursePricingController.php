@@ -32,7 +32,7 @@ final class CoursePricingController
      */
     public function show(FilterTableRequest $request): JsonResponse
     {
-        $coursePricings = CoursePricing::with(['course', 'professor', 'pricingType', 'language'])
+        $coursePricings = CoursePricing::with(['course', 'instructor', 'pricingType', 'language'])
         ->filter($request)
         ->paginate($request->limit);
 

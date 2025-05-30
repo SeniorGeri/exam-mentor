@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Operational\Models\Course;
 use Modules\Settings\Models\Language;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class CoursePricing extends Model
 {
@@ -28,22 +29,22 @@ final class CoursePricing extends Model
         'description',
     ];
 
-    public function course()
+    public function course(): BelongsTo 
     {
         return $this->belongsTo(Course::class);
     }
  
-    public function instructor()
+    public function instructor(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function pricingType()
+    public function pricingType(): BelongsTo
     {
         return $this->belongsTo(PricingType::class);
     }
 
-    public function language()
+    public function language(): BelongsTo
     {
         return $this->belongsTo(Language::class);
     }

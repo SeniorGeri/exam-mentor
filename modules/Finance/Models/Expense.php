@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Traits\HasTableFilterTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class Expense extends Model
 {
@@ -20,7 +21,7 @@ final class Expense extends Model
         'description',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

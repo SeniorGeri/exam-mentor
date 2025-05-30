@@ -1,11 +1,12 @@
-import {ContainerProps} from './types';
+import { ContainerProps } from './types';
 
-function FileContainer({file,  selectedFiles, handleSelectFile }: ContainerProps) {
+function FileContainer({ file, selectedFiles, handleSelectFile, setOpen }: ContainerProps) {
     return (
         <button
             className={`col-span-1 w-full rounded-lg py-1`}
             role="button"
-            onClick={() => handleSelectFile(file) }
+            onClick={() => handleSelectFile(file)}
+            onDoubleClick={() => setOpen(false)}
         >
             <div
                 className={`mx-auto overflow-hidden rounded-lg bg-white shadow-lg ${selectedFiles.includes(file) ? 'border-4 border-gray-300' : 'border-none'}`}

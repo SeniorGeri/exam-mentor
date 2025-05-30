@@ -1,0 +1,21 @@
+{
+    "contact_delete_succ": "Contact deleted successfully",
+    "contact_delete_fail": "Contact deleted failed",
+    "delete_contact": "Delete Contact",
+    "delete_contact_desc": "Are you sure you want to delete this contact?",
+    "close": "Close",
+    "delete": "Delete",
+    "edit_contact": "Edit Contact",
+    "edit_contact_desc": "Are you sure you want to edit this contact?",
+    "nr": "NR",
+    "description": "Description",
+    "yes" : "Yes",
+    "no": "No",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "phone": "Phone",
+    "ip": "IP",
+    "created_at": "Created At"
+}

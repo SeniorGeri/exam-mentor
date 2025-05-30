@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Validator::extend('no_html_tags', function ($attribute, $value, $parameters, $validator) {
+            return ! preg_match('/<(script|iframe|embed|object|applet|meta|link|style|form|input|button|textarea|select|option).*?>/i', $value);
+        }, 'The :attribute field contains forbidden HTML tags.');
     }
 }
