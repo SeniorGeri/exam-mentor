@@ -9,12 +9,11 @@
     "click_here_to_request_another": "click here to request another",
     "or": "or",
     "click_here_to_login": "click here to login",
-    "login": "Login",
+
     "confirm_password_desc": "Please confirm your password to continue.",
     "confirm_password": "Confirm password",
     "forgot_password": "Forgot password",
     "forgot_password_desc": "Please enter your email address and we will send you a link to reset your password.",
-    "email": "Email",
     "send_reset_link": "Send reset link",
     "create_an_account": "Create an account",
     "create_an_account_desc": "Create an account to start using Exam Mentor.",
@@ -24,7 +23,21 @@
     "subject": "Subject",
     "what_is_this_regarding": "What is this regarding?",
     "message": "Message",
-    "password": "Password"
 
+    "login": "Login",
+    "login_desc": "Login to start using Exam Mentor.",
+    "email": "Email",
+    "password": "Password",
+    "remember": "Remember me",
+    "dont_have_an_account": "Don't have an account?",
+    "sign_up": "Sign up",
+    "still_not_sure": "Still not sure",
+    "go_back_and": "Go back and",
+    "browse_a_bit_more": "browse a bit more",
+
+    "create_account": "Create an account",
+    "instructor": "Instructor",
+    "already_have_an_account": "Already have an account?",
+    "phone": "Phone"
 
 }

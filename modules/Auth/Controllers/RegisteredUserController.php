@@ -4,6 +4,7 @@ declare(strict_types= 1);
 
 namespace Modules\Auth\Controllers;
 
+use App\Enums\RolesEnum;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -40,9 +41,11 @@ final class RegisteredUserController
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
         ]);
-
+        
+        $request->instructor ? $user->assignRole(RolesEnum::INSTRUCTOR->value) : $user->assignRole(RolesEnum::STUDENT->value);
+        
         event(new Registered($user));
 
         Auth::login($user);

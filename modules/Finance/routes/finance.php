@@ -12,6 +12,8 @@ Route::prefix('course-pricing')->as('course-pricing.')->middleware(['web',  'aut
 
     Route::get('/list', [CoursePricingController::class, 'index'])->name('list')->permission('course-pricing.read');
     Route::get('load', [CoursePricingController::class, 'show'])->name('load')->permission('course-pricing.read');
+    Route::post('list', [CoursePricingController::class, 'store'])->name('store')->permission('course-pricing.create');
+    Route::put('list/{coursePricing}', [CoursePricingController::class, 'update'])->name('update')->permission('course-pricing.update');
     Route::delete('/list/{coursePricing}', [CoursePricingController::class, 'destroy'])->name('destroy')->permission('course-pricing.delete');
 });
 

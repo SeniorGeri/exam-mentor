@@ -26,7 +26,6 @@ const LocaleContext = createContext<LocaleContextType | null>(null);
 
 export const LocaleProvider = ({ children }: { children: React.ReactNode }) => {
     const { languages } = usePage<InertiaPageProps>().props;
-    console.log(languages);
     const [currentLocale, setCurrentLocale] = useState(languages.main);
 
     const setLocale = (locale: string) => {

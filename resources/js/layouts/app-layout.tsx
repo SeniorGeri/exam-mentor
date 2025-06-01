@@ -10,10 +10,7 @@ interface AppLayoutProps {
     breadcrumbs?: BreadcrumbItem[];
 }
 
-const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem('language', lng); // Store language preference
-};
+i18n.changeLanguage('en');
 
 export default ({children, breadcrumbs, ...props}: AppLayoutProps) => (
     <LocaleProvider>

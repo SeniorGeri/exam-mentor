@@ -19,5 +19,9 @@ class InstructorPermissionsSeeder extends Seeder
         $role->givePermissionTo("liquidation.create");
         $role->givePermissionTo("liquidation.read");
 
+        $role->givePermissionTo("course-pricing.create");
+        $role->givePermissionTo("course-pricing.read");
+        $role->givePermissionTo("course-pricing.update");
+        $role->givePermissionTo("course-pricing.delete");
     }
 }
