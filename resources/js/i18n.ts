@@ -9,6 +9,7 @@ import EnFinance from '../../modules/Finance/lang/en.json'
 import EnFrontend from '../../modules/Frontend/lang/en.json'
 import SqFrontend from '../../modules/Frontend/lang/sq.json'
 import EnNotification from '../../modules/Notification/lang/en.json'
+import EnAuth from '../../modules/Auth/lang/en.json'
 
 i18n
     .use(initReactI18next)
@@ -21,7 +22,8 @@ i18n
                 Operational: EnOperational,
                 Finance: EnFinance,
                 Frontend: EnFrontend,
-                Notification: EnNotification
+                Notification: EnNotification,
+                Auth: EnAuth
             },
             sq: {
                 Frontend: SqFrontend

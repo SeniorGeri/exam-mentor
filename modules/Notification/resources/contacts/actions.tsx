@@ -7,17 +7,23 @@ import {useCallback, useState} from 'react';
 import {Contact, ContactActionsProps} from "./data.js";
 // import {EditContact} from "./edit.js";
 import {DeleteContact} from "./delete.js";
+import {ViewContact} from "./view";
 import { useTranslation } from 'react-i18next';
+import { useForm } from '@inertiajs/react';
+
 
 export function ContactActions({contact}: ContactActionsProps) {
-
+    const { put } = useForm();
+    const markAsRead = (id: number) => {
+        put(route('contact.update', id));
+    };
     const { t } = useTranslation('Notification');
 
     const [selectedContact, setSelectedContact] = useState<Contact| undefined>(undefined);
 
-    const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | null>(null);
+    const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | 'view' | null>(null);
 
-    const handleAction = useCallback((contact: Contact, action: 'edit' | 'delete') => {
+    const handleAction = useCallback((contact: Contact, action: 'edit' | 'delete' | 'view') => {
         setTimeout(() => {
             setSelectedContact(contact);
             setSelectedAction(action);
@@ -34,20 +40,22 @@ export function ContactActions({contact}: ContactActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(contact.original, 'edit')}>{t('edit_instructor')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleAction(contact.original, 'view')}>{t('view_content')}</DropdownMenuItem>
+                    <DropdownMenuSeparator/>    
+                    <DropdownMenuItem onClick={() => markAsRead(contact.original.id)}>{t('mark_read')}</DropdownMenuItem>
                     <DropdownMenuSeparator/>
                     <DropdownMenuItem className="text-red-500" onClick={() => handleAction(contact.original, 'delete')}>
-                        {t('delete_instructor')}
+                        {t('delete')}
                         <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">
-                {/* {selectedContact && selectedAction === 'edit' && (
-                    <EditContact contact={selectedContact} isOpen={true} closeModal={() => setSelectedContact(undefined)}/>
-                )} */}
                 {selectedContact && selectedAction === 'delete' && (
                     <DeleteContact contact={selectedContact} isOpen={true} closeModal={() => setSelectedContact(undefined)}/>
+                )}
+                {selectedContact && selectedAction === 'view' && (
+                    <ViewContact contact={selectedContact} isOpen={true} closeModal={() => setSelectedContact(undefined)}/>
                 )}
             </div>
         </>

@@ -29,9 +29,10 @@ export const ContactColumns = (): ColumnDef<Contact>[] => {
             accessorKey: 'name',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('name')}/>,
             cell: ({row}) => {
+                console.log(row.original.is_read)
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('name')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('name')}</span>
                     </div>
                 );
             },
@@ -44,7 +45,7 @@ export const ContactColumns = (): ColumnDef<Contact>[] => {
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('phone')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('phone')}</span>
                     </div>
                 );
             },
@@ -57,7 +58,7 @@ export const ContactColumns = (): ColumnDef<Contact>[] => {
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('email')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('email')}</span>
                     </div>
                 );
             },
@@ -70,7 +71,7 @@ export const ContactColumns = (): ColumnDef<Contact>[] => {
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('subject')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('subject')}</span>
                     </div>
                 );
             },
@@ -83,7 +84,7 @@ export const ContactColumns = (): ColumnDef<Contact>[] => {
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('ip')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('ip')}</span>
                     </div>
                 );
             },

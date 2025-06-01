@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Modules\Finance\database\seeders\FinanceSeeder;
 use Modules\Settings\database\seeders\SettingsSeeder;
 use Modules\Hrm\database\seeders\HrmSeeder;
+use Modules\Notification\database\seeders\NotificationSeeder;
 use Modules\Operational\database\seeders\OperationalSeeder;
 
 
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
             $this->call(HrmSeeder::class);
             $this->call(OperationalSeeder::class);
             $this->call(FinanceSeeder::class);
+            $this->call(NotificationSeeder::class);
 
     }
 }

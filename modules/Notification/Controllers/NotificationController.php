@@ -34,8 +34,13 @@ final class NotificationController
      */
     public function show(FilterTableRequest $request): JsonResponse
     {
-        $notifications = Notification::filter($request)->paginate($request->limit);
-
+        $notifications = Notification::filter($request)
+        ->with([
+            'sender:id,name',
+            'notificationType:id,type'
+        ])
+        ->paginate($request->limit);
+        
         return response()->json(['data' => $notifications]);
     }
 
@@ -48,7 +53,7 @@ final class NotificationController
     public function update(Notification $notification): RedirectResponse
     {
         $notification->update([
-            'read' => true,
+            'is_read' => true,
         ]);
 
         return to_route('notification.list');

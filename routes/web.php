@@ -1,30 +1,55 @@
 <?php
 
+use App\Enums\RolesEnum;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Modules\Hrm\Models\Instructor;
+use Spatie\Permission\Models\Role;
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/', function () {
+        return Inertia::render('dashboard');
+    })->name('home');
+
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
     Route::get('test' , function () {
-        $isntructors = Instructor::create([
-            'name' => 'name',
-            'email'=> 'zzemaisl@test.com',
-            'password' => 12345678
-        ]);
+        
+ 
+        
+    return 'SUKSES FRATE';
+        // Permission::create(["name" => "contact.read"]);
+        // Permission::create(["name" => "contact.delete"]);
+        // Permission::create(["name" => "contact.update"]);
+        // Permission::create(["name" => "notification.read"]);
+        // Permission::create(["name" => "notification.delete"]);
+        // Permission::create(["name" => "notification.update"]);
 
-        dd($isntructors);
+        $role = Role::findByName(RolesEnum::ADMIN->value);
+        $role->givePermissionTo("notification.read");
+        $role->givePermissionTo("notification.delete");
+        $role->givePermissionTo("notification.update");
+        $role->givePermissionTo("contact.update");
+
+        $role = Role::findByName(RolesEnum::STUDENT->value);
+        $role->givePermissionTo("notification.read");
+        $role->givePermissionTo("notification.delete");
+        $role->givePermissionTo("notification.update");
+
+        $role = Role::findByName(RolesEnum::INSTRUCTOR->value);
+        $role->givePermissionTo("notification.read");
+        $role->givePermissionTo("notification.delete");
+        $role->givePermissionTo("notification.update");
+
+        dd('return');
     });
 });
 
 require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
 

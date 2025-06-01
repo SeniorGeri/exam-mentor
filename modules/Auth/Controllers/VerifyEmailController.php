@@ -2,9 +2,8 @@
 
 declare(strict_types= 1);
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;

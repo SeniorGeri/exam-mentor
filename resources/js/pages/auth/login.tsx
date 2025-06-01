@@ -101,6 +101,15 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     <TextLink href={route('register')} tabIndex={5}>
                         Sign up
                     </TextLink>
+                    <div className="mx-2">
+                        Still not sure ? Go back and {' '}
+                        <TextLink href={route('frontend.index')} tabIndex={5}>
+                            browse a bit more 
+                        </TextLink>
+                    </div>
+
+                  
+
                 </div>
             </form>
 

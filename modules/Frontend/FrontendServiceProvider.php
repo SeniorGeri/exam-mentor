@@ -6,7 +6,7 @@ namespace Modules\Frontend;
 
 use Illuminate\Support\ServiceProvider;
 
-class FrontendServiceProvider extends ServiceProvider
+final class FrontendServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

@@ -63,7 +63,7 @@ export function LanguageSelector() {
                                 <DropdownMenuItem
                                     className={cn(
                                         "flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer",
-                                        selectedLanguage.language_code === language.language_code ? "bg-gray-100" : "hover:bg-gray-50",
+                                        selectedLanguage.language_code === language.language_code ? "bg-gray-100 text-gray-700" : "hover:bg-gray-50",
                                     )}
                                     onClick={() => handleSelectLanguage(language)}
                                 >

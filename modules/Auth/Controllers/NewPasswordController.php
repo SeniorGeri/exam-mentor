@@ -2,7 +2,7 @@
 
 declare(strict_types= 1);
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Controllers;
 
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +22,7 @@ final class NewPasswordController
      */
     public function create(Request $request): Response
     {
-        return Inertia::render('auth/reset-password', [
+        return Inertia::render('Auth::reset-password', [
             'email' => $request->email,
             'token' => $request->route('token'),
         ]);

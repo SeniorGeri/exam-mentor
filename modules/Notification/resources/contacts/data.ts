@@ -20,6 +20,7 @@ export type Contact = {
     subject: string;
     message: string;
     phone: string;
+    is_read: boolean;
     ip: string;
     created_at: string;
 };
@@ -35,6 +36,12 @@ export type DeleteContactProps = {
 };
 
 export type EditContactProps = {
+    contact: Contact;
+    isOpen: boolean;
+    closeModal: () => void;
+};
+
+export type ViewContactProps = {
     contact: Contact;
     isOpen: boolean;
     closeModal: () => void;

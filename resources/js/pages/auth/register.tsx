@@ -14,6 +14,8 @@ type RegisterForm = {
     email: string;
     password: string;
     password_confirmation: string;
+    phone: string;
+    instructor: boolean;
 };
 
 export default function Register() {
@@ -22,6 +24,8 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
+        phone: '',
+        instructor: false,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -67,6 +71,22 @@ export default function Register() {
                             placeholder="email@example.com"
                         />
                         <InputError message={errors.email} />
+                    </div>
+
+                    <div className="grid gap-2">
+                        <Label htmlFor="phone">Phone number</Label>
+                        <Input
+                            id="phone"
+                            type="phone"
+                            required
+                            tabIndex={2}
+                            autoComplete="phone"
+                            value={data.phone}
+                            onChange={(e) => setData('phone', e.target.value)}
+                            disabled={processing}
+                            placeholder="Phone number"
+                        />
+                        <InputError message={errors.phone} />
                     </div>
 
                     <div className="grid gap-2">

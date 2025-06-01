@@ -17,6 +17,11 @@ class AdminPermissionsSeeder extends Seeder
 
         $role->givePermissionTo("contact.read");
         $role->givePermissionTo("contact.delete");
+        $role->givePermissionTo("contact.update");
+        
+        $role->givePermissionTo("notification.read");
+        $role->givePermissionTo("notification.delete");
+        $role->givePermissionTo("notification.update");
 
     }
 }

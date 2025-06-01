@@ -12,7 +12,7 @@ export function DeleteNotification({notification, isOpen, closeModal}: DeleteNot
     const { t } = useTranslation('Notification');
 
     const destroyNotification = () => {
-        router.delete(route('notification.destroy', notification.id), {
+        router.delete(route('notification.delete', notification.id), {
             preserveScroll: true,
             onSuccess: () => notificationDeleted(),
             onFinish: () => closeModal(),

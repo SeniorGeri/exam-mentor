@@ -40,9 +40,25 @@ final class ContactListController
     }
 
     /**
+     * Update ContactUs
+     *
+     * @param  ContactUs $contact
+     * @return RedirectResponse
+     */
+    public function update(ContactUs $contact): RedirectResponse
+    {
+        $contact->update([
+            'is_read' => true,
+        ]);
+
+        return to_route('contact.list');
+    }
+
+
+    /**
      * Delete Contact
      *
-     * @param  Contact $contact
+     * @param  ContactUs $contact
      * @return RedirectResponse
      */
     public function destroy(ContactUs $contact): RedirectResponse

@@ -31,7 +31,7 @@ export const NotificationColumns = (): ColumnDef<Notification>[] => {
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('title')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('title')}</span>
                     </div>
                 );
             },
@@ -39,12 +39,12 @@ export const NotificationColumns = (): ColumnDef<Notification>[] => {
             enableSorting: true,
         },
         {
-            accessorKey: 'message',
-            header: ({column}) => <DataTableColumnHeader column={column} title={t('message')}/>,
+            accessorKey: 'description',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('description')}/>,
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('message')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('description')}</span>
                     </div>
                 );
             },
@@ -57,7 +57,7 @@ export const NotificationColumns = (): ColumnDef<Notification>[] => {
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('type')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('notification_type')?.type}</span>
                     </div>
                 );
             },
@@ -65,12 +65,12 @@ export const NotificationColumns = (): ColumnDef<Notification>[] => {
             enableSorting: false,
         },
         {
-            accessorKey: 'receiver',
-            header: ({column}) => <DataTableColumnHeader column={column} title={t('receiver')}/>,
+            accessorKey: 'sender',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('sender')}/>,
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('receiver')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('sender')?.name}</span>
                     </div>
                 );
             },
@@ -83,7 +83,7 @@ export const NotificationColumns = (): ColumnDef<Notification>[] => {
             cell: ({row}) => {
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{row.getValue('created_at')}</span>
+                        <span className={`${row.original.is_read ? 'font-light' : 'font-black'} max-w-[500px] truncate`}>{row.getValue('created_at')}</span>
                     </div>
                 );
             },

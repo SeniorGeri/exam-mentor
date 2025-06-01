@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Modules\Operational;
+namespace Modules\Notification;
 
 use Illuminate\Support\ServiceProvider;
 
-class OperationalServiceProvider extends ServiceProvider
+final class NotificationServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
-    public function register(): void {}
 
     /**
      * Bootstrap services.

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Modules\Hrm;
+namespace Modules\Auth;
 
 use Illuminate\Support\ServiceProvider;
 
-final class HrmServiceProvider extends ServiceProvider
+final class AuthServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -18,9 +18,7 @@ final class HrmServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/hrm.php');
-
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadRoutesFrom(__DIR__.'/routes/auth.php');
 
     }
 }

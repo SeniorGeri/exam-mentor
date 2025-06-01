@@ -14,5 +14,10 @@ class PermissionsSeeder extends Seeder
     {
         Permission::create(["name" => "contact.read"]);
         Permission::create(["name" => "contact.delete"]);
+        Permission::create(["name" => "contact.update"]);
+
+        Permission::create(["name" => "notification.read"]);
+        Permission::create(["name" => "notification.delete"]);
+        Permission::create(["name" => "notification.update"]);
     }
 }

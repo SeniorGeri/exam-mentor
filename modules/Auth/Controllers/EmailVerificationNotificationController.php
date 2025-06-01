@@ -3,7 +3,7 @@
 declare(strict_types= 1);
 
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

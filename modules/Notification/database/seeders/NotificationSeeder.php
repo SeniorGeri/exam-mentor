@@ -3,6 +3,7 @@
 namespace Modules\Notification\database\seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Notification\Models\NotificationType;
 
 class NotificationSeeder extends Seeder
 {
@@ -13,6 +14,20 @@ class NotificationSeeder extends Seeder
     {
         $this->call(PermissionsSeeder::class);
         $this->call(AdminPermissionsSeeder::class);
+        $this->call(InstrustorPermissionsSeeder::class);
+        $this->call(StudentPermissionsSeeder::class);
 
+        NotificationType::create([
+            'type' => 'contact',
+        ]);
+        NotificationType::create([
+            'type' => 'payment',
+        ]);
+        NotificationType::create([
+            'type' => 'liquidation',
+        ]);
+        NotificationType::create([
+            'type' => 'instructor',
+        ]);
     }
 }

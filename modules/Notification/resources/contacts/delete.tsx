@@ -12,7 +12,7 @@ export function DeleteContact({contact, isOpen, closeModal}: DeleteContactProps)
     const { t } = useTranslation('Notification');
 
     const destroyContact = () => {
-        router.delete(route('contact.destroy', contact.id), {
+        router.delete(route('contact.delete', contact.id), {
             preserveScroll: true,
             onSuccess: () => contactDeleted(),
             onFinish: () => closeModal(),

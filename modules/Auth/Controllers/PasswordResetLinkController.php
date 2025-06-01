@@ -2,7 +2,7 @@
 
 declare(strict_types= 1);
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ final class PasswordResetLinkController
      */
     public function create(Request $request): Response
     {
-        return Inertia::render('auth/forgot-password', [
+        return Inertia::render('Auth::forgot-password', [
             'status' => $request->session()->get('status'),
         ]);
     }

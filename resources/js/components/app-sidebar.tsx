@@ -4,48 +4,48 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Bell, BellRing, Book, BookOpen, CalendarArrowUp, CircleGauge, Cog, Coins, Euro, Folder, GraduationCap, HandCoins, Handshake, Landmark, Languages, Map, Megaphone, PiggyBank, ReceiptEuro, School, User, UserCheck, UsersRound, } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: '/dashboard',
-        icon: LayoutGrid,
+        icon: CircleGauge,
         type: 'standalone'
     },
     {
         title: 'Operational',
         href: 'operational',
-        icon: LayoutGrid,
+        icon: Handshake,
         type: 'dropdown',
         permissions: ['school.read','subject.read','course.read','grade.read'],
         subItems: [
             {
                 title: 'School',
                 href: route('school.list'),
-                icon: LayoutGrid,
+                icon: School,
                 type: 'standalone',
                 permission: 'school.read',
             },
             {
                 title: 'Subject',
                 href: route('subject.list'),
-                icon: LayoutGrid,
+                icon: Book,
                 type: 'standalone',
                 permission: 'subject.read',
             },
             {
                 title: 'Course',
                 href: route('course.list'),
-                icon: LayoutGrid,
+                icon: GraduationCap,
                 type: 'standalone',
                 permission: 'course.read',
             },
             {
                 title: 'Grade',
                 href: route('grade.list'),
-                icon: LayoutGrid,
+                icon: CalendarArrowUp,
                 type: 'standalone',
                 permission: 'grade.read',
             }
@@ -54,35 +54,35 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Finance',
         href: 'finance',
-        icon: LayoutGrid,
+        icon: HandCoins,
         type: 'dropdown',
         permissions: ['course-pricing.read','liquidation.read','expense.read','transaction.read'],
         subItems: [
             {
                 title: 'Course Pricing',
                 href: route('course-pricing.list'),
-                icon: LayoutGrid,
+                icon: HandCoins,
                 type: 'standalone',
                 permission: 'course-pricing.read',
             },
             {
                 title: 'Liquidation',
                 href: route('liquidation.list'),
-                icon: LayoutGrid,
+                icon: Landmark,
                 type: 'standalone',
                 permission: 'liquidation.read',
             },
             {
                 title: 'Expense',
                 href: route('expense.list'),
-                icon: LayoutGrid,
+                icon: Coins,
                 type: 'standalone',
                 permission: 'expense.read',
             },
             {
                 title: 'Transaction',
                 href: route('transaction.list'),
-                icon: LayoutGrid,
+                icon: PiggyBank,
                 type: 'standalone',
                 permission: 'transaction.read',
             }
@@ -91,58 +91,81 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Hrm',
         href: 'hrm',
-        icon: LayoutGrid,
+        icon: UsersRound,
         type: 'dropdown',
         permissions: ['instructor.read', 'student.read'],
         subItems: [
             {
                 title: 'Instructor',
                 href: route('instructor.list'),
-                icon: LayoutGrid,
+                icon: UserCheck,
                 type: 'standalone',
                 permission: 'instructor.read',
             },
             {
                 title: 'Student',
                 href: route('student.list'),
-                icon: LayoutGrid,
+                icon: User,
                 type: 'standalone',
                 permission: 'student.read',
             }
         ]
     },
     {
+        title: 'Notification',
+        href: 'notification',
+        icon: Bell,
+        type: 'dropdown',
+        permissions: ['notification.read','contact.read'],
+        subItems: [
+            {
+                title: 'Notification',
+                href: route('notification.list'),
+                icon: BellRing,
+                type: 'standalone',
+                permission: 'notification.read',
+            },
+            {
+                title: 'Contact',
+                href: route('contact.list'),
+                icon: Megaphone,
+                type: 'standalone',
+                permission: 'contact.read',
+            }
+        ]
+    },
+    {
         title: 'Settings',
         href: 'settings',
-        icon: LayoutGrid,
+        icon: Cog,
         type: 'dropdown',
         permissions: ['country.read', 'city.read', 'language.read','method.read', 'currency.read'],
         subItems: [
             {
                 title: 'Country',
                 href: route('country.list'),
-                icon: LayoutGrid,
+                icon: Map,
                 type: 'standalone',
                 permission: 'country.read',
             },
             {
                 title: 'City',
                 href: route('city.list'),
-                icon: LayoutGrid,
+                icon: Map,
                 type: 'standalone',
                 permission: 'city.read',
             },
             {
                 title: 'Language',
                 href: route('language.list'),
-                icon: LayoutGrid,
+                icon: Languages,
                 type: 'standalone',
                 permission: 'language.read',
             },
             {
                 title: 'Currency',
                 href: route('currency.list'),
-                icon: LayoutGrid,
+                icon: Euro,
                 type: 'standalone',
                 permission: 'currency.read',
             }
@@ -150,7 +173,7 @@ const mainNavItems: NavItem[] = [
             {
                 title: 'Payment Method',
                 href: route('payment.list'),
-                icon: LayoutGrid,
+                icon: ReceiptEuro,
                 type: 'standalone',
                 permission: 'payment.read',
             }
@@ -160,16 +183,7 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
-    },
+
 ];
 
 export function AppSidebar() {

@@ -5,19 +5,23 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparat
 import {MoreHorizontal} from 'lucide-react';
 import {useCallback, useState} from 'react';
 import {Notification, NotificationActionsProps} from "./data.js";
-// import {EditContact} from "./edit.js";
-import {DeleteContact} from "./delete.js";
+import {DeleteNotification} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { useForm } from '@inertiajs/react';
+
 
 export function NotificationActions({notification}: NotificationActionsProps) {
-
+    const { put } = useForm();
+    const markAsRead = (id: number) => {
+        put(route('notification.update', id));
+    };
     const { t } = useTranslation('Notification');
 
     const [selectedNotification, setSelectedNotification] = useState<Notification| undefined>(undefined);
 
-    const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | null>(null);
+    const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | 'view' | null>(null);
 
-    const handleAction = useCallback((notification: Notification, action: 'edit' | 'delete') => {
+    const handleAction = useCallback((notification: Notification, action: 'edit' | 'delete' | 'view') => {
         setTimeout(() => {
             setSelectedNotification(notification);
             setSelectedAction(action);
@@ -33,21 +37,18 @@ export function NotificationActions({notification}: NotificationActionsProps) {
                         <span className="sr-only">{t('open_menu')}</span>
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(notification.original, 'edit')}>{t('edit_instructor')}</DropdownMenuItem>
+                <DropdownMenuContent align="end" className="w-[160px]">  
+                    <DropdownMenuItem onClick={() => markAsRead(notification.original.id)}>{t('mark_read')}</DropdownMenuItem>
                     <DropdownMenuSeparator/>
                     <DropdownMenuItem className="text-red-500" onClick={() => handleAction(notification.original, 'delete')}>
-                        {t('delete_instructor')}
+                        {t('delete')}
                         <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">
-                {/* {selectedContact && selectedAction === 'edit' && (
-                    <EditContact contact={selectedContact} isOpen={true} closeModal={() => setSelectedContact(undefined)}/>
-                )} */}
                 {selectedNotification && selectedAction === 'delete' && (
-                    <DeleteContact notification={selectedNotification} isOpen={true} closeModal={() => setSelectedNotification(undefined)}/>
+                    <DeleteNotification notification={selectedNotification} isOpen={true} closeModal={() => setSelectedNotification(undefined)}/>
                 )}
             </div>
         </>

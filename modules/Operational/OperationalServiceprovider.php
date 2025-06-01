@@ -6,7 +6,7 @@ namespace Modules\Operational;
 
 use Illuminate\Support\ServiceProvider;
 
-class OperationalServiceProvider extends ServiceProvider
+final class OperationalServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

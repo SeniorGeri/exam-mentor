@@ -6,7 +6,7 @@ namespace Modules\Settings;
 
 use Illuminate\Support\ServiceProvider;
 
-class SettingsServiceProvider extends ServiceProvider
+final class SettingsServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

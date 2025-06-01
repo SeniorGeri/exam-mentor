@@ -20,6 +20,7 @@ export type Notification = {
     type: string;
     sender: User;
     receiver: User;
+    is_read: boolean;
     created_at: string;
 };
 

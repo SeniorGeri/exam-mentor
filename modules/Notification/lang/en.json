@@ -17,5 +17,16 @@
     "message": "Message",
     "phone": "Phone",
     "ip": "IP",
-    "created_at": "Created At"
+    "created_at": "Created At",
+    "view_contact_message": "View Contact Message",
+    "view_contact_message_desc": "Are you sure you want to view this contact message?",
+    "view_content": "View Content",
+    "mark_read": "Mark as read",
+    "title": "Title",
+    "type": "Type",
+    "receiver": "Receiver",
+    "sender": "Sender",
+    "delete_notification": "Delete Notification",
+    "delete_notification_desc": "Are you sure you want to delete this notification?",
+    "notification_delete_succ": "Notification deleted successfully"
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types= 1);
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Auth\Controllers;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -21,7 +21,7 @@ final class RegisteredUserController
      */
     public function create(): Response
     {
-        return Inertia::render('auth/register');
+        return Inertia::render('Auth::register');
     }
 
     /**

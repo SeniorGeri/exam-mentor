@@ -8,4 +8,6 @@ return [
     Modules\Operational\OperationalServiceProvider::class,
     Modules\Finance\FinanceServiceProvider::class,
     Modules\Frontend\FrontendServiceProvider::class,
+    Modules\Notification\NotificationServiceProvider::class,
+    Modules\Auth\AuthServiceProvider::class,
 ];

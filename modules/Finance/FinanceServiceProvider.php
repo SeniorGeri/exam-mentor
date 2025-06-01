@@ -6,7 +6,7 @@ namespace Modules\Finance;
 
 use Illuminate\Support\ServiceProvider;
 
-class FinanceServiceProvider extends ServiceProvider
+final class FinanceServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
