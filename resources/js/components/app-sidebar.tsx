@@ -19,8 +19,22 @@ const mainNavItems: NavItem[] = [
         href: 'operational',
         icon: Handshake,
         type: 'dropdown',
-        permissions: ['school.read','subject.read','course.read','grade.read'],
+        permissions: ['course-instructor.read','school.read','subject.read','course.read','grade.read'],
         subItems: [
+            {
+                title: 'Course Instructor',
+                href: route('course-instructor.list'),
+                icon: HandCoins,
+                type: 'standalone',
+                permission: 'course-instructor.read',
+            },
+            {
+                title: 'Course',
+                href: route('course.list'),
+                icon: GraduationCap,
+                type: 'standalone',
+                permission: 'course.read',
+            },
             {
                 title: 'School',
                 href: route('school.list'),
@@ -36,13 +50,6 @@ const mainNavItems: NavItem[] = [
                 permission: 'subject.read',
             },
             {
-                title: 'Course',
-                href: route('course.list'),
-                icon: GraduationCap,
-                type: 'standalone',
-                permission: 'course.read',
-            },
-            {
                 title: 'Grade',
                 href: route('grade.list'),
                 icon: CalendarArrowUp,
@@ -56,15 +63,8 @@ const mainNavItems: NavItem[] = [
         href: 'finance',
         icon: HandCoins,
         type: 'dropdown',
-        permissions: ['course-pricing.read','liquidation.read','expense.read','transaction.read'],
-        subItems: [
-            {
-                title: 'Course Pricing',
-                href: route('course-pricing.list'),
-                icon: HandCoins,
-                type: 'standalone',
-                permission: 'course-pricing.read',
-            },
+        permissions: ['liquidation.read','expense.read','transaction.read'],
+        subItems: [    
             {
                 title: 'Liquidation',
                 href: route('liquidation.list'),

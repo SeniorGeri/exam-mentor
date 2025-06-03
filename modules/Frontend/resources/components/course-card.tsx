@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Card } from "@/components/ui/card"
 import { User } from "lucide-react"
-import { CoursePrice } from "../data"
+import { CourseInstructor } from "../data"
 import { Link } from "@inertiajs/react"
 
 
@@ -12,7 +12,7 @@ export default function CourseCard({
   longevity,
   course,
   language,
-}: CoursePrice) {
+}: CourseInstructor) {
   return (
     <Link href={route('frontend.course', course.id)}>
 

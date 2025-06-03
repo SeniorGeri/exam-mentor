@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Frontend\Controllers;
 
-use Modules\Finance\Models\CoursePricing;
+use Modules\Operational\Models\CourseInstructor;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,7 +19,7 @@ final class MainController
     public function index(): Response
     {
 
-        $courses = CoursePricing::with([
+        $courses = CourseInstructor::with([
             'course:id,title,image',
             'pricingType:id,name',
             'instructor:id,name',
@@ -42,7 +42,7 @@ final class MainController
      */
     public function browse(string $searchKey = ''): Response
     {
-        $courses = CoursePricing::with([
+        $courses = CourseInstructor::with([
             'course:id,title,image',
             'pricingType:id,name',
             'instructor:id,name',
@@ -66,9 +66,9 @@ final class MainController
         ]);
     }
 
-    public function show(CoursePricing $coursePricing): Response
+    public function show(CourseInstructor $courseInstructor): Response
     {
-        $course = $coursePricing->with([
+        $course = $courseInstructor->with([
             'course:id,title,image,description',
             'pricingType:id,name',
             'instructor:id,name',

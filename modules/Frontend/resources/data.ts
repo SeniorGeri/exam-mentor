@@ -1,7 +1,7 @@
 import { TranslatableField } from '@/types/helpers';
 
 export type CoursePaginate = {
-    data: CoursePrice[];
+    data: CourseInstructor[];
     first_page_url: string;
     last_page_url: string;
     prev_page_url: string | null;
@@ -14,7 +14,7 @@ export type CoursePaginate = {
     links: PaginateLink[];
 }
 
-export type CoursePrice = {
+export type CourseInstructor = {
     id: number;
     title: string;
     image: string;

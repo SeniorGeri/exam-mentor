@@ -15,11 +15,6 @@ final class PermissionsSeeder extends Seeder
     public function run(): void
     {
 
-        Permission::create(["name" => "course-pricing.create"]);
-        Permission::create(["name" => "course-pricing.read"]);
-        Permission::create(["name" => "course-pricing.update"]);
-        Permission::create(["name" => "course-pricing.delete"]);
-
         Permission::create(["name" => "expense.create"]);
         Permission::create(["name" => "expense.read"]);
         Permission::create(["name" => "expense.update"]);

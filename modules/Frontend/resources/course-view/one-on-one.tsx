@@ -5,9 +5,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Clock, BookOpen, Award, Users, CheckCircle } from "lucide-react"
 import { useTranslation } from 'react-i18next';
 import { useLocale } from "@/contexts/locale";
-import { CoursePrice } from "../data";
+import { CourseInstructor } from "../data";
 
-export default function OneOnOne({ course }: { course: CoursePrice }) {
+export default function OneOnOne({ course }: { course: CourseInstructor }) {
     const { t } = useTranslation('Frontend');
     const { currentLocale } = useLocale();
     

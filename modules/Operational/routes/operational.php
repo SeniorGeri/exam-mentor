@@ -8,7 +8,7 @@ use Modules\Operational\Controllers\SchoolController;
 use Modules\Operational\Controllers\SubjectController;
 use Modules\Operational\Controllers\GradeController;
 use Modules\Operational\Controllers\CourseController;
-
+use Modules\Operational\Controllers\CourseInstructorController;
 
 Route::prefix('school')->as('school.')->middleware(['web',  'auth:sanctum'])->group(function () {
 
@@ -53,4 +53,13 @@ Route::prefix('active-course')->as('active-course.')->middleware(['web',  'auth:
     Route::get('load', [ActiveCourseController::class, 'show'])->name('load')->permission('active-course.read');
     Route::put('/list/{activeCourse}', [ActiveCourseController::class, 'update'])->name('update')->permission('active-course.update');
     Route::delete('/list/{activeCourse}', [ActiveCourseController::class, 'destroy'])->name('destroy')->permission('active-course.delete');
+});
+
+Route::prefix('course-instructor')->as('course-instructor.')->middleware(['web',  'auth:sanctum'])->group(function () {
+
+    Route::get('/list', [CourseInstructorController::class, 'index'])->name('list')->permission('course-instructor.read');
+    Route::get('load', [CourseInstructorController::class, 'show'])->name('load')->permission('course-instructor.read');
+    Route::post('list', [CourseInstructorController::class, 'store'])->name('store')->permission('course-instructor.create');
+    Route::put('list/{courseInstructor}', [CourseInstructorController::class, 'update'])->name('update')->permission('course-instructor.update');
+    Route::delete('/list/{courseInstructor}', [CourseInstructorController::class, 'destroy'])->name('destroy')->permission('course-instructor.delete');
 });

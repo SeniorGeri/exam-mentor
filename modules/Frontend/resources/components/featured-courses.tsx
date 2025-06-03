@@ -1,7 +1,7 @@
 import CourseCard from "./course-card"
-import { CoursePrice } from "../data"
+import { CourseInstructor } from "../data"
 
-export function FeaturedCourses({courses}: {courses: CoursePrice[]}) {
+export function FeaturedCourses({courses}: {courses: CourseInstructor[]}) {
   return (
     <section className="py-16 px-6">
         <div className="mx-auto max-w-7xl">
