@@ -3,19 +3,9 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use Modules\Finance\Controllers\CoursePricingController;
 use Modules\Finance\Controllers\LiquidationController;
 use Modules\Finance\Controllers\ExpenseController;
 use Modules\Finance\Controllers\TransactionController;
-
-Route::prefix('course-pricing')->as('course-pricing.')->middleware(['web',  'auth:sanctum'])->group(function () {
-
-    Route::get('/list', [CoursePricingController::class, 'index'])->name('list')->permission('course-pricing.read');
-    Route::get('load', [CoursePricingController::class, 'show'])->name('load')->permission('course-pricing.read');
-    Route::post('list', [CoursePricingController::class, 'store'])->name('store')->permission('course-pricing.create');
-    Route::put('list/{coursePricing}', [CoursePricingController::class, 'update'])->name('update')->permission('course-pricing.update');
-    Route::delete('/list/{coursePricing}', [CoursePricingController::class, 'destroy'])->name('destroy')->permission('course-pricing.delete');
-});
 
 Route::prefix('liquidation')->as('liquidation.')->middleware(['web',  'auth:sanctum'])->group(function () {
 

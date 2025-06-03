@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Traits\HasTableFilterTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Finance\Models\CoursePricing;
+use Modules\Operational\Models\CourseInstructor;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Operational\Models\ActiveCourseStatus;
 
@@ -18,7 +18,7 @@ final class ActiveCourse extends Model
     use HasTableFilterTrait;
     
     protected $fillable = [
-        'course_price_id',
+        'course_instructor_id',
         'instructor_id',
         'student_id',
         'status_id',
@@ -28,9 +28,9 @@ final class ActiveCourse extends Model
         'description',
     ];
 
-    public function coursePrice(): BelongsTo
+    public function courseInstructor(): BelongsTo
     {
-        return $this->belongsTo(CoursePricing::class);
+        return $this->belongsTo(CourseInstructor::class);
     }
 
     public function instructor(): BelongsTo

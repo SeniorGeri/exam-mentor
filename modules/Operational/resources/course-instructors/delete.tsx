@@ -4,23 +4,23 @@ import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, A
 import {router} from '@inertiajs/react';
 import {toast} from 'sonner';
 import {route} from "ziggy-js";
-import {DeleteCoursePriceProps} from "./data";
+import {DeleteCourseInstructorProps} from "./data";
 import { useTranslation } from 'react-i18next';
 
-export function DeleteCoursePrice({coursePrice, isOpen, closeModal}: DeleteCoursePriceProps) {
+export function DeleteCourseInstructor({courseInstructor, isOpen, closeModal}: DeleteCourseInstructorProps) {
 
-    const { t } = useTranslation('Finance');
+    const { t } = useTranslation('Operational');
 
-    const destroyCoursePrice = () => {
-        router.delete(route('course-pricing.destroy', coursePrice.id), {
+    const destroyCourseInstructor = () => {
+        router.delete(route('course-instructor.destroy', courseInstructor.id), {
             preserveScroll: true,
-            onSuccess: () => coursePriceDeleted(),
+            onSuccess: () => courseInstructorDeleted(),
             onFinish: () => closeModal(),
         });
     };
 
-    const coursePriceDeleted = () => {
-        toast(t('course_price_delete_succ'), {position: 'top-right', duration: 2000});
+    const courseInstructorDeleted = () => {
+        toast(t('course_instructor_delete_succ'), {position: 'top-right', duration: 2000});
         closeModal();
     };
 
@@ -28,14 +28,14 @@ export function DeleteCoursePrice({coursePrice, isOpen, closeModal}: DeleteCours
         <AlertDialog open={isOpen}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{t('delete_course_price')}?</AlertDialogTitle>
+                    <AlertDialogTitle>{t('delete_course_instructor')}?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        {t('delete_course_price_desc')}
+                        {t('delete_course_instructor_desc')}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel onClick={closeModal}>{t('close')}</AlertDialogCancel>
-                    <AlertDialogAction onClick={destroyCoursePrice}>{t('delete')}</AlertDialogAction>
+                    <AlertDialogAction onClick={destroyCourseInstructor}>{t('delete')}</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

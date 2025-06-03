@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Finance\Models;
+namespace Modules\Operational\Models;
 
 use App\Models\User;
 use App\Traits\HasTableFilterTrait;
@@ -12,8 +12,9 @@ use Modules\Operational\Models\Course;
 use Modules\Settings\Models\Language;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Finance\Models\PricingType;
 
-final class CoursePricing extends Model
+final class CourseInstructor extends Model
 {
     use SoftDeletes;
     use HasTableFilterTrait;

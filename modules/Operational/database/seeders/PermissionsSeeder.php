@@ -35,6 +35,12 @@ final class PermissionsSeeder extends Seeder
         Permission::create(["name" => "course.update"]);
         Permission::create(["name" => "course.delete"]);
 
+        
+        Permission::create(["name" => "course-instructor.create"]);
+        Permission::create(["name" => "course-instructor.read"]);
+        Permission::create(["name" => "course-instructor.update"]);
+        Permission::create(["name" => "course-instructor.delete"]);
+
         Permission::create(["name" => "active-course.create"]);
         Permission::create(["name" => "active-course.read"]);
         Permission::create(["name" => "active-course.update"]);

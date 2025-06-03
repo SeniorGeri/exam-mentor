@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('active_courses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_price_id')->constrained('course_pricings');
+            $table->foreignId('course_instructor_id')->constrained('course_instructors');
             $table->foreignId('instructor_id')->constrained('users');
             $table->foreignId('student_id')->constrained('users');
             $table->foreignId('status_id')->constrained('active_course_statuses');

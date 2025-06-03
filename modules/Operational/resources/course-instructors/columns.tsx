@@ -2,14 +2,14 @@
 
 import {DataTableColumnHeader} from '@/components/data-table/data-table-column-header';
 import {ColumnDef} from '@tanstack/react-table';
-import {CoursePrice} from "./data";
+import {CourseInstructor} from "./data";
 import { useTranslation } from 'react-i18next';
 import { Course } from '@/modules/Operational/resources/courses/data';
 
 
 
-export const CoursePriceColumns = (): ColumnDef<CoursePrice>[] => {
-    const { t } = useTranslation('Finance');
+export const CourseInstructorColumns = (): ColumnDef<CourseInstructor>[] => {
+    const { t } = useTranslation('Operational');
 
 
     return [

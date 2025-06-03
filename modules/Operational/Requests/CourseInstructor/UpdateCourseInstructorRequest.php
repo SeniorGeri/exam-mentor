@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Modules\Finance\Requests\CoursePricing;
+namespace Modules\Operational\Requests\CourseInstructor;
 
 use App\Enums\RolesEnum;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-final class UpdateStorePricingRequest extends FormRequest
+final class UpdateCourseInstructorRequest extends FormRequest
 {
     public function prepareForValidation(): void
     {

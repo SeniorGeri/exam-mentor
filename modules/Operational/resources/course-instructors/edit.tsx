@@ -7,31 +7,31 @@ import {route} from "ziggy-js";
 import { useTranslation } from 'react-i18next';
 import CustomInput from '@/components/input/custom-input';
 import CustomTextarea from '@/components/input/custom-textarea';
-import {EditCoursePriceProps} from "./data";
+import {EditCourseInstructorProps} from "./data";
 
-export function EditCoursePrice({coursePrice, isOpen, closeModal}: EditCoursePriceProps) {
+export function EditCourseInstructor({courseInstructor, isOpen, closeModal}: EditCourseInstructorProps) {
 
-    const { t } = useTranslation('Finance');
+    const { t } = useTranslation('Operational');
 
 
     const {data, setData, put, processing, reset, errors, clearErrors} = useForm({
-        id: coursePrice?.id,
-        value: coursePrice?.value,
-        description: coursePrice?.description,
+        id: courseInstructor?.id,
+        value: courseInstructor?.value,
+        description: courseInstructor?.description,
     });
 
-    const updateCoursePrice: FormEventHandler = (e) => {
+    const updateCourseInstructor: FormEventHandler = (e) => {
         e.preventDefault();
-        put(route('course-pricing.update', coursePrice.id), {
+        put(route('course-instructor.update', courseInstructor.id), {
             preserveScroll: true,
-            onSuccess: () => updatedCoursePrice(),
+            onSuccess: () => updatedCourseInstructor(),
             onError: (error) => toast(error.description, {position: 'top-right', duration: 2000}),
             onFinish: () => reset(),
         });
     };
 
-    const updatedCoursePrice = () => {
-        toast(t('course_price_edit_succ'), {position: 'top-right', duration: 2000});
+    const updatedCourseInstructor = () => {
+        toast(t('course_instructor_edit_succ'), {position: 'top-right', duration: 2000});
         clearErrors();
         reset();
         closeModal();
@@ -41,12 +41,12 @@ export function EditCoursePrice({coursePrice, isOpen, closeModal}: EditCoursePri
     return (
         <Dialog open={isOpen} modal={true}>
             <DialogContent>
-                <DialogTitle>{t('edit_course_price')}</DialogTitle>
+                <DialogTitle>{t('edit_course_instructor')}</DialogTitle>
                 <DialogDescription>
-                    {t('edit_course_price_desc')}
+                    {t('edit_course_instructor_desc')}
                 </DialogDescription>
 
-                <form className="space-y-6" onSubmit={updateCoursePrice}>
+                <form className="space-y-6" onSubmit={updateCourseInstructor}>
 
                      <CustomInput
                         id="value"
@@ -74,7 +74,7 @@ export function EditCoursePrice({coursePrice, isOpen, closeModal}: EditCoursePri
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">{t('edit_course_price')}</button>
+                            <button type="submit">{t('edit_course_instructor')}</button>
                         </Button>
                     </DialogFooter>
                 </form>

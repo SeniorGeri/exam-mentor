@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\Operational\Controllers;
 
+use App\Enums\RolesEnum;
 use App\Http\Requests\Main\FilterTableRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Modules\Operational\Models\ActiveCourse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -39,7 +41,11 @@ final class ActiveCourseController
     */
     public function show(FilterTableRequest $request): JsonResponse
     {
-        $activeCourses = ActiveCourse::with(['coursePrice', 'instructor', 'student', 'status'])
+        $user = Auth::user();
+        $activeCourses = ActiveCourse::with(['courseInstructor', 'instructor', 'student', 'status'])
+        ->when($user->hasRole(RolesEnum::INSTRUCTOR->value), function ($query) {
+            $query->where('instructor_id', $user->id);
+        })
         ->filter($request)
         ->paginate($request->limit);
 
