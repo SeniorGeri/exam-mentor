@@ -10,7 +10,6 @@ import {CountriesProvider} from './countries-context';
 export default function LanguageIndex({countries}:{countries: Country[]}) {
 
 
-
     return (
         <CountriesProvider countries={countries}>
             <AppLayout breadcrumbs={cityBreadcrumbs}>

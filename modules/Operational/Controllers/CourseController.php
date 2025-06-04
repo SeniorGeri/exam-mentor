@@ -28,16 +28,14 @@ final class CourseController
      */
     public function index(): Response
     {
-        $schools = School::all(['id', 'title', DB::raw("'" . School::class . "' as className")]);
-        $subjects = Subject::all(['id', 'title', DB::raw("'" . Subject::class . "' as className")]);
-        $grades = Grade::all(['id', 'title', DB::raw("'" . Grade::class . "' as className")]);
+        $schools = School::all(['id', 'title']);
+        $subjects = Subject::all(['id', 'title']);
+        $grades = Grade::all(['id', 'title']);
 
         return Inertia::render('Operational::courses/index',[
-            'classifications' => [
-                ...$schools,
-                ...$subjects,
-                ...$grades
-            ]
+            'schools' => $schools,
+            'subjects' => $subjects,
+            'grades' => $grades
         ]);
 
     }

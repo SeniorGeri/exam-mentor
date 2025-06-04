@@ -38,8 +38,11 @@ export type EditCourseProps = {
 };
 
 
-export type Classification = {
-    id: number;
-    title: TranslatableField;
-    className: string;
+export type Classification<T> = {
+    value: number;
+    label: T;
 };
+
+export type ClassificationGroup<T>  = {
+    [key: string]: Classification<T>[];
+}

@@ -11,8 +11,7 @@ import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
 import {route} from "ziggy-js";
 import { useClassifications } from './classifications-context';
-import CustomCheckbox from '@/components/input/custom-checkbox';
-import { Classification } from './data';
+import { CustomMultiSelect } from '@/components/input/custom-multi-select';
 
 
 export function CreateCourse() {
@@ -27,18 +26,12 @@ export function CreateCourse() {
         image: '',
         title: '',
         description: '',
-        classifications: [],
+        schools: [],
+        subjects: [],
+        grades: [],
 
     });
 
-    const setCheckboxData = (key: string, checked: boolean, value: string) => {
-        if(checked){
-            setData('classifications', [...data.classifications, value]);
-            console.log(key, checked, value);
-        } else {
-            setData('classifications', data.classifications.filter((id: string) => id !== value));
-        }
-    }
 
     const storeCourseCreateCourse: FormEventHandler = (e) => {
         e.preventDefault();
@@ -84,21 +77,15 @@ export function CreateCourse() {
 
                     <FileInput inputName='image' setFormData={setData} />
 
-                    {
-                        classifications.map((classification: Classification) => (
-                            <CustomCheckbox
-                                key={classification.id}
-                                id={classification.id.toString()}
-                                value={classification}
-                                placeholder={classification.title['en']}
-                                setFormData={setCheckboxData}
-                                is_checked={data.classifications.includes(classification)}
-
-                            />
-                        ))
-                    }
+                    <CustomMultiSelect
+                        id="schools"
+                        selected={data.schools}
+                        onChange={(selected) => setData('schools', selected)}
+                        placeholder={t('schools')}
+                        options={classifications['schools']}
+                    />
                     
-                    <CustomTextarea
+                    <CustomTextarea 
                            id="description"
                            value={data.description}
                            setFormData={setData}

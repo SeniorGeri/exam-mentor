@@ -59,3 +59,18 @@ export type TextEditorInterface = {
     setFormData?: (key: string, value: string | object) => void;
 };
 
+
+export type MultiSelectProps<T> = {
+    id: string;
+    options: Option<T>[];
+    selected: T[];
+    onChange: (selected: T[]) => void;
+    placeholder?: string;
+    className?: string;
+    badgeClassName?: string;
+};
+
+export type Option<T> = {
+    value: T;
+    label: string;
+};
