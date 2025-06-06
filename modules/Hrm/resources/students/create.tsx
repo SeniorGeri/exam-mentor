@@ -12,7 +12,7 @@ import { SelectItem } from '@/components/ui/select';
 import { useStudentData } from './student-data-context';
 import { City } from '@/modules/Settings/resources/cities/data';
 import { Gender } from '@/modules/Settings/resources/genders/data';
-import FileInput from 'modules/Media/resources/js/file-input';
+import FileInput from '@/modules/Media/resources/js/file-input';
 import CustomInput from '@/components/input/custom-input';
 import CustomSelect from '@/components/input/custom-select';
 import CustomSwitch from '@/components/input/custom-switch';

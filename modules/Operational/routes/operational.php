@@ -41,8 +41,10 @@ Route::prefix('course')->as('course.')->middleware(['web',  'auth:sanctum'])->gr
 
     Route::get('/list', [CourseController::class, 'index'])->name('list')->permission('course.read');
     Route::get('load', [CourseController::class, 'show'])->name('load')->permission('course.read');
-    Route::post('/list', [CourseController::class, 'store'])->name('store')->permission('course.create');
-    Route::put('/list/{course}', [CourseController::class, 'update'])->name('update')->permission('course.update');
+    Route::get('/create', [CourseController::class, 'create'])->name('create')->permission('course.create');
+    Route::post('/create', [CourseController::class, 'store'])->name('store')->permission('course.create');
+    Route::get('/edit/{course}', [CourseController::class, 'edit'])->name('edit')->permission('course.update');
+    Route::put('/edit/{course}', [CourseController::class, 'update'])->name('update')->permission('course.update');
     Route::delete('/list/{course}', [CourseController::class, 'destroy'])->name('destroy')->permission('course.delete');
 });
 
@@ -59,7 +61,9 @@ Route::prefix('course-instructor')->as('course-instructor.')->middleware(['web',
 
     Route::get('/list', [CourseInstructorController::class, 'index'])->name('list')->permission('course-instructor.read');
     Route::get('load', [CourseInstructorController::class, 'show'])->name('load')->permission('course-instructor.read');
-    Route::post('list', [CourseInstructorController::class, 'store'])->name('store')->permission('course-instructor.create');
-    Route::put('list/{courseInstructor}', [CourseInstructorController::class, 'update'])->name('update')->permission('course-instructor.update');
+    Route::get('create', [CourseInstructorController::class, 'create'])->name('create')->permission('course-instructor.create');
+    Route::post('create', [CourseInstructorController::class, 'store'])->name('store')->permission('course-instructor.create');
+    Route::get('edit/{courseInstructor}', [CourseInstructorController::class, 'edit'])->name('edit')->permission('course-instructor.update');
+    Route::put('edit/{courseInstructor}', [CourseInstructorController::class, 'update'])->name('update')->permission('course-instructor.update');
     Route::delete('/list/{courseInstructor}', [CourseInstructorController::class, 'destroy'])->name('destroy')->permission('course-instructor.delete');
 });

@@ -5,9 +5,9 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparat
 import {MoreHorizontal} from 'lucide-react';
 import {useCallback, useState} from 'react';
 import {Course, CourseActionsProps} from "./data.js";
-import {EditCourse} from "./edit.js";
 import {DeleteCourse} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { router } from '@inertiajs/react';
 
 export function CourseActions({course}: CourseActionsProps) {
 
@@ -34,7 +34,7 @@ export function CourseActions({course}: CourseActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(course.original, 'edit')}>{t('edit_course')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() =>  router.visit(route('course.edit', course.original.id))}>{t('edit_course')}</DropdownMenuItem>
                     <DropdownMenuSeparator/>
                     <DropdownMenuItem className="text-red-500" onClick={() => handleAction(course.original, 'delete')}>
                         {t('delete_course')}
@@ -43,9 +43,6 @@ export function CourseActions({course}: CourseActionsProps) {
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">
-                {selectedCourse && selectedAction === 'edit' && (
-                    <EditCourse course={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
-                )}
                 {selectedCourse && selectedAction === 'delete' && (
                     <DeleteCourse course={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
                 )}

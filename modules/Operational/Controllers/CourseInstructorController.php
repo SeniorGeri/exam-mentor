@@ -6,14 +6,18 @@ namespace Modules\Operational\Controllers;
 
 use App\Enums\RolesEnum;
 use App\Http\Requests\Main\FilterTableRequest;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Modules\Operational\Models\CourseInstructor;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Finance\Models\PricingType;
+use Modules\Operational\Models\Course;
 use Modules\Operational\Requests\CourseInstructor\StoreCourseInstructorRequest;
 use Modules\Operational\Requests\CourseInstructor\UpdateCourseInstructorRequest;
+use Modules\Settings\Models\Language;
 
 final class CourseInstructorController
 {
@@ -27,6 +31,24 @@ final class CourseInstructorController
     {
         return Inertia::render('Operational::course-instructors/index');
     }
+
+     /**
+     * Return view to create course pricing
+     *
+     * @return Response
+     */
+    public function create(): Response
+    {
+
+        $courses = Course::all(['id', 'title']);
+        $instructors = User::all(['id', 'name']);
+        $pricingTypes = PricingType::all(['id', 'type']);
+        return Inertia::render('Operational::course-instructors/create', [
+            'courses' => $courses,
+            'instructors' => $instructors,
+            'pricingTypes' => $pricingTypes,
+        ]);
+    }  
 
     /**
      * Store new course pricing
@@ -50,11 +72,11 @@ final class CourseInstructorController
     public function show(FilterTableRequest $request): JsonResponse
     {
         $user = Auth::user();
-        $coursePricings = CourseInstructor::with(['course', 'instructor', 'pricingType', 'language'])
+        $coursePricings = CourseInstructor::filter($request)
+        ->with(['course', 'instructor', 'pricingType', 'language'])
         ->when($user->hasRole(RolesEnum::INSTRUCTOR->value), function ($query) use ($user) {
             $query->where('instructor_id', $user->id);
         })
-        ->filter($request)
         ->paginate($request->limit);
 
         return response()->json(['data' => $coursePricings]);
@@ -67,8 +89,29 @@ final class CourseInstructorController
      * @param  CourseInstructor $courseInstructor
      * @return RedirectResponse
      */
-    public function update(UpdateCourseInstructorRequest $request, CourseInstructor $courseInstructor): RedirectResponse
+    public function edit(CourseInstructor $courseInstructor): Response
     {
+        $courses = Course::all(['id', 'title']);
+        $instructors = User::all(['id', 'name']);
+        $pricingTypes = PricingType::all(['id', 'type']);
+
+        return Inertia::render('Operational::course-instructors/edit', [
+            'courseInstructor' => $courseInstructor,
+            'courses' => $courses,
+            'instructors' => $instructors,
+            'pricingTypes' => $pricingTypes,
+        ]);
+    }
+
+    /**
+     * Update course pricing
+     *
+     * @param  UpdateCourseInstructorRequest $request
+     * @param  CourseInstructor $courseInstructor
+     * @return RedirectResponse
+     */
+    public function update(UpdateCourseInstructorRequest $request, CourseInstructor $courseInstructor): RedirectResponse
+    {   
         $courseInstructor->fill($request->validated())->save();
 
         return to_route('course-instructor.list');

@@ -21,8 +21,12 @@ class InstructorPermissionsSeeder extends Seeder
         $role->givePermissionTo("school.read");
         $role->givePermissionTo("grade.read");
         $role->givePermissionTo("subject.read");
-        $role->givePermissionTo("course.read");
-        $role->givePermissionTo("active-course.read");
+
+
+        $role->givePermissionTo("course-instructor.create");
+        $role->givePermissionTo("course-instructor.read");
+        $role->givePermissionTo("course-instructor.update");
+        $role->givePermissionTo("course-instructor.delete");
 
     }
 }

@@ -5,9 +5,9 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparat
 import {MoreHorizontal} from 'lucide-react';
 import {useCallback, useState} from 'react';
 import {CourseInstructor, CourseInstructorActionsProps} from "./data.js";
-import {EditCourseInstructor} from "./edit.js";
 import {DeleteCourseInstructor} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { router } from '@inertiajs/react';
 
 export function CourseInstructorActions({courseInstructor}: CourseInstructorActionsProps) {
 
@@ -34,18 +34,15 @@ export function CourseInstructorActions({courseInstructor}: CourseInstructorActi
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(courseInstructor.original, 'edit')}>{t('edit_expense')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() =>  router.visit(route('course-instructor.edit', courseInstructor.original.id))}>{t('edit_course')}</DropdownMenuItem>
                     <DropdownMenuSeparator/>
                     <DropdownMenuItem className="text-red-500" onClick={() => handleAction(courseInstructor.original, 'delete')}>
-                        {t('delete_expense')}
+                        {t('delete_course')}
                         <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">
-                {selectedCourseInstructor && selectedAction === 'edit' && (
-                    <EditCourseInstructor courseInstructor={selectedCourseInstructor} isOpen={true} closeModal={() => setSelectedCourseInstructor(undefined)}/>
-                )}
                 {selectedCourseInstructor && selectedAction === 'delete' && (
                     <DeleteCourseInstructor courseInstructor={selectedCourseInstructor} isOpen={true} closeModal={() => setSelectedCourseInstructor(undefined)}/>
                 )}

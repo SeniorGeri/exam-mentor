@@ -1,4 +1,3 @@
-import { Instructor } from '@/modules/Hrm/resources/instructors/data';
 import type {BreadcrumbItem} from '@/types';
 import {Row} from '@tanstack/react-table';
 import {route} from "ziggy-js";
@@ -13,17 +12,6 @@ export const courseInstructorBreadcrumbs: BreadcrumbItem[] = [
         href: route('course-instructor.list'),
     },
 ];
-
-export type CourseInstructor = {
-    id: number;
-    value: number;
-    description: string;
-    active_course_id: number;
-    created_by: number;
-    winner_id: number;
-    approved: boolean;
-    winner: Instructor;
-};
 
 export type CourseInstructorActionsProps = {
     courseInstructor: Row<CourseInstructor>;
@@ -40,3 +28,16 @@ export type EditCourseInstructorProps = {
     isOpen: boolean;
     closeModal: () => void;
 };
+
+export type CourseInstructor = {
+    id: number;
+    course_id: number;
+    instructor_id: number;
+    pricing_type_id: number;
+    language_id: number;
+    price: number;
+    longevity: string;
+    description: string;
+    lessons: number;
+    image: string;
+}

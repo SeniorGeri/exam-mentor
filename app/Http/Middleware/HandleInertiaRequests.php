@@ -51,7 +51,7 @@ class HandleInertiaRequests extends Middleware
             ],
 
             'languages' => [
-                'data' => Language::all('language_code','flag','language'),
+                'data' => Language::all('id','language_code','flag','language'),
                 'main' => config('app.locale')
             ],
 

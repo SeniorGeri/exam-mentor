@@ -31,8 +31,10 @@ final class StoreCourseInstructorRequest extends FormRequest
             'pricing_type_id' => ['required', 'integer'],
             'language_id' => ['required', 'integer'],
             'price' => ['required', 'integer'],
-            'longevity' => ['required', 'integer'],
+            'longevity' => ['required', 'string'],
+            'lessons' => ['required', 'integer'],
             'description' => ['required', 'string'],
+            'image' => ['nullable', 'string'],
         ];
     }
 }

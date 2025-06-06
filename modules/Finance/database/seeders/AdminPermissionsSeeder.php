@@ -17,11 +17,6 @@ final class AdminPermissionsSeeder extends Seeder
     {
         $role = Role::findByName(RolesEnum::ADMIN->value);
 
-        $role->givePermissionTo("course-pricing.create");
-        $role->givePermissionTo("course-pricing.read");
-        $role->givePermissionTo("course-pricing.update");
-        $role->givePermissionTo("course-pricing.delete");
-        
         $role->givePermissionTo("expense.create");
         $role->givePermissionTo("expense.read");
         $role->givePermissionTo("expense.update");

@@ -1,94 +1,121 @@
-import {Button} from '@/components/ui/button';
-import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle} from '@/components/ui/dialog';
-import {useForm} from '@inertiajs/react';
-import {FormEventHandler, useEffect} from 'react';
-import {toast} from 'sonner';
-import {EditCourseProps} from "./data";
-import {route} from "ziggy-js";
-import { useLocale } from '@/contexts/locale';
-import { Languages } from '@/components/languages';
-import { useTranslation } from 'react-i18next';
-import FileInput from 'modules/Media/resources/js/file-input';
-import CustomInput from '@/components/input/custom-input';
+'use client';
+
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
+import { courseBreadcrumbs } from './data';
+import { usePage } from '@inertiajs/react';
+import { InertiaLangPageProps } from '@/types/helpers';
 import CustomTextarea from '@/components/input/custom-textarea';
+import { CustomMultiSelect } from '@/components/input/custom-multi-select';
+import CustomInput from '@/components/input/custom-input';
+import { FormEventHandler } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useForm } from '@inertiajs/react';
+import { Subject } from '../subjects/data';
+import { Grade } from '../grades/data';
+import { School } from '../schools/data';
+import FileInput from '../../../Media/resources/js/file-input';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Course } from './data';
+import { toast } from 'sonner';
 
-export function EditCourse({course, isOpen, closeModal}: EditCourseProps) {
-
+export default function EditCourse({ schools, subjects, grades, course }: { schools: School[], subjects: Subject[], grades: Grade[], course: Course }) {
     const { t } = useTranslation('Operational');
 
-    const { currentLocale } = useLocale();
-
-    const {data, setData, put, processing, reset, errors, clearErrors} = useForm({
+    const { languages } = usePage<InertiaLangPageProps>().props;
+    console.log(course);
+    const {data, setData, put, processing, errors} = useForm({
         id: course?.id,
-        title: course?.title ? course?.title[currentLocale] : '',
+        title: course?.title ? course?.title[languages.main] : '',
         description: course?.description,
         image: course?.image,
-        locale: currentLocale ?? null
+        locale: languages.main ?? null,
+        schools: course?.school_ids.map((school) => school.school_id),
+        subjects: course?.subject_ids.map((subject) => subject.subject_id),
+        grades: course?.grade_ids.map((grade) => grade.grade_id),
     });
 
-    useEffect(() =>setData('title', course?.title[data.locale] || '') , [data.locale]);
 
-    const updateCourse: FormEventHandler = (e) => {
+    const storeCourseCreateCourse: FormEventHandler = (e) => {
         e.preventDefault();
         put(route('course.update', course.id), {
             preserveScroll: true,
-            onSuccess: () => updatedCourse(),
-            onError: (error) => toast(error.description, {position: 'top-right', duration: 2000}),
-            onFinish: () => reset(),
+            onSuccess: () => toast(t('course_updated_succ'), {position: 'top-right', duration: 2000}),
         });
     };
-
-    const updatedCourse = () => {
-        toast(t('course_edit_succ'), {position: 'top-right', duration: 2000});
-        clearErrors();
-        reset();
-        closeModal();
-
-    };
-
     return (
-        <Dialog open={isOpen} modal={true}>
-            <DialogContent>
-                <DialogTitle>{t('edit_course')}</DialogTitle>
-                <DialogDescription>
-                    {t('edit_course_desc')}
-                </DialogDescription>
+            <AppLayout breadcrumbs={courseBreadcrumbs}>
+                <Head title="Courses" />
+                <div className="flex flex-col gap-2 p-4 ">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>{t('edit_course')}</CardTitle>
+                            <CardDescription>{t('edit_course_desc')}</CardDescription>
+                        </CardHeader>
 
-                <form className="space-y-6" onSubmit={updateCourse}>
-                    <Languages currentLocale={data.locale} setData={setData}/>
+                        <CardContent>
+                            <form className="space-y-6" onSubmit={storeCourseCreateCourse}>
 
-                     <CustomInput
-                        id="title"
-                        value={data.title}
-                        setFormData={setData}
-                        placeholder={t('title')}
-                        errorMessage={errors.title}
-                    />
-
-                    <FileInput defaultValue={[data.image]} inputName='image' setFormData={setData} />
+                                <CustomInput
+                                    id="title"
+                                    value={data.title}
+                                    setFormData={setData}
+                                    placeholder={t('title')}
+                                    errorMessage={errors.title}
+                                />
 
 
-                    <CustomTextarea
-                        id="description"
-                        value={data.description}
-                        setFormData={setData}
-                        placeholder={t('description')}
-                        errorMessage={errors.description}
-                    />
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                                    <CustomMultiSelect
+                                        id="schools"
+                                        selected={data.schools}
+                                        onChange={(selected) => setData('schools', selected)}
+                                        placeholder={t('schools')}
+                                        options={schools.map((school) => { return { value: school.id, label: school.title[languages.main] } })}
+                                    />
 
-                    <DialogFooter className="gap-2">
-                        <DialogClose asChild>
-                            <Button variant="secondary" onClick={closeModal}>
-                                {t('close')}
-                            </Button>
-                        </DialogClose>
+                                    <CustomMultiSelect
+                                        id="subjects"
+                                        selected={data.subjects}
+                                        onChange={(selected) => setData('subjects', selected)}
+                                        placeholder={t('subjects')}
+                                        options={subjects.map((subject) => { return { value: subject.id, label: subject.title[languages.main] } })}
+                                    />
 
-                        <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">{t('edit_course')}</button>
-                        </Button>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
+                                    <CustomMultiSelect
+                                        id="grades"
+                                        selected={data.grades}
+                                        onChange={(selected) => setData('grades', selected)}
+                                        placeholder={t('grades')}
+                                        options={grades.map((grade) => { return { value: grade.id, label: grade.title[languages.main] } })}
+                                    />
+                                </div>
+                                <CustomTextarea
+                                        className="col-span-2"
+                                        id="description"
+                                        value={data.description}
+                                        setFormData={setData}
+                                        placeholder={t('description')}
+                                        errorMessage={errors.description}
+                                    />
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            
+                                    <FileInput inputName='image' setFormData={setData} defaultValue={[data.image]}/>
+                                    <div className="flex justify-end items-end">
+                                        <Button variant="default" disabled={processing} size="sm" type="submit">
+                                            {t('edit_course')}
+                                        </Button>
+                                    </div>
+                                </div>
+                            
+
+                        
+                            </form>
+                        </CardContent>
+                    </Card>
+                </div>
+            </AppLayout>
     );
 }

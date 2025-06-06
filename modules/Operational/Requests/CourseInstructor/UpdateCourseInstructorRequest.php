@@ -26,14 +26,17 @@ final class UpdateCourseInstructorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', 'integer', 'exists:course_pricings,id'],
+            'id' => ['required', 'integer', 'exists:course_instructors,id'],
             'course_id' => ['required', 'integer'],
             'instructor_id' => ['required', 'integer'],
             'pricing_type_id' => ['required', 'integer'],
             'language_id' => ['required', 'integer'],
             'price' => ['required', 'integer'],
-            'longevity' => ['required', 'integer'],
+            'lessons' => ['required', 'integer'],
+            'longevity' => ['required', 'string'],
             'description' => ['required', 'string'],
+            'image' => ['nullable', 'string'],
+
         ];
     }
 }

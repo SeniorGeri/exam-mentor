@@ -17,29 +17,44 @@ use Modules\Operational\Models\School;
 use Modules\Operational\Models\Subject;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Operational\Actions\AddCourseClassifications;
+use Modules\Operational\Models\CourseGrade;
+use Modules\Operational\Models\CourseSchool;
+use Modules\Operational\Models\CourseSubject;
 
 final class CourseController
 {
+
+    /**
+     * Return view to list courses
+     *
+     * @return Response
+     */
+    public function index(): Response
+    {
+
+        return Inertia::render('Operational::courses/index');
+
+    }
 
     /**
      * Return view to create courses
      *
      * @return Response
      */
-    public function index(): Response
+    public function create(): Response
     {
         $schools = School::all(['id', 'title']);
         $subjects = Subject::all(['id', 'title']);
         $grades = Grade::all(['id', 'title']);
 
-        return Inertia::render('Operational::courses/index',[
+        return Inertia::render('Operational::courses/create',[
             'schools' => $schools,
             'subjects' => $subjects,
             'grades' => $grades
         ]);
 
     }
-
     /**
      * Load courses
      *
@@ -61,25 +76,39 @@ final class CourseController
      */
     public function store(StoreCourseRequest $request): RedirectResponse
     {
+        DB::beginTransaction();
         $course = Course::create($request->validated());
-        if($request->has('classifications')) {
-            
-            $classifications = array_map(function($classification) use ($course) {
-                return [
-                    'course_id' => $course->id,
-                    'classificable_id' => $classification['id'],
-                    'classificable_type' => $classification['className'],
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ];
-            }, $request->classifications);
-            
+        AddCourseClassifications::execute($request, $course);
+        DB::commit();
 
-            CourseClassification::insert($classifications);
-        }
+    
         return to_route('course.list');
     }
     
+    /**
+     * Edit Course
+     *
+     * @param  Course $course
+     * @return Response
+     */
+    public function edit(Course $course): Response
+    {
+        $schools = School::all(['id', 'title']);
+        $subjects = Subject::all(['id', 'title']);
+        $grades = Grade::all(['id', 'title']);
+        $course->load([
+            'schoolIds',
+            'subjectIds',
+            'gradeIds'
+        ]);
+        return Inertia::render('Operational::courses/edit',[
+            'course' => $course,
+            'schools' => $schools,
+            'subjects' => $subjects,
+            'grades' => $grades
+        ]);
+    }
+
     /**
      * Update Course
      *
@@ -89,10 +118,19 @@ final class CourseController
      */
     public function update(UpdateCourseRequest $request, Course $course): RedirectResponse
     {
+        DB::beginTransaction();
         $course->fill($request->validated())
         ->setMultipleTranslations($request->translated(), $request->locale)
         ->save();
 
+        CourseSchool::where('course_id', $course->id)->forceDelete();
+        CourseSubject::where('course_id', $course->id)->forceDelete();
+        CourseGrade::where('course_id', $course->id)->forceDelete();
+
+        AddCourseClassifications::execute($request, $course);
+        DB::commit();
+      
+    
         return to_route('course.list');
     }
 

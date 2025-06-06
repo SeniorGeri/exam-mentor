@@ -19,8 +19,9 @@ final class StoreCourseRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:100'],
             'image' => ['nullable', 'string'],
-            'description' =>  ['nullable', 'string'],
-            'classifications' =>  ['nullable'],
+            'schools' =>  ['nullable', 'array'],
+            'subjects' =>  ['nullable', 'array'],
+            'grades' =>  ['nullable', 'array'],
             
         ];
     }

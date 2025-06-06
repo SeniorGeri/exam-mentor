@@ -28,12 +28,14 @@ export type CourseInstructor = {
 
 export type PricingType = {
     id: number;
-    name: string;
+    type: string;
 }
 
 export type Language = {
     id: number;
     language: TranslatableField;
+    language_code: string;
+    flag: string;
 }
 
 export type Professor = {

@@ -7,13 +7,15 @@ import { route } from 'ziggy-js';
 import { CourseColumns } from './columns';
 import { Course } from './data';
 import { CourseActions } from './actions';
-import { CreateCourse } from './create';
 import { useLocale } from '@/contexts/locale';
+import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
 
 export default function CourseTable() {
 
     const { hasPermission } = usePermissions();
     const { currentLocale } = useLocale();
+    const { t } = useTranslation('Operational');    
 
     const columns: ColumnDef<Course>[] = [
         ...CourseColumns(currentLocale),
@@ -26,7 +28,11 @@ export default function CourseTable() {
 
         <DataTable urlPath={route('course.load')} columns={columns}>
             {hasPermission('course.create') && (
-                <CreateCourse />
+                <a href={route('course.create')}>
+                    <Button variant="default" size="sm">
+                        {t('create_course')}
+                    </Button>
+                </a>
             )}
 
         </DataTable>

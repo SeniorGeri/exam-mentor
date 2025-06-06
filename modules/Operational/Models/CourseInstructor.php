@@ -27,7 +27,9 @@ final class CourseInstructor extends Model
         'language_id',
         'price',
         'longevity',
+        'lessons',
         'description',
+        'image',
     ];
 
     public function course(): BelongsTo 

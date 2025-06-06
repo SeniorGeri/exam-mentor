@@ -9,6 +9,8 @@ use App\Traits\HasTranslationsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 final class Course extends Model
 {
@@ -21,8 +23,33 @@ final class Course extends Model
 
     protected $translatable = ['title'];
 
-    // public function classifications(): HasManyThrough
-    // {
-    //     // return $this->hasManyThrough(CourseClassification::class, Classification::class);
-    // }
+    public function grades(): HasManyThrough
+    {
+        return $this->hasManyThrough(CourseGrade::class, Grade::class, 'course_id', 'id', 'id', 'grade_id' );
+    }
+
+    public function subjects(): HasManyThrough
+    {
+        return $this->hasManyThrough(CourseSubject::class, Subject::class, 'course_id', 'id', 'id', 'subject_id' );
+    }
+
+    public function schools(): HasManyThrough
+    {
+        return $this->hasManyThrough(CourseSchool::class, School::class, 'course_id', 'id', 'id', 'school_id' );
+    }
+
+    public function gradeIds(): HasMany
+    {
+        return $this->hasMany(CourseGrade::class, 'course_id', 'id');
+    }
+
+    public function subjectIds(): HasMany
+    {
+        return $this->hasMany(CourseSubject::class, 'course_id', 'id');
+    }
+
+    public function schoolIds(): HasMany
+    {
+        return $this->hasMany(CourseSchool::class, 'course_id', 'id');
+    }
 }

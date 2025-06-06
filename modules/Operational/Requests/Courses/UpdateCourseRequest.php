@@ -22,7 +22,10 @@ final class UpdateCourseRequest extends FormRequest
         return [
             'image' => ['nullable', 'string'],
             'description' =>  ['nullable', 'string'],
-            'locale' => ['required', 'string']
+            'locale' => ['required', 'string'],
+            'schools' =>  ['nullable', 'array'],
+            'subjects' =>  ['nullable', 'array'],
+            'grades' =>  ['nullable', 'array'],
         ];
     }
 

@@ -19,6 +19,15 @@ export type Course = {
     title: TranslatableField;
     description: string;
     image: string;
+    school_ids: {
+        school_id: number;
+    }[];
+    subject_ids: {
+        subject_id: number;
+    }[];
+    grade_ids: {
+        grade_id: number;
+    }[];
 };
 
 export type CourseActionsProps = {

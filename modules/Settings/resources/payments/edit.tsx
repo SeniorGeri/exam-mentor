@@ -13,7 +13,7 @@ import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
 import { Switch } from '@/components/ui/switch';
-import FileInput from 'modules/Media/resources/js/file-input';
+import FileInput from '@/modules/Media/resources/js/file-input';
 import CustomTextarea from '@/components/input/custom-textarea';
 import CustomSwitch from '@/components/input/custom-switch';
 import CustomInput from '@/components/input/custom-input';

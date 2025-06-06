@@ -5,18 +5,22 @@ import {ColumnDef} from '@tanstack/react-table';
 import {CourseInstructor} from "./data";
 import { useTranslation } from 'react-i18next';
 import { Course } from '@/modules/Operational/resources/courses/data';
-
+import { InertiaLangPageProps } from '@/types/helpers';
+import { usePage } from '@inertiajs/react';
+import { Instructor } from '@/modules/Hrm/resources/instructors/data';
 
 
 export const CourseInstructorColumns = (): ColumnDef<CourseInstructor>[] => {
     const { t } = useTranslation('Operational');
-
+        const { languages } = usePage<InertiaLangPageProps>().props;
+    
 
     return [
         {
             accessorKey: 'NR',
             header: () => t('nr'),
             cell: ({row, table}) => {
+                console.log(row);
                 return (
                     <div className="flex space-x-2 px-4">
                         <span className="max-w-[50px] truncate font-light">
@@ -33,7 +37,7 @@ export const CourseInstructorColumns = (): ColumnDef<CourseInstructor>[] => {
                 const course : Course = row.getValue('course')
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{course.name}</span>
+                        <span className="max-w-[500px] truncate font-light">{course.title[languages.main]}</span>
                     </div>
                 );
             },
@@ -41,13 +45,26 @@ export const CourseInstructorColumns = (): ColumnDef<CourseInstructor>[] => {
             enableSorting: true,
         },
         {
-            accessorKey: 'value',
-            header: ({column}) => <DataTableColumnHeader column={column} title={t('value')}/>,
+            accessorKey: 'instructor',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('instructor')}/>,
             cell: ({row}) => {
-                const value : number = row.getValue('value')
+                const instructor : Instructor = row.getValue('instructor')
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{value}</span>
+                        <span className="max-w-[500px] truncate font-light">{instructor.name}</span>
+                    </div>
+                );
+            },
+            enableColumnFilter: true,
+            enableSorting: true,
+        },
+        {
+            accessorKey: 'price',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('price')}/>,
+            cell: ({row}) => {
+                return (
+                    <div className="flex space-x-2">
+                        <span className="max-w-[500px] truncate font-light">{row.getValue('price')}</span>
                     </div>
                 );
             },

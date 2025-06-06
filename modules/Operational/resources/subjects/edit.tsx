@@ -8,7 +8,7 @@ import {route} from "ziggy-js";
 import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
-import FileInput from 'modules/Media/resources/js/file-input';
+import FileInput from '@/modules/Media/resources/js/file-input';
 import CustomInput from '@/components/input/custom-input';
 import CustomTextarea from '@/components/input/custom-textarea';
 

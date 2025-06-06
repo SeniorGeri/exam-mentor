@@ -6,7 +6,7 @@ import CustomSwitch from '@/components/input/custom-switch';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
 import {useForm} from '@inertiajs/react';
-import FileInput from 'modules/Media/resources/js/file-input';
+import FileInput from '@/modules/Media/resources/js/file-input';
 import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
