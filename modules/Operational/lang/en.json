@@ -72,6 +72,12 @@
     "pricing_type": "Pricing type",
     "language": "Language",
     "course_instructor_updated_succ": "The course instructor has been updated succesfully",
+    "curricula": "Curricula",
+    "includes": "Includes",
+    "curriculum": "Curriculum",
+    "include": "Include",
+    "add_curricula": "Add curricula",
+    "add_includes": "Add includes",
 
     "school": "School",
     "create_school": "Create school",

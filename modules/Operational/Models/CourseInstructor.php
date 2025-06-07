@@ -12,6 +12,7 @@ use Modules\Operational\Models\Course;
 use Modules\Settings\Models\Language;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Finance\Models\PricingType;
 
 final class CourseInstructor extends Model
@@ -50,5 +51,15 @@ final class CourseInstructor extends Model
     public function language(): BelongsTo
     {
         return $this->belongsTo(Language::class);
+    }
+
+    public function curricula(): HasMany
+    {
+        return $this->hasMany(CourseCurriculum::class);
+    }
+
+    public function includes(): HasMany
+    {
+        return $this->hasMany(CourseIncludes::class);
     }
 }

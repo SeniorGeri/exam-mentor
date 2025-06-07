@@ -35,6 +35,9 @@ final class StoreCourseInstructorRequest extends FormRequest
             'lessons' => ['required', 'integer'],
             'description' => ['required', 'string'],
             'image' => ['nullable', 'string'],
+            'curricula' => ['nullable', 'array'],
+            'includes' => ['nullable', 'array'],
         ];
     }
 }
+    

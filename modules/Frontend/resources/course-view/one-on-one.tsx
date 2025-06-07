@@ -10,7 +10,7 @@ import { CourseInstructor } from "../data";
 export default function OneOnOne({ course }: { course: CourseInstructor }) {
     const { t } = useTranslation('Frontend');
     const { currentLocale } = useLocale();
-    
+    console.log(course)
     return (
             <div className="container mx-auto py-8 px-4">
                 <div className="grid md:grid-cols-3 gap-8">

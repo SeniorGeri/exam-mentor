@@ -10,11 +10,14 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Modules\Operational\Models\CourseInstructor;
 use Inertia\Inertia;
 use Inertia\Response;
 use Modules\Finance\Models\PricingType;
 use Modules\Operational\Models\Course;
+use Modules\Operational\Models\CourseCurriculum;
+use Modules\Operational\Models\CourseIncludes;
 use Modules\Operational\Requests\CourseInstructor\StoreCourseInstructorRequest;
 use Modules\Operational\Requests\CourseInstructor\UpdateCourseInstructorRequest;
 use Modules\Settings\Models\Language;
@@ -58,7 +61,26 @@ final class CourseInstructorController
      */
     public function store(StoreCourseInstructorRequest $request): RedirectResponse
     {
-        CourseInstructor::create($request->validated());
+        DB::beginTransaction();
+        $courseInstructor = CourseInstructor::create($request->validated());
+        CourseCurriculum::insert(
+            array_map(function ($curriculum) use ($courseInstructor) {
+                return [
+                    'course_instructor_id' => $courseInstructor->id,
+                    'title' => `{"en":"` . $curriculum['title'] . `"}`,
+                    'description' => `{"en":"` .$curriculum['description'] . `"}`,
+                ];
+            }, $request->validated()['curricula'])
+        );
+        CourseIncludes::insert(
+            array_map(function ($include) use ($courseInstructor) {
+                return [
+                    'course_instructor_id' => $courseInstructor->id,
+                    'title' => `{"en":"` .$include['title'] . `"}`,
+                ];
+            }, $request->validated()['includes'])
+        );
+        DB::commit();
 
         return to_route('course-instructor.list');
     }   
@@ -94,9 +116,9 @@ final class CourseInstructorController
         $courses = Course::all(['id', 'title']);
         $instructors = User::all(['id', 'name']);
         $pricingTypes = PricingType::all(['id', 'type']);
-
+        
         return Inertia::render('Operational::course-instructors/edit', [
-            'courseInstructor' => $courseInstructor,
+            'courseInstructor' => $courseInstructor->load(['curricula', 'includes']),
             'courses' => $courses,
             'instructors' => $instructors,
             'pricingTypes' => $pricingTypes,
@@ -112,7 +134,33 @@ final class CourseInstructorController
      */
     public function update(UpdateCourseInstructorRequest $request, CourseInstructor $courseInstructor): RedirectResponse
     {   
+        DB::beginTransaction();
+
         $courseInstructor->fill($request->validated())->save();
+        
+        CourseCurriculum::where("course_instructor_id", $courseInstructor->id)
+        ->whereNotIn('id', array_column($request->validated()['curricula'], 'id'))
+        ->forceDelete();
+
+        array_map(function ($curriculum) use ($courseInstructor) {
+            CourseCurriculum::updateOrCreate(['id' => $curriculum['id']], [
+                'course_instructor_id' => $courseInstructor->id,
+                'title' => $curriculum['title'],
+                'description' => $curriculum['description'],
+            ]);
+        }, $request->validated()['curricula']);
+
+        CourseIncludes::where("course_instructor_id", $courseInstructor->id)
+        ->whereNotIn('id', array_column($request->validated()['includes'], 'id'))
+        ->forceDelete();
+
+        array_map(function ($include) use ($courseInstructor) {
+            CourseIncludes::updateOrCreate(['id' => $include['id']], [
+                'course_instructor_id' => $courseInstructor->id,
+                'title' => $include['title'],
+            ]);
+        }, $request->validated()['includes']);
+        DB::commit();
 
         return to_route('course-instructor.list');
     }

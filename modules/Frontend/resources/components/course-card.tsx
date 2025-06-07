@@ -7,14 +7,15 @@ import { Link } from "@inertiajs/react"
 
 
 export default function CourseCard({
-  price = 89.99,
+  id,
+  price,
   instructor,
   longevity,
   course,
   language,
 }: CourseInstructor) {
   return (
-    <Link href={route('frontend.course', course.id)}>
+    <Link href={route('frontend.course', id)}>
 
       <Card className="relative overflow-hidden rounded-xl h-[380px] w-full max-w-sm border-0 shadow-lg transition-all duration-300 hover:shadow-xl group cursor-pointer">
         <div className="absolute inset-0 w-full h-full">

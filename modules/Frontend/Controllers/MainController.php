@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Frontend\Controllers;
 
-use Modules\Operational\Models\CourseInstructor;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Operational\Models\CourseInstructor;
 
 final class MainController
 {
@@ -66,15 +66,15 @@ final class MainController
         ]);
     }
 
-    public function show(CourseInstructor $courseInstructor): Response
-    {
-        $course = $courseInstructor->with([
+    public function show(int $courseInstructor): Response
+    {  
+        $course = CourseInstructor::whereId($courseInstructor)
+        ->with([
             'course:id,title,image,description',
             'pricingType:id,name',
             'instructor:id,name',
             'language:id,language'
         ])->first();
-
         return Inertia::render('Frontend::show', [
             'course' => $course,
         ]);
