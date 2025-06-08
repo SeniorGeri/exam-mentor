@@ -42,6 +42,7 @@ final class RegisteredUserController
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
+            'phone' => $request->phone,
         ]);
         
         $request->instructor ? $user->assignRole(RolesEnum::INSTRUCTOR->value) : $user->assignRole(RolesEnum::STUDENT->value);

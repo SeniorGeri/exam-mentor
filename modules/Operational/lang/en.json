@@ -78,6 +78,8 @@
     "include": "Include",
     "add_curricula": "Add curricula",
     "add_includes": "Add includes",
+    "update_course_instructor": "Update course instructor",
+    "update_course_instructor_desc": "The form below allows you to update the selected course instructor",
 
     "school": "School",
     "create_school": "Create school",

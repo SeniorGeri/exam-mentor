@@ -36,7 +36,8 @@ final class UpdateCourseInstructorRequest extends FormRequest
             'longevity' => ['required', 'string'],
             'description' => ['required', 'string'],
             'image' => ['nullable', 'string'],
-
+            'curricula' => ['nullable', 'array'],
+            'includes' => ['nullable', 'array']
         ];
     }
 }

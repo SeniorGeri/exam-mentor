@@ -19,7 +19,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('test' , function () {
         
- 
+        $role = Role::findByName(RolesEnum::INSTRUCTOR->value);
+
+    
+        $role->givePermissionTo("course.read");
+        $role->givePermissionTo("active-course.read");
+        $role->givePermissionTo("school.read");
+        $role->givePermissionTo("grade.read");
+        $role->givePermissionTo("subject.read");
+
+
+        $role->givePermissionTo("course-instructor.create");
+        $role->givePermissionTo("course-instructor.read");
+        $role->givePermissionTo("course-instructor.update");
+        $role->givePermissionTo("course-instructor.delete");
         
     return 'SUKSES FRATE';
         // Permission::create(["name" => "contact.read"]);

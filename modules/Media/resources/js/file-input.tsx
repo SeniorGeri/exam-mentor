@@ -34,7 +34,7 @@ function FileInput({ multiple = false, inputName = 'image', setFormData, default
             });
             setSelectedFile(mappedValues);
         }
-    }, [defaultValue]);
+    }, []);
 
     const handleSelectFile = (file: Image) => {
         setCurrentFile(file);

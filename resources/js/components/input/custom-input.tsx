@@ -13,6 +13,7 @@ export default function CustomInput({
     placeholder = null,
     ref = null,
     step = null,
+    disabled = false,
     setFormData
 }: InputInterface) {
 
@@ -30,6 +31,7 @@ export default function CustomInput({
               onChange={(e) => setFormData(id, e.target.value)}
               placeholder={placeholder}
               autoComplete={id}
+              disabled={disabled}
           />
 
           <InputError message={errorMessage}/>

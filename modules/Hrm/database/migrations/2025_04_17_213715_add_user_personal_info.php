@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('city_id')->nullable()->constrained('cities')->after('id');
             $table->foreignId('gender_id')->nullable()->constrained('genders')->after('id');
             $table->boolean('active')->default(true)->after('email');
-            $table->string('address')->nullable()->after('active');
+            $table->string('phone')->nullable()->after('active');
+            $table->string('address')->nullable()->after('phone');
             $table->text('bio')->nullable()->after('address');
             $table->string('profile_pic')->nullable()->after('bio');
 
@@ -31,6 +32,7 @@ return new class extends Migration
     {
         Schema::table('user', function (Blueprint $table) {
             $table->dropColumn('active');
+            $table->dropColumn('phone');
             $table->dropColumn('address');
             $table->dropColumn('country_id');
             $table->dropColumn('city_id');

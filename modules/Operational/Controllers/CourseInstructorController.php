@@ -63,28 +63,24 @@ final class CourseInstructorController
     {
         DB::beginTransaction();
         $courseInstructor = CourseInstructor::create($request->validated());
-        CourseCurriculum::insert(
-            array_map(function ($curriculum) use ($courseInstructor) {
-                return [
-                    'course_instructor_id' => $courseInstructor->id,
-                    'title' => `{"en":"` . $curriculum['title'] . `"}`,
-                    'description' => `{"en":"` .$curriculum['description'] . `"}`,
-                ];
-            }, $request->validated()['curricula'])
-        );
-        CourseIncludes::insert(
-            array_map(function ($include) use ($courseInstructor) {
-                return [
-                    'course_instructor_id' => $courseInstructor->id,
-                    'title' => `{"en":"` .$include['title'] . `"}`,
-                ];
-            }, $request->validated()['includes'])
-        );
+        array_map(function ($curriculum) use ($courseInstructor) {
+            CourseCurriculum::create([
+                'course_instructor_id' => $courseInstructor->id,
+                'title' => $curriculum['title'],
+                'description' => $curriculum['description'],
+            ]);
+        }, $request->validated()['curricula']);
+        array_map(function ($include) use ($courseInstructor) {
+            CourseIncludes::create([
+                'course_instructor_id' => $courseInstructor->id,
+                'title' => $include['title'],
+            ]);
+        }, $request->validated()['includes']);
         DB::commit();
 
         return to_route('course-instructor.list');
     }   
-
+    
     /**
      * Load course pricings
      *
@@ -94,14 +90,14 @@ final class CourseInstructorController
     public function show(FilterTableRequest $request): JsonResponse
     {
         $user = Auth::user();
-        $coursePricings = CourseInstructor::filter($request)
+        $courseInstructors = CourseInstructor::filter($request)
         ->with(['course', 'instructor', 'pricingType', 'language'])
         ->when($user->hasRole(RolesEnum::INSTRUCTOR->value), function ($query) use ($user) {
             $query->where('instructor_id', $user->id);
         })
         ->paginate($request->limit);
 
-        return response()->json(['data' => $coursePricings]);
+        return response()->json(['data' => $courseInstructors]);
     }
 
     /**

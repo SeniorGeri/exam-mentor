@@ -9,6 +9,7 @@ export type InputInterface = {
     placeholder?: string,
     errorMessage?: string,
     step?: number,
+    disabled?: boolean,
     setFormData?: (key: string, value: string | number ) => void
 }
 

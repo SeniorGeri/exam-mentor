@@ -23,7 +23,10 @@ final class MainController
             'course:id,title,image',
             'pricingType:id,name',
             'instructor:id,name',
-            'language:id,language'
+            'language:id,language',
+            'course.grades',
+            'course.subjects',
+            'course.schools',
         ])
         ->orderBy('created_at', 'desc')
         ->limit(4)
@@ -46,7 +49,10 @@ final class MainController
             'course:id,title,image',
             'pricingType:id,name',
             'instructor:id,name',
-            'language:id,language'
+            'language:id,language',
+            'course.grades',
+            'course.subjects',
+            'course.schools',
         ])
         ->whereHas('course', function ($query) use ($searchKey) {
             if($searchKey !== ''){
@@ -73,8 +79,15 @@ final class MainController
             'course:id,title,image,description',
             'pricingType:id,name',
             'instructor:id,name',
-            'language:id,language'
-        ])->first();
+            'language:id,language',
+            'course.grades',
+            'course.subjects',
+            'course.schools',
+            'curricula',
+            'includes',
+        ])
+        ->withCount('courseActive')
+        ->first();
         return Inertia::render('Frontend::show', [
             'course' => $course,
         ]);

@@ -1,4 +1,5 @@
 import type {BreadcrumbItem} from '@/types';
+import { TranslatableField } from '@/types/helpers';
 import {Row} from '@tanstack/react-table';
 import {route} from "ziggy-js";
 
@@ -40,15 +41,30 @@ export type CourseInstructor = {
     description: string;
     lessons: number;
     image: string;
+    curricula: Curriculum[];
+    includes: Include[];
 }
 
-export type Curriculum = {
+export type FormCurriculum = {
     id: number;
     title: string;
     description: string;
 }
 
-export type Include = {
+export type FormInclude = {
     id: number;
     title: string;
+}
+
+
+
+export type Curriculum = {
+    id: number;
+    title: TranslatableField;
+    description: TranslatableField;
+}
+
+export type Include = {
+    id: number;
+    title: TranslatableField;
 }

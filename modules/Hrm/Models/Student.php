@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Traits\HasRoleBehaviorTrait;
 use App\Traits\HasTableFilterTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Settings\Models\Country;
+use Modules\Settings\Models\City;
+use Modules\Settings\Models\Gender;
 
 final class Student extends User
 {
@@ -29,5 +32,7 @@ final class Student extends User
         "gender_id",
         "address",
         "profile_pic",
+        "phone",
+        "country_id"
     ];
 }

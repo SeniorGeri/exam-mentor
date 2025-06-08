@@ -7,10 +7,11 @@ import DeleteUser from '@/components/delete-user';
 import HeadingSmall from '@/components/heading-small';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
+import CustomInput from '@/components/input/custom-input';
+import { InertiaLangPageProps } from '@/types/helpers';
+import FileInput from '@/modules/Media/resources/js/file-input';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -21,15 +22,20 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 type ProfileForm = {
     name: string;
-    email: string;
+    phone: string;
+    address: string;
+    profile_pic: string;
 }
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
     const { auth } = usePage<SharedData>().props;
+    const { languages } = usePage<InertiaLangPageProps>().props;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
+    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<ProfileForm>({
         name: auth.user.name,
-        email: auth.user.email,
+        phone: auth.user.phone,
+        address: auth.user.address,
+        profile_pic: auth.user.profile_pic,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -49,38 +55,85 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                     <HeadingSmall title="Profile information" description="Update your name and email address" />
 
                     <form onSubmit={submit} className="space-y-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="name">Name</Label>
 
-                            <Input
+                    <FileInput inputName='profile_pic' setFormData={setData} defaultValue={[data.profile_pic]}/>
+
+                        <div className="grid gap-2">
+
+                            <CustomInput
                                 id="name"
-                                className="mt-1 block w-full"
+                                type="text"
                                 value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
-                                required
-                                autoComplete="name"
+                                setFormData={setData}
                                 placeholder="Full name"
                             />
-
                             <InputError className="mt-2" message={errors.name} />
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="email">Email address</Label>
-
-                            <Input
+                            <CustomInput
                                 id="email"
                                 type="email"
-                                className="mt-1 block w-full"
-                                value={data.email}
-                                onChange={(e) => setData('email', e.target.value)}
-                                required
-                                autoComplete="username"
+                                value={auth.user.email}
+                                disabled
                                 placeholder="Email address"
                             />
-
-                            <InputError className="mt-2" message={errors.email} />
                         </div>
+
+                        <div className="grid gap-2">
+
+                            <CustomInput
+                                id="phone"
+                                type="text"
+                                value={data.phone}
+                                setFormData={setData}
+                                placeholder="Phone number"
+                            />
+                            <InputError className="mt-2" message={errors.phone} />
+                        </div>
+
+                        <div className="grid gap-2">
+
+                            <CustomInput
+                                id="address"
+                                type="text"
+                                value={data.address}
+                                setFormData={setData}
+                                placeholder="Address"
+                            />
+                            <InputError className="mt-2" message={errors.address} />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <CustomInput
+                                id="country"
+                                type="text"
+                                value={auth.user.country?.country ? auth.user.country?.country[languages.main] : ''}
+                                disabled
+                                placeholder="Country"
+                            />
+                        </div>
+                        
+                        <div className="grid gap-2">
+                            <CustomInput
+                                id="city"
+                                type="text"
+                                value={auth.user.city?.city ? auth.user.city?.city[languages.main] : ''}
+                                disabled
+                                placeholder="City"
+                            />
+                        </div>
+                        
+                        <div className="grid gap-2">
+                            <CustomInput
+                                id="gender"
+                                type="text"
+                                value={auth.user.gender?.gender ? auth.user.gender?.gender[languages.main] : ''}
+                                disabled
+                                placeholder="Gender"
+                            />
+                        </div>
+                        
 
                         {mustVerifyEmail && auth.user.email_verified_at === null && (
                             <div>

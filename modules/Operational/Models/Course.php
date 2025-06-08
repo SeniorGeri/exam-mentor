@@ -25,17 +25,17 @@ final class Course extends Model
 
     public function grades(): HasManyThrough
     {
-        return $this->hasManyThrough(CourseGrade::class, Grade::class, 'course_id', 'id', 'id', 'grade_id' );
+        return $this->hasManyThrough(Grade::class, CourseGrade::class, 'course_id', 'id', 'id', 'grade_id' );
     }
 
     public function subjects(): HasManyThrough
     {
-        return $this->hasManyThrough(CourseSubject::class, Subject::class, 'course_id', 'id', 'id', 'subject_id' );
+        return $this->hasManyThrough(Subject::class, CourseSubject::class, 'course_id', 'id', 'id', 'subject_id' );
     }
 
     public function schools(): HasManyThrough
     {
-        return $this->hasManyThrough(CourseSchool::class, School::class, 'course_id', 'id', 'id', 'school_id' );
+        return $this->hasManyThrough(School::class, CourseSchool::class, 'course_id', 'id', 'id', 'school_id' );
     }
 
     public function gradeIds(): HasMany

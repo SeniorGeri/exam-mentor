@@ -62,4 +62,9 @@ final class CourseInstructor extends Model
     {
         return $this->hasMany(CourseIncludes::class);
     }
+
+    public function courseActive(): HasMany
+    {
+        return $this->hasMany(ActiveCourse::class);
+    }
 }

@@ -1,3 +1,7 @@
+import { Curriculum, Include } from '@/modules/Operational/resources/course-instructors/data';
+import { Grade } from '@/modules/Operational/resources/grades/data';
+import { School } from '@/modules/Operational/resources/schools/data';
+import { Subject } from '@/modules/Operational/resources/subjects/data';
 import { TranslatableField } from '@/types/helpers';
 
 export type CoursePaginate = {
@@ -19,11 +23,15 @@ export type CourseInstructor = {
     title: string;
     image: string;
     price: number;
-    instructor: Professor;
+    instructor: Instructor;
     language: Language;
-    longevity: number;
+    longevity: string;
+    lessons: number;
     pricing_type: PricingType;
     course: Course;
+    includes: Include[];
+    curricula: Curriculum[];
+    course_active_count: number;
 }
 
 export type PricingType = {
@@ -38,9 +46,10 @@ export type Language = {
     flag: string;
 }
 
-export type Professor = {
+export type Instructor = {
     id: number;
     name: string;
+    image: string;
 }
 
 export type PaginateLink = {
@@ -54,4 +63,7 @@ export type Course = {
     title: TranslatableField;
     image:string;
     description?: string;
+    grades: Grade[];
+    subjects: Subject[];
+    schools: School[];
 }

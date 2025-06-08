@@ -101,7 +101,7 @@ final class CourseController
             'subjectIds',
             'gradeIds'
         ]);
-        return Inertia::render('Operational::courses/edit',[
+        return Inertia::render('Operational::courses/edit/index',[
             'course' => $course,
             'schools' => $schools,
             'subjects' => $subjects,
