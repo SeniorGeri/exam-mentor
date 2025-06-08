@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 export function DeleteLiquidation({liquidation, isOpen, closeModal}: DeleteLiquidationProps) {
 
     const { t } = useTranslation('Finance');
-
+ 
     const destroyLiquidation = () => {
         router.delete(route('liquidation.destroy', liquidation.id), {
             preserveScroll: true,
