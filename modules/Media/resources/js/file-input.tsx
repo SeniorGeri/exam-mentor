@@ -21,7 +21,7 @@ function FileInput({ multiple = false, inputName = 'image', setFormData, default
     const { isUploading, uploadFiles } = useUpload();
     const [open, setOpen] = useState(false);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         if (defaultValue.length > 0) {
             const mappedValues: Image[] = defaultValue.map((image: string) => {
@@ -48,8 +48,7 @@ function FileInput({ multiple = false, inputName = 'image', setFormData, default
             setSelectedFile([...selectedFiles, file]);
         }
     };
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     useEffect(() => {
         if (multiple) {
             setFormData(

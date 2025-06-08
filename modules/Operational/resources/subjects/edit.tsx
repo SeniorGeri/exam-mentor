@@ -25,7 +25,8 @@ export function EditSubject({subject, isOpen, closeModal}: EditSubjectProps) {
         image: subject?.image,
         locale: currentLocale ?? null
     });
-
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() =>setData('title', subject?.title[data.locale] || '') , [data.locale]);
 
     const updateSubject: FormEventHandler = (e) => {
