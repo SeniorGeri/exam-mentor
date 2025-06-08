@@ -34,6 +34,7 @@ export function useMediaFiles({ initialPage = 1, filter = '' }: UseMediaFilesPro
         }
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {loadMore()}, []);
 
     return {

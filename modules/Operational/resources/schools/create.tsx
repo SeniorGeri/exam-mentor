@@ -11,7 +11,7 @@ import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
 import {route} from "ziggy-js";
-import { useCountries } from 'modules/Settings/resources/cities/countries-context';
+import { useCountries } from '@/modules/Settings/resources/cities/countries-context';
 import { SelectItem } from '@/components/ui/select';
 import { Country } from '@/modules/Settings/resources/countries/data';
 

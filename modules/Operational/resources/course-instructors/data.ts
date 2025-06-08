@@ -1,5 +1,4 @@
 import type {BreadcrumbItem} from '@/types';
-import { TranslatableField } from '@/types/helpers';
 import {Row} from '@tanstack/react-table';
 import {route} from "ziggy-js";
 

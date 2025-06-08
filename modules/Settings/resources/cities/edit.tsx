@@ -29,6 +29,7 @@ export function EditCity({city, isOpen, closeModal}: EditCityProps) {
         locale: currentLocale ?? null
     });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() =>setData('city', city?.city[data.locale] || '') , [data.locale]);
 
     const updateCity: FormEventHandler = (e) => {

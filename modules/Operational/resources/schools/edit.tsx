@@ -14,7 +14,7 @@ import CustomTextarea from '@/components/input/custom-textarea';
 import CustomSelect from '@/components/input/custom-select';
 import { Country } from '@/modules/Settings/resources/countries/data';
 import { SelectItem } from '@/components/ui/select';
-import { useCountries } from 'modules/Settings/resources/cities/countries-context';
+import { useCountries } from '@/modules/Settings/resources/cities/countries-context';
 
 export function EditSchool({school, isOpen, closeModal}: EditSchoolProps) {
 
@@ -33,7 +33,8 @@ export function EditSchool({school, isOpen, closeModal}: EditSchoolProps) {
         locale: currentLocale ?? null
     });
 
-    useEffect(() =>setData('title', school?.title[data.locale] || '') , [data.locale]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() =>setData('title', school?.title[data.locale] || '') , [data.locale]);
 
     const updateSchool: FormEventHandler = (e) => {
         e.preventDefault();

@@ -1,9 +1,5 @@
-import InputError from '@/components/input-error';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler, useEffect} from 'react';
 import {toast} from 'sonner';
@@ -12,7 +8,6 @@ import {route} from "ziggy-js";
 import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
 import { useTranslation } from 'react-i18next';
-import { Switch } from '@/components/ui/switch';
 import FileInput from '@/modules/Media/resources/js/file-input';
 import CustomTextarea from '@/components/input/custom-textarea';
 import CustomSwitch from '@/components/input/custom-switch';
@@ -34,6 +29,7 @@ export function EditPayment({payment, isOpen, closeModal}: EditPaymentProps) {
         locale: currentLocale ?? null
     });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() =>setData('method', payment?.method[data.locale] || '') , [data.locale]);
 
     const updatePayment: FormEventHandler = (e) => {

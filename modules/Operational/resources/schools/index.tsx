@@ -4,8 +4,8 @@ import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
 import { schoolBreadcrumbs } from './data';
 import SchoolTable from './school';
-import { CountriesProvider } from 'modules/Settings/resources/cities/countries-context';
-import { Country } from 'modules/Settings/resources/countries/data';
+import { CountriesProvider } from '@/modules/Settings/resources/cities/countries-context';
+import { Country } from '@/modules/Settings/resources/countries/data';
 
 export default function SchoolIndex({countries}:{countries: Country[]}) {
 

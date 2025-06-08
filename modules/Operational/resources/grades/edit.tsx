@@ -24,6 +24,7 @@ export function EditGrade({grade, isOpen, closeModal}: EditGradeProps) {
         locale: currentLocale ?? null
     });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() =>setData('title', grade?.title[data.locale] || '') , [data.locale]);
 
     const updateGrade: FormEventHandler = (e) => {

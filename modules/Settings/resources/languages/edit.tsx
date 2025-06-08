@@ -1,9 +1,5 @@
-import InputError from '@/components/input-error';
 import {Button} from '@/components/ui/button';
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle} from '@/components/ui/dialog';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {Textarea} from '@/components/ui/textarea';
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler, useEffect} from 'react';
 import {toast} from 'sonner';
@@ -31,6 +27,7 @@ export function EditLanguage({language, isOpen, closeModal}: EditLanguageProps) 
         locale: currentLocale ?? null
     });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() =>setData('language', language?.language[data.locale] || '') , [data.locale]);
 
     const updateLanguage: FormEventHandler = (e) => {

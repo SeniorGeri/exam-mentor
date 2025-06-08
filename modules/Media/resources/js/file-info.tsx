@@ -20,6 +20,7 @@ function FileInfo({file, setUploadedFiles, uploadedFiles, setCurrentFile}: InfoP
         original: file?.original
     });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         setData({
             id: file?.id,

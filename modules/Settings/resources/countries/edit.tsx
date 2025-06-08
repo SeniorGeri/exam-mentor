@@ -26,6 +26,7 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
         locale: currentLocale ?? null
     });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() =>setData('country', country?.country[data.locale] || '') , [data.locale]);
 
     const updateCountry: FormEventHandler = (e) => {
