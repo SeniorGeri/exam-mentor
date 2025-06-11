@@ -47,17 +47,17 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect</h3>
             <div className="flex space-x-4">
-              <Link href="https://www.facebook.com/ExamMentor" target="_blank">
+              <Link href="https://www.facebook.com/OnlyStudy" target="_blank">
                 <Button variant="ghost" size="icon">
                   <Facebook className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="https://www.instagram.com/ExamMentor" target="_blank">
+              <Link href="https://www.instagram.com/OnlyStudy" target="_blank">
                 <Button variant="ghost" size="icon">
                   <Instagram className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="https://www.youtube.com/ExamMentor" target="_blank">
+              <Link href="https://www.youtube.com/OnlyStudy" target="_blank">
                 <Button variant="ghost" size="icon">
                   <Youtube className="h-4 w-4" />
                 </Button>
@@ -67,7 +67,7 @@ export function Footer() {
         </div>
         <div className="mt-10 border-t pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Exam Mentor. All rights reserved.
+            © {new Date().getFullYear()} OnlyStudy. All rights reserved.
           </p>
         </div>
       </div>

@@ -17,7 +17,7 @@ export function Navigation() {
         <div className="mr-4 hidden md:flex">
           <Link href={route('frontend.index')} className="mr-6 flex items-center space-x-2">
           <img src={faviconSVG} alt="" width={20} height={20}/>
-            <span className="hidden font-bold sm:inline-block">Exam Mentor</span>
+            <span className="hidden font-bold sm:inline-block">OnlyStudy</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link href={route('frontend.browse')} className="transition-colors hover:text-foreground/80 text-foreground">
