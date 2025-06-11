@@ -40,6 +40,7 @@ export function CreateInstructor() {
         bio: '',
         profile_pic: '',
         description: '',
+        specialization: '',
     });
 
     const storeCountCreateInstructor: FormEventHandler = (e) => {
@@ -106,6 +107,14 @@ export function CreateInstructor() {
                             className='col-span-1'
                         />    
 
+                        <CustomInput 
+                            id="specialization"
+                            value={data.specialization}
+                            setFormData={setData}
+                            placeholder={t('specialization')}
+                            errorMessage={errors.specialization}
+                            className='col-span-1'
+                        />    
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3">

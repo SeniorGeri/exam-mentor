@@ -49,7 +49,8 @@ export type Language = {
 export type Instructor = {
     id: number;
     name: string;
-    image: string;
+    profile_pic: string;
+    specialization: string;
 }
 
 export type PaginateLink = {

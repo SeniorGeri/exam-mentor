@@ -38,6 +38,7 @@ export type Instructor = {
     country: Country;
     city: City;
     gender: Gender;
+    specialization: string;
 };
 
 export type InstructorActionsProps = {

@@ -11,7 +11,7 @@ import { Curriculum } from "@/modules/Operational/resources/course-instructors/d
 export default function OneOnOne({ course }: { course: CourseInstructor }) {
     const { t } = useTranslation('Frontend');
     const { currentLocale } = useLocale();
-    console.log(course)
+    console.log(course.instructor)
     return (
         <div className="container mx-auto py-8 px-4">
             <div className="grid md:grid-cols-3 gap-8">
@@ -21,7 +21,7 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                         <img
                             src={course.image ?? course.course.image}
                             alt="Course thumbnail"
-                            className="object-cover"
+                            className="w-full h-full object-cover"
                         />
                     </div>
 
@@ -30,12 +30,12 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                         <h1 className="text-3xl font-bold mb-4">{course.course.title[currentLocale]}</h1>
                         <div className="flex items-center gap-3 mb-4">
                             <Avatar>
-                                <AvatarImage src={course.instructor?.image} alt="Instructor" />
-                                <AvatarFallback>JD</AvatarFallback>
+                                <AvatarImage src={course.instructor?.profile_pic} alt="Instructor" />
+                                <AvatarFallback>{course.instructor.name.charAt(0)}</AvatarFallback>
                             </Avatar>
                             <div>
                                 <p className="font-medium">{course.instructor.name}</p>
-                                <p className="text-sm text-muted-foreground">Senior Web Developer</p>
+                                <p className="text-sm text-muted-foreground">{course.instructor.specialization}</p>
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                                                 course.includes.map((include) => (
                                                     <li key={include.id} className="flex items-center gap-2">
                                                         <CheckCircle className="h-5 w-5 text-green-500" />
-                                                        <span>{include.title['en']}</span>
+                                                        <span>{include.title[currentLocale]}</span>
                                                     </li>
                                                 ))
                                             }

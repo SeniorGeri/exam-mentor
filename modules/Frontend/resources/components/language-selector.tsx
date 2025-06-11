@@ -9,10 +9,12 @@ import { cn } from "@/lib/utils"
 import { InertiaLangPageProps, LanguageData } from "@/types/helpers"
 import { usePage } from "@inertiajs/react"
 import i18n from '@/i18n';
+import { useLocale } from '@/contexts/locale';
 
 
 export function LanguageSelector() {
 
+    const { setLocale } = useLocale();
     const { languages } = usePage<InertiaLangPageProps>().props;
     const currentLanguage = languages.data.find((language) => language.language_code === (localStorage.getItem('language') ?? languages.main)); 
     const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage)
@@ -26,6 +28,7 @@ export function LanguageSelector() {
         setSelectedLanguage(language)
         setIsOpen(false)
         localStorage.setItem('language', language.language_code)
+        setLocale(language.language_code)
     }
 
     return (

@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card"
 import { User } from "lucide-react"
 import { CourseInstructor } from "../data"
 import { Link } from "@inertiajs/react"
-
+import { useLocale } from '@/contexts/locale';
 
 
 export default function CourseCard({
@@ -15,7 +15,8 @@ export default function CourseCard({
   course,
   language,
 }: CourseInstructor) {
-  console.log(course);
+   
+  const { currentLocale } = useLocale();
   return (
     <Link href={route('frontend.course', id)}>
 
@@ -23,7 +24,7 @@ export default function CourseCard({
         <div className="absolute inset-0 w-full h-full">
           <img
             src={(image ?? course.image )|| "/placeholder.svg"}
-            alt={course.title['en']}
+            alt={course.title[currentLocale]}
             className="object-cover transition-transform duration-700 group-hover:scale-110  h-full"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
@@ -38,7 +39,7 @@ export default function CourseCard({
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <h3 className="font-serif font-semibold text-2xl leading-tight tracking-tight">{course.title['en']}</h3>
+              <h3 className="font-serif font-semibold text-2xl leading-tight tracking-tight">{course.title[currentLocale]}</h3>
               <div className="flex items-center gap-2 text-white/80">
                 <User className="h-4 w-4" />
                 <span className="text-sm font-medium">{instructor.name}</span>
@@ -48,11 +49,11 @@ export default function CourseCard({
             <div className="pt-3 border-t border-white/20">
               <div className="flex flex-wrap gap-2">
                 <Badge
-                    key={language.language['en']}
+                    key={language.language[currentLocale]}
                     variant="outline"
                     className="font-normal text-xs rounded-full px-2.5 py-0.5 border-white/30 text-white/90 bg-transparent"
                   >
-                    {language.language['en']}
+                    {language.language[currentLocale]}
                   </Badge>
                 {course.grades.slice(0, 3).map((grade) => (
                   <Badge
@@ -60,7 +61,7 @@ export default function CourseCard({
                     variant="outline"
                     className="font-normal text-xs rounded-full px-2.5 py-0.5 border-white/30 text-white/90 bg-transparent"
                   >
-                    {grade.title['en']}
+                    {grade.title[currentLocale]}
                   </Badge>
                 ))}
                  {course.subjects.slice(0, 3).map((subject) => (
@@ -69,7 +70,7 @@ export default function CourseCard({
                     variant="outline"
                     className="font-normal text-xs rounded-full px-2.5 py-0.5 border-white/30 text-white/90 bg-transparent"
                   >
-                    {subject.title['en']}
+                    {subject.title[currentLocale]}
                   </Badge>
                 ))}
               </div>

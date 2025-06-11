@@ -26,6 +26,8 @@ final class ProfileUpdateRequest extends FormRequest
             'address' => ['required','string','max:255'],
 
             'profile_pic' => ['nullable','string','max:255'],
+            
+            'specialization' => ['nullable','string','max:255'],
         ];
     }
 }

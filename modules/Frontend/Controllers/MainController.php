@@ -78,7 +78,7 @@ final class MainController
         ->with([
             'course:id,title,image,description',
             'pricingType:id,name',
-            'instructor:id,name',
+            'instructor:id,name,profile_pic,specialization',
             'language:id,language',
             'course.grades',
             'course.subjects',

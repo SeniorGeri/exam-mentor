@@ -42,6 +42,7 @@ export interface User {
     avatar?: string;
     address?: string;
     phone?: string;
+    specialization?: string;
     email_verified_at: string | null;
     created_at: string;
     updated_at: string;

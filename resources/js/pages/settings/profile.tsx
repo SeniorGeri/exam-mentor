@@ -24,6 +24,7 @@ type ProfileForm = {
     name: string;
     phone: string;
     address: string;
+    specialization: string;
     profile_pic: string;
 }
 
@@ -35,6 +36,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
         name: auth.user.name,
         phone: auth.user.phone,
         address: auth.user.address,
+        specialization: auth.user.specialization,
         profile_pic: auth.user.profile_pic,
     });
 
@@ -78,6 +80,19 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                                 disabled
                                 placeholder="Email address"
                             />
+                        </div>
+
+                        
+                        <div className="grid gap-2">
+
+                            <CustomInput
+                                id="specialization"
+                                type="text"
+                                value={data.specialization}
+                                setFormData={setData}
+                                placeholder="Specialization"
+                            />
+                            <InputError className="mt-2" message={errors.specialization} />
                         </div>
 
                         <div className="grid gap-2">

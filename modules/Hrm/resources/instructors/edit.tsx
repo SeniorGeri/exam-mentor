@@ -34,6 +34,7 @@ export function EditInstructor({instructor, isOpen, closeModal}: EditInstructorP
         bio: instructor?.bio,
         profile_pic: instructor?.profile_pic,
         description: instructor?.description,
+        specialization: instructor?.specialization,
     });
 
     const updateInstructor: FormEventHandler = (e) => {
@@ -63,7 +64,7 @@ export function EditInstructor({instructor, isOpen, closeModal}: EditInstructorP
                 </DialogDescription>
 
                 <form className="space-y-6" onSubmit={updateInstructor}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3">
 
                     <CustomInput
                         id="name"
@@ -84,6 +85,14 @@ export function EditInstructor({instructor, isOpen, closeModal}: EditInstructorP
                         className='col-span-1'
                     />    
 
+                    <CustomInput 
+                        id="specialization"
+                        value={data.specialization}
+                        setFormData={setData}
+                        placeholder={t('specialization')}
+                        errorMessage={errors.specialization}
+                        className='col-span-1'
+                    />    
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3">

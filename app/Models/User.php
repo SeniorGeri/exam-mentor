@@ -39,7 +39,8 @@ class User extends Authenticatable
         'country_id',
         'city_id',
         'gender_id',
-        'profile_pic'
+        'profile_pic',
+        "specialization"
     ];
 
 

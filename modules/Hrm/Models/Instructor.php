@@ -39,7 +39,8 @@ final class Instructor extends User
         "profile_pic",
         "bio",
         "phone",
-        "country_id"
+        "country_id",
+        "specialization"
     ];
 
     protected $translatable = ['bio'];
