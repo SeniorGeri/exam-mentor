@@ -13,4 +13,6 @@ enum NotificationTypeEnum: int
     case LIQUIDATION = 3;
 
     case INSTRUCTOR = 4;
+
+    case ORDER = 5;
 }

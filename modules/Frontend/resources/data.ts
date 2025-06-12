@@ -23,6 +23,7 @@ export type CourseInstructor = {
     title: string;
     image: string;
     price: number;
+    instructor_id: number;
     instructor: Instructor;
     language: Language;
     longevity: string;
@@ -32,6 +33,7 @@ export type CourseInstructor = {
     includes: Include[];
     curricula: Curriculum[];
     course_active_count: number;
+    description: string;
 }
 
 export type PricingType = {

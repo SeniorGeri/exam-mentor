@@ -29,5 +29,8 @@ class NotificationSeeder extends Seeder
         NotificationType::create([
             'type' => 'instructor',
         ]);
+        NotificationType::create([
+            'type' => 'order',
+        ]);
     }
 }

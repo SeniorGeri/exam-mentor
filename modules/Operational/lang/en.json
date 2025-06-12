@@ -91,5 +91,13 @@
     "school_edit_succ": "The school has been updated succesfully",
     "edit_school_desc": "The form  below allows you to update the selected school",
     "school_delete_succ": "The school has been deleted succesfully",
-    "delete_school_desc": "By proceeding  the school will be deleted."
+    "delete_school_desc": "By proceeding  the school will be deleted.",
+
+    "status": "Status",
+    "active_course_delete_succ": "The active course has been deleted succesfully",
+    "delete_active_course_desc": "By proceeding  the active course will be deleted.",
+    "edit_active_course": "Edit active course",
+    "edit_active_course_desc": "The form below allows you to update the selected active course",
+    "active_course_edit_succ": "The active course has been updated succesfully",
+    "delete_active_course": "Delete active course"
 }

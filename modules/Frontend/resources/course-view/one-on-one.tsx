@@ -7,12 +7,17 @@ import { useTranslation } from 'react-i18next';
 import { useLocale } from "@/contexts/locale";
 import { CourseInstructor } from "../data";
 import { Curriculum } from "@/modules/Operational/resources/course-instructors/data"
+import { OrderModal } from "../components/order-modal"
 
 export default function OneOnOne({ course }: { course: CourseInstructor }) {
     const { t } = useTranslation('Frontend');
     const { currentLocale } = useLocale();
-    console.log(course.instructor)
-    return (
+    const formattedPrice = new Intl.NumberFormat("en-UK", {
+        style: "currency",
+        currency: "EUR",
+      }).format(course.price)
+      
+      return (
         <div className="container mx-auto py-8 px-4">
             <div className="grid md:grid-cols-3 gap-8">
                 <div className="md:col-span-2 space-y-6">
@@ -130,9 +135,10 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                 {/* Purchase Card */}
                 <div className="md:col-span-1">
                     <div className="sticky top-8 border rounded-xl p-6 shadow-sm space-y-6">
-                        <div className="text-3xl font-bold">${course.price}</div>
+                        <div className="text-3xl font-bold">{formattedPrice}</div>
                         <div className="space-y-2">
-                            <Button className="w-full text-lg py-6">{t('register_now')}</Button>
+                            <OrderModal courseInstructor={course} />
+                            {/* <Button className="w-full text-lg py-6">{t('register_now')}</Button> */}
                             <Button variant="outline" className="w-full">
                                 {t('whatsapp_us')}
                             </Button>

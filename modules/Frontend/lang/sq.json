@@ -72,5 +72,18 @@
     "your_phone": "Numri i telefonit juaj",
     "company_address": "Remote Europe",
     "company_email": "exammentoring@gmail.com",
-    "company_phone": "+1 (555) 123-4567\nMon-Fri, 9AM-5PM"
+    "company_phone": "+1 (555) 123-4567\nMon-Fri, 9AM-5PM",
+
+
+    "finish_registration": "Perfundo regjistrimin",
+    "register_now_desc": "Pas perfundimit te regjistrimit ekipi jone do ju kontaktoj se shpejti me email dhe/ose me SMS",
+    "finish_registration_desc": "Ju lutemi plotesoni formën eposhtme për të perfunduar regjistrimin tuaj.",
+    "finish_registration_success": "Regjistrimi  perfundoi me sukses.",
+    "instructor": "Instruktori",
+    "lessons": "Leksione",
+    "duration": "Kohezgjatja",
+    "price": "Cmimi",
+    "registered_succesfully_hold_tight": "Ju sapo u regjistruat me sukses. Shume shpejt nje anetar i ekipit tone do ju kontaktoj",
+    "close": "Mbyll dhe anullo!"
+
   }

@@ -2,10 +2,10 @@
 
 import {DataTableColumnHeader} from '@/components/data-table/data-table-column-header';
 import {ColumnDef} from '@tanstack/react-table';
-import {ActiveCourse} from "./data";
+import {ActiveCourse, ActiveCourseStatus} from "./data";
 import { useTranslation } from 'react-i18next';
-import { TranslatableField } from '@/types/helpers';
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
+import { CourseInstructor } from '../course-instructors/data';
 
 
 
@@ -28,12 +28,14 @@ export const ActiveCourseColumns = (currentLocale :string): ColumnDef<ActiveCour
             },
         },
         {
-            accessorKey: 'image',
+            accessorKey: 'course_instructor',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('image')}/>,
             cell: ({row}) => {
+                const course : CourseInstructor = row.getValue('course_instructor')
+                console.log(course)
                 return (
                     <Avatar>
-                        <AvatarImage className="h-12 w-12" src={row.getValue('image')} alt={(row.getValue('title') as Record<string, string>)[currentLocale]} />
+                        <AvatarImage className="h-12 w-12" src={course?.image} alt={''} />
                     </Avatar>
                 )
             },
@@ -44,10 +46,24 @@ export const ActiveCourseColumns = (currentLocale :string): ColumnDef<ActiveCour
             accessorKey: 'title',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('title')}/>,
             cell: ({row}) => {
-                const title : TranslatableField = row.getValue('title')
+                const course : CourseInstructor = row.getValue('course_instructor')
                 return (
                     <div className="flex space-x-2">
-                        <span className="max-w-[500px] truncate font-light">{title[currentLocale] || t('not_translated')}</span>
+                        <span className="max-w-[500px] truncate font-light">{course?.description }</span>
+                    </div>
+                );
+            },
+            enableColumnFilter: true,
+            enableSorting: true,
+        },
+        {
+            accessorKey: 'status',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('status')}/>,
+            cell: ({row}) => {
+                const course : ActiveCourseStatus = row.getValue('status')
+                return (
+                    <div className="flex space-x-2">
+                        <span className="max-w-[500px] truncate font-light">{course?.status[currentLocale] || t('not_translated')}</span>
                     </div>
                 );
             },

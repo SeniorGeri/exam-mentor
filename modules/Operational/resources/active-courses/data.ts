@@ -18,8 +18,10 @@ export type ActiveCourse = {
     id: number;
     status_id: number;
     title: TranslatableField;
-    description: string;
-    image: string;
+    course_instructor: {
+        title: TranslatableField;
+        image: string;
+    };
 };
 
 export type ActiveCourseStatus = {

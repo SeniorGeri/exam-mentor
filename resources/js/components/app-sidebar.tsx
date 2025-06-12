@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Bell, BellRing, Book, BookOpen, CalendarArrowUp, CircleGauge, Cog, Coins, Euro, Folder, GraduationCap, HandCoins, Handshake, Landmark, Languages, Map, Megaphone, PiggyBank, ReceiptEuro, School, User, UserCheck, UsersRound, } from 'lucide-react';
+import { Bell, BellRing, Book, BookOpen, CalendarArrowUp, CircleGauge, Cog, Coins, Euro, Folder, GraduationCap, HandCoins, Handshake, Landmark, Languages, Map, Megaphone, PiggyBank, ReceiptEuro, School, ShieldCheck, User, UserCheck, UsersRound, } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -19,8 +19,15 @@ const mainNavItems: NavItem[] = [
         href: 'operational',
         icon: Handshake,
         type: 'dropdown',
-        permissions: ['course-instructor.read','school.read','subject.read','course.read','grade.read'],
+        permissions: ['active-course.read','course-instructor.read','school.read','subject.read','course.read','grade.read'],
         subItems: [
+            {
+                title: 'Active course',
+                href: route('active-course.list'),
+                icon: ShieldCheck,
+                type: 'standalone',
+                permission: 'active-course.read',
+            },
             {
                 title: 'Course Instructor',
                 href: route('course-instructor.list'),

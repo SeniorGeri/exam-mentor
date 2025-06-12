@@ -78,7 +78,17 @@
     "your_phone": "Your phone number",
     "company_address": "Remote Europe",
     "company_email": "exammentoring@gmail.com",
-    "company_phone": "+1 (555) 123-4567\nMon-Fri, 9AM-5PM"
+    "company_phone": "+1 (555) 123-4567\nMon-Fri, 9AM-5PM",
 
-    
+
+    "finish_registration": "Finish Registration",
+    "register_now_desc": "Please finish your registration our team will then contact you via email and/or sms for more details",
+    "finish_registration_desc": "Please fill in the form below to finish your registration.",
+    "finish_registration_success": "Registration finished successfully.",
+    "instructor": "Instructor",
+    "lessons": "Lessons",
+    "duration": "Duration",
+    "price": "Price",
+    "registered_succesfully_hold_tight": "You have been registered successfully, hold tight! A team member will contact you soon.",
+    "close": "Close and cancel !"
 }

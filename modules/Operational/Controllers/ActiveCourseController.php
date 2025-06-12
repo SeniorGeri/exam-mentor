@@ -42,11 +42,14 @@ final class ActiveCourseController
     public function show(FilterTableRequest $request): JsonResponse
     {
         $user = Auth::user();
-        $activeCourses = ActiveCourse::with(['courseInstructor', 'instructor', 'student', 'status'])
+        $activeCourses = ActiveCourse::filter($request)
+        ->with(['courseInstructor', 'instructor', 'student', 'status'])
         ->when($user->hasRole(RolesEnum::INSTRUCTOR->value), function ($query) {
             $query->where('instructor_id', $user->id);
         })
-        ->filter($request)
+        ->when($user->hasRole(RolesEnum::STUDENT->value), function ($query) {
+            $query->where('student_id', $user->id);
+        })
         ->paginate($request->limit);
 
         return response()->json(['data' => $activeCourses]);

@@ -17,6 +17,12 @@ export default function CourseCard({
 }: CourseInstructor) {
    
   const { currentLocale } = useLocale();
+
+  const formattedPrice = new Intl.NumberFormat("en-UK", {
+    style: "currency",
+    currency: "EUR",
+  }).format(price)
+
   return (
     <Link href={route('frontend.course', id)}>
 
@@ -33,7 +39,7 @@ export default function CourseCard({
         <div className="relative h-full flex flex-col justify-end p-6 text-white z-10">
           <div className="absolute top-5 right-5">
             <Badge className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border-0 rounded-full px-3 py-1">
-              ${price.toFixed(2)}
+              {formattedPrice}
             </Badge>
           </div>
 
