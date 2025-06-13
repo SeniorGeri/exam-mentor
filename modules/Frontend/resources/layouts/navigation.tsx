@@ -8,9 +8,12 @@ import { Link } from '@inertiajs/react';
 import {faviconSVG} from '@/assets/images'
 import { useTranslation } from 'react-i18next';
 import { LanguageSelector } from "../components/language-selector"
+import { usePage } from "@inertiajs/react"
+import type { SharedData } from "@/types"
 
 export function Navigation() {
     const { t } = useTranslation('Frontend');
+    const { auth } = usePage<SharedData>().props
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
@@ -65,11 +68,19 @@ export function Navigation() {
               <Input placeholder={t('search_course')} className="pl-8 md:w-[300px] lg:w-[400px]" />
             </div>
           </div>
-          <Button variant="outline" className="ml-auto hidden md:flex">
-              <Link href={route('login')} className="hover:text-foreground/80">
-                {t('login')}
-              </Link>
-          </Button>
+          {auth?.user ? (
+            <Button variant="outline" className="ml-auto hidden md:flex">
+                <Link href={route('login')} className="hover:text-foreground/80">
+                  {t('panel')}
+                </Link>
+            </Button>
+          ) : (
+            <Button variant="outline" className="ml-auto hidden md:flex">
+                <Link href={route('login')} className="hover:text-foreground/80">
+                  {t('login')}
+                </Link>
+            </Button>
+          )}
 
           <LanguageSelector />
         </div>

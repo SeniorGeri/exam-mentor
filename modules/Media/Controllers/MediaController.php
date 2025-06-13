@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Media\Controllers;
 
+use App\Enums\RolesEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Modules\Media\Models\Media;
 use Modules\Media\Requests\DeleteMediaRequest;
@@ -18,7 +21,11 @@ final class MediaController
      */
     public function show(): View
     {
-        $medias = Media::orderBy('created_at', 'DESC')->simplePaginate(5);
+        $medias = Media::orderBy('created_at', 'DESC')
+        ->when(!Auth::user()->hasRole(RolesEnum::ADMIN->value), function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })
+        ->simplePaginate(5);
 
         return view('storage::media', ['medias' => $medias]);
     }
@@ -46,10 +53,15 @@ final class MediaController
      */
     public function search(SearchMediaRequest $request): JsonResponse
     {
-        $medias = Media::where('original', 'like', '%'.$request->search_key.'%')
-            ->orWhere('text', 'like', '%'.$request->search_key.'%')
+        $medias = Media::when(!Auth::user()->hasRole(RolesEnum::ADMIN->value), function ($query) {
+            $query->where('user_id', Auth::user()->id);
+        })
+        ->where(function (Builder $query) use ($request){
+            $query->where('original', 'like', '%'.$request->search_key.'%')
+            ->orWhere('text', 'like', '%'.$request->search_key.'%');
+        })
             ->orderBy('created_at', 'DESC')
-            ->orderBy('created_at', 'DESC')->simplePaginate(30);
+            ->simplePaginate(30);
 
         return response()->json(['medias' => $medias]);
     }

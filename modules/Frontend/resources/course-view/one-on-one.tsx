@@ -2,12 +2,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Clock, BookOpen, Award, Users, CheckCircle } from "lucide-react"
+import { Clock, BookOpen, Award, Users, CheckCircle, MessageCircleMore } from "lucide-react"
 import { useTranslation } from 'react-i18next';
 import { useLocale } from "@/contexts/locale";
 import { CourseInstructor } from "../data";
 import { Curriculum } from "@/modules/Operational/resources/course-instructors/data"
 import { OrderModal } from "../components/order-modal"
+import { Link } from "@inertiajs/react"
 
 export default function OneOnOne({ course }: { course: CourseInstructor }) {
     const { t } = useTranslation('Frontend');
@@ -140,7 +141,10 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                             <OrderModal courseInstructor={course} />
                             {/* <Button className="w-full text-lg py-6">{t('register_now')}</Button> */}
                             <Button variant="outline" className="w-full">
-                                {t('whatsapp_us')}
+                            <MessageCircleMore />
+                            <a target="_blank" href={`https://wa.me/+355697745537?text=Hello desha te intersohesha pak per ${course.course.title[currentLocale]}`}>
+                                     {t('whatsapp_us')}
+                                </a>
                             </Button>
                         </div>
                         <div className="space-y-4 pt-4 border-t">

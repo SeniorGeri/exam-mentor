@@ -16,7 +16,7 @@
     "forgot_password_desc": "Please enter your email address and we will send you a link to reset your password.",
     "send_reset_link": "Send reset link",
     "create_an_account": "Create an account",
-    "create_an_account_desc": "Create an account to start using Exam Mentor.",
+    "create_an_account_desc": "Create an account to start using OnlyStudy.",
     "name": "Name",
     "your_name": "Your name",
     "your_email": "Your email address",
@@ -25,7 +25,7 @@
     "message": "Message",
 
     "login": "Login",
-    "login_desc": "Login to start using Exam Mentor.",
+    "login_desc": "Login to start using OnlyStudy.",
     "email": "Email",
     "password": "Password",
     "remember": "Remember me",

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Notification\Controllers\ContactListController;
 use Modules\Notification\Controllers\NotificationController;
 
-Route::middleware(['web','auth:sanctum'])->group(function () {
+Route::prefix('backoffice/')->middleware(['web','auth:sanctum'])->group(function () {
 
     Route::get('/contact', [ContactListController::class, 'index'])->name('contact.list')->permission('contact.read');
     Route::get('/contact/load', [ContactListController::class, 'show'])->name('contact.load')->permission('contact.read');

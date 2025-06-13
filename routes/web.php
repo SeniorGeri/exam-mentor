@@ -5,13 +5,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Role;
 
-
+Route::get('/', fn () => redirect()->route('frontend.index'))->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/', function () {
-        return Inertia::render('dashboard');
-    })->name('home');
+
 
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');

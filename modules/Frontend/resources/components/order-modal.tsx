@@ -27,7 +27,7 @@ export function OrderModal({ courseInstructor }: { courseInstructor: CourseInstr
   const { t } = useTranslation("Frontend")
   const { auth } = usePage<SharedData>().props
   const [open, setOpen] = useState(false)
-const { currentLocale } = useLocale();
+  const { currentLocale } = useLocale();
 
   const { data, setData, post, processing, reset, clearErrors } = useForm({
     course_instructor_id: courseInstructor.id,
