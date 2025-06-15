@@ -9,10 +9,12 @@ use App\Models\User;
 use App\Traits\HasTranslationsTrait;
 use App\Traits\HasRoleBehaviorTrait;
 use App\Traits\HasTableFilterTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Settings\Models\City;
-use Modules\Settings\Models\Country;
-use Modules\Settings\Models\Gender;
+use Modules\Finance\Models\Liquidation;
+use Modules\Operational\Models\ActiveCourse;
+use Modules\Operational\Models\CourseInstructor;
+
 
 final class Instructor extends User
 {
@@ -45,4 +47,18 @@ final class Instructor extends User
 
     protected $translatable = ['bio'];
 
+    public function courses(): HasMany
+    {
+        return $this->hasMany(CourseInstructor::class, 'instructor_id');
+    }
+
+    public function activeCourses(): HasMany
+    {
+        return $this->hasMany(ActiveCourse::class, 'instructor_id');
+    }
+    
+    public function liquidations(): HasMany
+    {
+        return $this->hasMany(Liquidation::class, 'winner_id');
+    }
 }

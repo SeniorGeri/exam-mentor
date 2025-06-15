@@ -17,5 +17,6 @@ final class OperationalSeeder extends Seeder
         $this->call(AdminPermissionsSeeder::class);
         $this->call(StaticDataSeeder::class);
         $this->call(InstructorPermissionsSeeder::class);
+        $this->call(StudentPermissionsSeeder::class);
     }
 }

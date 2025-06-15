@@ -8,11 +8,12 @@ import {Course, CourseActionsProps} from "./data.js";
 import {DeleteCourse} from "./delete.js";
 import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function CourseActions({course}: CourseActionsProps) {
 
     const { t } = useTranslation('Operational');
-
+    const { hasPermission, hasAnyPermission} = usePermissions();
     const [selectedCourse, setSelectedCourse] = useState<Course| undefined>(undefined);
 
     const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | null>(null);
@@ -24,6 +25,10 @@ export function CourseActions({course}: CourseActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['course.update', 'course.delete'])) {
+        return null;
+    }
+    
     return (
         <>
             <DropdownMenu>
@@ -34,12 +39,16 @@ export function CourseActions({course}: CourseActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() =>  router.visit(route('course.edit', course.original.id))}>{t('edit_course')}</DropdownMenuItem>
+                    {hasPermission('course.update') && (
+                        <DropdownMenuItem onClick={() =>  router.visit(route('course.edit', course.original.id))}>{t('edit_course')}</DropdownMenuItem>
+                    )}
                     <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(course.original, 'delete')}>
-                        {t('delete_course')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('course.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(course.original, 'delete')}>
+                            {t('delete_course')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

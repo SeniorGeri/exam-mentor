@@ -48,5 +48,6 @@ final class AdminPermissionsSeeder extends Seeder
         $role->givePermissionTo("active-course.read");
         $role->givePermissionTo("active-course.update");
         $role->givePermissionTo("active-course.delete");
+        $role->givePermissionTo("active-course.lessons");
     }
 }

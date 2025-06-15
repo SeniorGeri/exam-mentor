@@ -113,7 +113,7 @@ final class CourseInstructorController
         $instructors = User::all(['id', 'name']);
         $pricingTypes = PricingType::all(['id', 'type']);
         
-        return Inertia::render('Operational::course-instructors/edit', [
+        return Inertia::render('Operational::course-instructors/edit/index', [
             'courseInstructor' => $courseInstructor->load(['curricula', 'includes']),
             'courses' => $courses,
             'instructors' => $instructors,

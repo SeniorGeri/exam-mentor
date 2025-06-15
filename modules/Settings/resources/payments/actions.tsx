@@ -8,10 +8,13 @@ import {Payment, PaymentActionsProps} from "./data.js";
 import {EditPayment} from "./edit.js";
 import {DeletePayment} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function PaymentActions({payment}: PaymentActionsProps) {
 
     const { t } = useTranslation('Settings');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedPayment, setSelectedPayment] = useState<Payment| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function PaymentActions({payment}: PaymentActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['payment.update', 'payment.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function PaymentActions({payment}: PaymentActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(payment.original, 'edit')}>{t('edit_payment')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(payment.original, 'delete')}>
-                        {t('delete_payment')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('payment.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(payment.original, 'edit')}>{t('edit_payment')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('payment.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(payment.original, 'delete')}>
+                            {t('delete_payment')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

@@ -9,22 +9,30 @@ import { useTranslation } from 'react-i18next';
 import { ActiveCourse } from './data';
 import { EditActiveCourse } from './edit';
 import { DeleteActiveCourse } from './delete';
+import { EditActiveCourseStatus } from './edit-status';
+import { router } from '@inertiajs/react';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function ActiveCourseActions({activeCourse}: ActiveCourseActionsProps) {
 
     const { t } = useTranslation('Operational');
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedCourse, setSelectedCourse] = useState<ActiveCourse| undefined>(undefined);
 
-    const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | null>(null);
+    const [selectedAction, setSelectedAction] = useState<'edit-status' | 'edit' | 'finish_lesson' | 'delete' | null>(null);
 
-    const handleAction = useCallback((course: ActiveCourse, action: 'edit' | 'delete') => {
+    const handleAction = useCallback((course: ActiveCourse, action: 'edit-status' | 'edit' | 'finish_lesson' | 'delete') => {
         setTimeout(() => {
             setSelectedCourse(course);
             setSelectedAction(action);
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['active-course.update', 'active-course.delete', 'active-course.lessons'])) {
+        return null;
+    }
+    
     return (
         <>
             <DropdownMenu>
@@ -35,8 +43,24 @@ export function ActiveCourseActions({activeCourse}: ActiveCourseActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(activeCourse.original, 'edit')}>{t('edit_course')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
+                    {hasPermission('active-course.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(activeCourse.original, 'edit-status')}>{t('update_status')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('active-course.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(activeCourse.original, 'edit')}>{t('edit_course')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                   )}
+                    {hasPermission('active-course.lessons') && activeCourse.original.status_id === 3 && (
+                        <>
+                            <DropdownMenuItem onClick={() =>  router.visit(route('active-course.lessons', activeCourse.original.id))}>{t('finish_lesson')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
                     <DropdownMenuItem className="text-red-500" onClick={() => handleAction(activeCourse.original, 'delete')}>
                         {t('delete_course')}
                         <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
@@ -44,11 +68,14 @@ export function ActiveCourseActions({activeCourse}: ActiveCourseActionsProps) {
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">
-                {selectedCourse && selectedAction === 'edit' && (
-                    <EditActiveCourse activeCourse={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
+                {selectedCourse && selectedAction === 'edit-status' && (
+                    <EditActiveCourseStatus activeCourse={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
                 )}
                 {selectedCourse && selectedAction === 'delete' && (
                     <DeleteActiveCourse activeCourse={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
+                )}
+                {selectedCourse && selectedAction === 'edit' && (
+                    <EditActiveCourse activeCourse={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
                 )}
             </div>
         </>

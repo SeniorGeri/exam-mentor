@@ -8,10 +8,13 @@ import {Student, StudentActionsProps} from "./data.js";
 import {EditStudent} from "./edit.js";
 import {DeleteStudent} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function StudentActions({student}: StudentActionsProps) {
 
     const { t } = useTranslation('Hrm');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedStudent, setSelectedStudent] = useState<Student| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function StudentActions({student}: StudentActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['student.update', 'student.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function StudentActions({student}: StudentActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(student.original, 'edit')}>{t('edit_student')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(student.original, 'delete')}>
-                        {t('delete_student')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('student.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(student.original, 'edit')}>{t('edit_student')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('student.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(student.original, 'delete')}>
+                            {t('delete_student')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

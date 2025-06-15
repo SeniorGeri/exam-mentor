@@ -3,22 +3,24 @@ import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Dia
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler} from 'react';
 import {toast} from 'sonner';
-import {EditActiveCourseProps} from "./data";
+import {ActiveCourseStatus, EditActiveCourseProps} from "./data";
 import {route} from "ziggy-js";
+import { useLocale } from '@/contexts/locale';
 import { useTranslation } from 'react-i18next';
-import CustomInput from '@/components/input/custom-input';
+import CustomSelect from '@/components/input/custom-select';
+import { SelectItem } from '@/components/ui/select';
+import { useStatuses } from './status-context';
 
-export function EditActiveCourse({activeCourse, isOpen, closeModal}: EditActiveCourseProps) {
+export function EditActiveCourseStatus({activeCourse, isOpen, closeModal}: EditActiveCourseProps) {
 
     const { t } = useTranslation('Operational');
 
+    const { currentLocale } = useLocale();
+    const statuses = useStatuses(); // Access directly from context
+
     const {data, setData, put, processing, reset, errors, clearErrors} = useForm({
         id: activeCourse?.id,
-        value: activeCourse?.value,
-        left: activeCourse?.left,
-        liquidation_percentage: activeCourse?.liquidation_percentage,
         status_id: activeCourse?.status_id,
-        description: activeCourse?.description,
     });
 
     const updateActiveCourse: FormEventHandler = (e) => {
@@ -49,38 +51,21 @@ export function EditActiveCourse({activeCourse, isOpen, closeModal}: EditActiveC
 
                 <form className="space-y-6" onSubmit={updateActiveCourse}>
 
-                    <CustomInput
-                        id="value"
-                        value={data.value}
+                <CustomSelect
+                        id="status_id"
+                        value={data.status_id}
+                        text = {statuses.find((count: ActiveCourseStatus) => count.id.toString() === data.status_id.toString())?.status['en'] || t('select_status')}
                         setFormData={setData}
-                        placeholder={t('value')}
-                        errorMessage={errors.value}
-                    />
+                        placeholder={t('status')}
+                        errorMessage={errors.status_id}
+                    >   
+                        <>
+                            {statuses.map((status : ActiveCourseStatus) => (
+                                <SelectItem key={status.id} value={status.id.toString()}>{status.status[currentLocale]}</SelectItem>
+                            ))}
+                        </>
+                    </CustomSelect>
 
-                    <CustomInput
-                        id="left"
-                        value={data.left}
-                        setFormData={setData}
-                        placeholder={t('left')}
-                        errorMessage={errors.left}
-                    />
-
-                    <CustomInput
-                        id="liquidation_percentage"
-                        value={data.liquidation_percentage}
-                        setFormData={setData}
-                        placeholder={t('liquidation_percentage')}
-                        errorMessage={errors.liquidation_percentage}
-                    />
-
-                    <CustomInput
-                        id="description"
-                        value={data.description}
-                        setFormData={setData}
-                        placeholder={t('description')}
-                        errorMessage={errors.description}
-                    />
-         
                
 
                     <DialogFooter className="gap-2">

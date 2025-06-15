@@ -8,11 +8,12 @@ import {School, SchoolActionsProps} from "./data.js";
 import {EditSchool} from "./edit.js";
 import {DeleteSchool} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function SchoolActions({school}: SchoolActionsProps) {
 
     const { t } = useTranslation('Operational');
-
+    const { hasPermission, hasAnyPermission} = usePermissions();
     const [selectedSchool, setSelectedSchool] = useState<School| undefined>(undefined);
 
     const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | null>(null);
@@ -24,6 +25,10 @@ export function SchoolActions({school}: SchoolActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['school.update', 'school.delete'])) {
+        return null;
+    }
+    
     return (
         <>
             <DropdownMenu>
@@ -34,12 +39,18 @@ export function SchoolActions({school}: SchoolActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(school.original, 'edit')}>{t('edit_school')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(school.original, 'delete')}>
-                        {t('delete_school')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('school.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(school.original, 'edit')}>{t('edit_school')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('school.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(school.original, 'delete')}>
+                            {t('delete_school')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

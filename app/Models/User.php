@@ -9,10 +9,13 @@ namespace App\Models;
 use GeriHoxha\LaravelRoleModels\HasRoleBehavior;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Modules\Finance\Models\Transaction;
 use Modules\Settings\Models\City;
 use Modules\Settings\Models\Country;
 use Modules\Settings\Models\Gender;
@@ -75,18 +78,23 @@ class User extends Authenticatable
     }
 
 
-    public function country()
+    public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
     }
 
-    public function city()
+    public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
     }
 
-    public function gender()
+    public function gender(): BelongsTo
     {
         return $this->belongsTo(Gender::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'user_id');
     }
 }

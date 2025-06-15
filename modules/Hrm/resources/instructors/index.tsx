@@ -7,7 +7,7 @@ import { InstructorData } from './data';
 import { InstructorDataProvider } from './instructor-data-context';
 import InstructorTable from './instructor';
 
-export default function LanguageIndex({countries, cities, genders }: InstructorData) {
+export default function InstructorIndex({countries, cities, genders }: InstructorData) {
 
 
 

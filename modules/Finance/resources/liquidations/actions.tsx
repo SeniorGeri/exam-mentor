@@ -8,10 +8,13 @@ import {Liquidation, LiquidationActionsProps} from "./data.js";
 import {EditLiquidation} from "./edit.js";
 import {DeleteLiquidation} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function LiquidationActions({liquidation}: LiquidationActionsProps) {
 
     const { t } = useTranslation('Finance');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedLiquidation, setSelectedLiquidation] = useState<Liquidation| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function LiquidationActions({liquidation}: LiquidationActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['liquidation.update', 'liquidation.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function LiquidationActions({liquidation}: LiquidationActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(liquidation.original, 'edit')}>{t('edit_expense')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(liquidation.original, 'delete')}>
-                        {t('delete_expense')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('liquidation.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(liquidation.original, 'edit')}>{t('edit_expense')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('liquidation.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(liquidation.original, 'delete')}>
+                            {t('delete_expense')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

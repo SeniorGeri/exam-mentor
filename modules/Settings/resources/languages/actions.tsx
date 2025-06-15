@@ -8,10 +8,13 @@ import {Language, LanguageActionsProps} from "./data.js";
 import {EditLanguage} from "./edit.js";
 import {DeleteLanguage} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function LanguageActions({language}: LanguageActionsProps) {
 
     const { t } = useTranslation('Settings');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedLanguage, setSelectedLanguage] = useState<Language| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function LanguageActions({language}: LanguageActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['language.update', 'language.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function LanguageActions({language}: LanguageActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(language.original, 'edit')}>{t('edit_language')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(language.original, 'delete')}>
-                        {t('delete_language')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('language.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(language.original, 'edit')}>{t('edit_language')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('language.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(language.original, 'delete')}>
+                            {t('delete_language')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

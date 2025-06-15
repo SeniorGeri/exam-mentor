@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Modules\Operational\Controllers\ActiveCourseActionsController;
 use Modules\Operational\Controllers\ActiveCourseController;
 use Modules\Operational\Controllers\SchoolController;
 use Modules\Operational\Controllers\SubjectController;
@@ -53,11 +54,16 @@ Route::prefix('backoffice/')->group(function () {
 
 
     Route::prefix('active-course')->as('active-course.')->middleware(['web',  'auth:sanctum'])->group(function () {
+        
+        Route::get('/create', [ActiveCourseController::class, 'create'])->name('create')->permission('active-course.create');
+        Route::post('/create', [ActiveCourseController::class, 'store'])->name('store')->permission('active-course.create');
 
         Route::get('/list', [ActiveCourseController::class, 'index'])->name('list')->permission('active-course.read');
         Route::get('load', [ActiveCourseController::class, 'show'])->name('load')->permission('active-course.read');
         Route::put('/list/{activeCourse}', [ActiveCourseController::class, 'update'])->name('update')->permission('active-course.update');
         Route::delete('/list/{activeCourse}', [ActiveCourseController::class, 'destroy'])->name('destroy')->permission('active-course.delete');
+        
+        Route::get('lessons/{activeCourse}', [ActiveCourseActionsController::class, 'store'])->name('lessons')->permission('active-course.lessons');
     });
 
     Route::prefix('course-instructor')->as('course-instructor.')->middleware(['web',  'auth:sanctum'])->group(function () {

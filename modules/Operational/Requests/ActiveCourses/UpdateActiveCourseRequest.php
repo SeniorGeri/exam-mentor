@@ -18,6 +18,10 @@ final class UpdateActiveCourseRequest extends FormRequest
     {
         return [
             'status_id' => ['required', 'integer'],
+            'value' => ['nullable', 'integer'],
+            'left' => ['nullable', 'integer'],
+            'liquidation_percentage' => ['nullable', 'integer'],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

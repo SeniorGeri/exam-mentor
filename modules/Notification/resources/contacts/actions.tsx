@@ -10,6 +10,7 @@ import {DeleteContact} from "./delete.js";
 import {ViewContact} from "./view";
 import { useTranslation } from 'react-i18next';
 import { useForm } from '@inertiajs/react';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 
 export function ContactActions({contact}: ContactActionsProps) {
@@ -18,7 +19,7 @@ export function ContactActions({contact}: ContactActionsProps) {
         put(route('contact.update', id));
     };
     const { t } = useTranslation('Notification');
-
+    const { hasPermission, hasAnyPermission} = usePermissions();
     const [selectedContact, setSelectedContact] = useState<Contact| undefined>(undefined);
 
     const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | 'view' | null>(null);
@@ -30,6 +31,10 @@ export function ContactActions({contact}: ContactActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['contact.update', 'contact.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -40,14 +45,24 @@ export function ContactActions({contact}: ContactActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(contact.original, 'view')}>{t('view_content')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>    
-                    <DropdownMenuItem onClick={() => markAsRead(contact.original.id)}>{t('mark_read')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(contact.original, 'delete')}>
-                        {t('delete')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('contact.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(contact.original, 'view')}>{t('view_content')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>    
+                        </>
+                    )}
+                    {hasPermission('contact.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => markAsRead(contact.original.id)}>{t('mark_read')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('contact.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(contact.original, 'delete')}>
+                            {t('delete')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

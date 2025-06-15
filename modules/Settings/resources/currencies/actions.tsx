@@ -8,10 +8,13 @@ import {Currency, CurrencyActionsProps} from "./data.js";
 import {EditCurrency} from "./edit.js";
 import {DeleteCurrency} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function CurrencyActions({currency}: CurrencyActionsProps) {
 
     const { t } = useTranslation('Settings');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedCurrency, setSelectedCurrency] = useState<Currency| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function CurrencyActions({currency}: CurrencyActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['currency.update', 'currency.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function CurrencyActions({currency}: CurrencyActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(currency.original, 'edit')}>{t('edit_currency')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(currency.original, 'delete')}>
-                        {t('delete_currency')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('currency.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(currency.original, 'edit')}>{t('edit_currency')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('currency.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(currency.original, 'delete')}>
+                            {t('delete_currency')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

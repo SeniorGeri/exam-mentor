@@ -6,6 +6,7 @@ import {ActiveCourse, ActiveCourseStatus} from "./data";
 import { useTranslation } from 'react-i18next';
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar';
 import { CourseInstructor } from '../course-instructors/data';
+import { User } from '@/types';
 
 
 
@@ -64,6 +65,47 @@ export const ActiveCourseColumns = (currentLocale :string): ColumnDef<ActiveCour
                 return (
                     <div className="flex space-x-2">
                         <span className="max-w-[500px] truncate font-light">{course?.status[currentLocale] || t('not_translated')}</span>
+                    </div>
+                );
+            },
+            enableColumnFilter: true,
+            enableSorting: true,
+        },
+        {
+            accessorKey: 'instructor',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('instructor')}/>,
+            cell: ({row}) => {
+                const instructor : User = row.getValue('instructor')
+                return (
+                    <div className="flex space-x-2">
+                        <span className="max-w-[500px] truncate font-light">{instructor?.name }</span>
+                    </div>
+                );
+            },
+            enableColumnFilter: true,
+            enableSorting: true,
+        },
+        {
+            accessorKey: 'student',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('student')}/>,
+            cell: ({row}) => {
+                const student : User = row.getValue('student')
+                return (
+                    <div className="flex space-x-2">
+                        <span className="max-w-[500px] truncate font-light">{student?.name }</span>
+                    </div>
+                );
+            },
+            enableColumnFilter: true,
+            enableSorting: true,
+        },
+        {
+            accessorKey: 'left',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('lessons_left')}/>,
+            cell: ({row}) => {
+                return (
+                    <div className="flex space-x-2">
+                        <span className="max-w-[500px] truncate font-light">{row.getValue('left')}</span>
                     </div>
                 );
             },

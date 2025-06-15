@@ -8,11 +8,12 @@ import {Grade, GradeActionsProps} from "./data.js";
 import {EditGrade} from "./edit.js";
 import {DeleteGrade} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function GradeActions({grade}: GradeActionsProps) {
 
     const { t } = useTranslation('Operational');
-
+    const { hasPermission, hasAnyPermission} = usePermissions();
     const [selectedGrade, setSelectedGrade] = useState<Grade| undefined>(undefined);
 
     const [selectedAction, setSelectedAction] = useState<'edit' | 'delete' | null>(null);
@@ -24,6 +25,10 @@ export function GradeActions({grade}: GradeActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['grade.update', 'grade.delete'])) {
+        return null;
+    }
+    
     return (
         <>
             <DropdownMenu>
@@ -34,12 +39,18 @@ export function GradeActions({grade}: GradeActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(grade.original, 'edit')}>{t('edit_grade')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(grade.original, 'delete')}>
-                        {t('delete_grade')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('grade.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(grade.original, 'edit')}>{t('edit_grade')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('grade.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(grade.original, 'delete')}>
+                            {t('delete_grade')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

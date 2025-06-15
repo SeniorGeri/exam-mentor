@@ -8,10 +8,13 @@ import {Instructor, InstructorActionsProps} from "./data.js";
 import {EditInstructor} from "./edit.js";
 import {DeleteInstructor} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function InstructorActions({instructor}: InstructorActionsProps) {
 
     const { t } = useTranslation('Hrm');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedInstructor, setSelectedInstructor] = useState<Instructor| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function InstructorActions({instructor}: InstructorActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['instructor.update', 'instructor.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function InstructorActions({instructor}: InstructorActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(instructor.original, 'edit')}>{t('edit_instructor')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(instructor.original, 'delete')}>
-                        {t('delete_instructor')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('instructor.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(instructor.original, 'edit')}>{t('edit_instructor')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('instructor.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(instructor.original, 'delete')}>
+                            {t('delete_instructor')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

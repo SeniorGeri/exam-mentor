@@ -27,10 +27,10 @@ export default function CourseInstructorTable() {
         <DataTable urlPath={route('course-instructor.load')} columns={columns}>
             {hasPermission('course-instructor.create') && (
                  <a href={route('course-instructor.create')}>
-                 <Button variant="default" size="sm">
-                     {t('create_course_instructor')}
-                 </Button>
-             </a>
+                    <Button variant="default" size="sm">
+                        {t('create_course_instructor')}
+                    </Button>
+                </a>
             )}
 
         </DataTable>

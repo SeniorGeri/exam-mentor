@@ -8,10 +8,12 @@ import {CourseInstructor, CourseInstructorActionsProps} from "./data.js";
 import {DeleteCourseInstructor} from "./delete.js";
 import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function CourseInstructorActions({courseInstructor}: CourseInstructorActionsProps) {
 
     const { t } = useTranslation('Operational');
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedCourseInstructor, setSelectedCourseInstructor] = useState<CourseInstructor| undefined>(undefined);
 
@@ -24,6 +26,10 @@ export function CourseInstructorActions({courseInstructor}: CourseInstructorActi
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['course-instructor.update', 'course-instructor.delete'])) {
+        return null;
+    }
+    
     return (
         <>
             <DropdownMenu>
@@ -34,12 +40,16 @@ export function CourseInstructorActions({courseInstructor}: CourseInstructorActi
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() =>  router.visit(route('course-instructor.edit', courseInstructor.original.id))}>{t('edit_course')}</DropdownMenuItem>
+                    {hasPermission('course-instructor.update') && (
+                        <DropdownMenuItem onClick={() =>  router.visit(route('course-instructor.edit', courseInstructor.original.id))}>{t('edit_course')}</DropdownMenuItem>
+                    )}
                     <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(courseInstructor.original, 'delete')}>
-                        {t('delete_course')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('course-instructor.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(courseInstructor.original, 'delete')}>
+                            {t('delete_course')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

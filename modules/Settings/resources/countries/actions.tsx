@@ -8,10 +8,13 @@ import {Country, CountryActionsProps} from "./data.js";
 import {EditCountry} from "./edit.js";
 import {DeleteCountry} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function CountryActions({country}: CountryActionsProps) {
 
     const { t } = useTranslation('Settings');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedCountry, setSelectedCountry] = useState<Country| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function CountryActions({country}: CountryActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['country.update', 'country.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function CountryActions({country}: CountryActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(country.original, 'edit')}>{t('edit_country')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(country.original, 'delete')}>
-                        {t('delete_country')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('country.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(country.original, 'edit')}>{t('edit_country')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('country.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(country.original, 'delete')}>
+                            {t('delete_country')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

@@ -99,5 +99,15 @@
     "edit_active_course": "Edit active course",
     "edit_active_course_desc": "The form below allows you to update the selected active course",
     "active_course_edit_succ": "The active course has been updated succesfully",
-    "delete_active_course": "Delete active course"
+    "delete_active_course": "Delete active course",
+    "lessons_left": "Lessons left",
+    "student": "Student",
+    "update_status":"Update status",
+    "finish_lesson":"Finish lesson",
+    "liquidation_percentage":"Liquidation percentage",
+    "create_active_course":"Create active course",
+    "create_active_course_desc":"The form below allows you to create new active course",
+    "course_instructor": "Course instructor",
+    "value": "Course value",
+    "left": "Lessons left"
 }

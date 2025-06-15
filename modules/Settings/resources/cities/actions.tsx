@@ -8,10 +8,13 @@ import {City, CityActionsProps} from "./data.js";
 import {EditCity} from "./edit.js";
 import {DeleteCity} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions';
 
 export function CityActions({city}: CityActionsProps) {
 
     const { t } = useTranslation('Settings');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedCity, setSelectedCity] = useState<City| undefined>(undefined);
 
@@ -24,7 +27,11 @@ export function CityActions({city}: CityActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['city.update', 'city.delete'])) {
+        return null;
+    }
     return (
+        
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -34,12 +41,19 @@ export function CityActions({city}: CityActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(city.original, 'edit')}>{t('edit_city')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(city.original, 'delete')}>
-                        {t('delete_city')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('city.update') && (
+                        <>
+                        <DropdownMenuItem onClick={() => handleAction(city.original, 'edit')}>{t('edit_city')}</DropdownMenuItem>
+                        <DropdownMenuSeparator/>
+                        </>
+                    )}
+
+                    {hasPermission('city.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(city.original, 'delete')}>
+                            {t('delete_city')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

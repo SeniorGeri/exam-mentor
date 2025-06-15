@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Hrm\Controllers\Instructor;
+
+use Inertia\Inertia;
+use Inertia\Response;
+use Modules\Hrm\Models\Instructor;
+
+final class InstructorProfileController
+{
+
+    /**
+     * Return view to create instructors
+     *
+     * @return Response
+     */
+    public function index(Instructor $instructor): Response
+    {
+       
+        $instructor->load([
+            'country:id,country',
+            'city:id,city',
+            'gender:id,gender',
+            'transactions',
+            'courses',
+            'activeCourses',
+            'liquidations'
+        ]);
+        return Inertia::render('Hrm::instructors/profile/index',[
+            'instructor' => $instructor
+        ]);
+
+    }
+
+}

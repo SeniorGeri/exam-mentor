@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Operational\Models\ActiveCourse;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Hrm\Models\Student;
 use Modules\Operational\Models\ActiveCourseStatus;
+use Modules\Operational\Models\CourseInstructor;
+use Modules\Operational\Requests\ActiveCourses\StoreActiveCourseRequest;
 use Modules\Operational\Requests\ActiveCourses\UpdateActiveCourseRequest;
 
 final class ActiveCourseController
@@ -31,6 +34,37 @@ final class ActiveCourseController
             'activeCourseStatuses' => $activeCourseStatuses
         ]);
 
+    }
+
+    /**
+     * Return view to create active courses
+     *
+     * @return Response
+     */
+    public function create(): Response
+    {
+        $activeCourseStatuses = ActiveCourseStatus::all();
+        $courseInstructors = CourseInstructor::with(['course', 'instructor'])->get();
+        $students = Student::all();
+
+        return Inertia::render('Operational::active-courses/create/index', [
+            'statuses' => $activeCourseStatuses,
+            'courseInstructors' => $courseInstructors,
+            'students' => $students
+        ]);
+    }
+
+    /**
+     * Store new active course
+     *
+     * @param  StoreActiveCourseRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StoreActiveCourseRequest $request): RedirectResponse
+    {
+        ActiveCourse::create($request->validated());
+
+        return to_route('active-course.list');
     }
 
     /**
@@ -63,8 +97,12 @@ final class ActiveCourseController
      * @return RedirectResponse
      */
     public function update(UpdateActiveCourseRequest $request, ActiveCourse $activeCourse): RedirectResponse
-    {
-        $activeCourse->fill($request->validated())->save();
+    {   
+        $user = Auth::user();
+
+        if($user->hasRole(RolesEnum::ADMIN->value)) {
+            $activeCourse->fill($request->validated())->save();
+        }
 
         return to_route('active-course.list');
     }

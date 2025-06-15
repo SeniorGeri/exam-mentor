@@ -8,10 +8,13 @@ import {Subject, SubjectActionsProps} from "./data.js";
 import {EditSubject} from "./edit.js";
 import {DeleteSubject} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function SubjectActions({subject}: SubjectActionsProps) {
 
     const { t } = useTranslation('Operational');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedSubject, setSelectedSubject] = useState<Subject| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function SubjectActions({subject}: SubjectActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['subject.update', 'subject.delete'])) {
+        return null;
+    }
+    
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function SubjectActions({subject}: SubjectActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(subject.original, 'edit')}>{t('edit_subject')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(subject.original, 'delete')}>
-                        {t('delete_subject')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('subject.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(subject.original, 'edit')}>{t('edit_subject')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('subject.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(subject.original, 'delete')}>
+                            {t('delete_subject')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">

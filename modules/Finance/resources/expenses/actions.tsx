@@ -8,10 +8,13 @@ import {Expense, ExpenseActionsProps} from "./data.js";
 import {EditExpense} from "./edit.js";
 import {DeleteExpense} from "./delete.js";
 import { useTranslation } from 'react-i18next';
+import { usePermissions } from '@/hooks/use-permissions.js';
 
 export function ExpenseActions({expense}: ExpenseActionsProps) {
 
     const { t } = useTranslation('Finance');
+
+    const { hasPermission, hasAnyPermission} = usePermissions();
 
     const [selectedExpense, setSelectedExpense] = useState<Expense| undefined>(undefined);
 
@@ -24,6 +27,10 @@ export function ExpenseActions({expense}: ExpenseActionsProps) {
         }, 10)
     }, []);
 
+    if (!hasAnyPermission(['expense.update', 'expense.delete'])) {
+        return null;
+    }
+
     return (
         <>
             <DropdownMenu>
@@ -34,12 +41,18 @@ export function ExpenseActions({expense}: ExpenseActionsProps) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[160px]">
-                    <DropdownMenuItem onClick={() => handleAction(expense.original, 'edit')}>{t('edit_expense')}</DropdownMenuItem>
-                    <DropdownMenuSeparator/>
-                    <DropdownMenuItem className="text-red-500" onClick={() => handleAction(expense.original, 'delete')}>
-                        {t('delete_expense')}
-                        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-                    </DropdownMenuItem>
+                    {hasPermission('expense.update') && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(expense.original, 'edit')}>{t('edit_expense')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                    )}
+                    {hasPermission('expense.delete') && (
+                        <DropdownMenuItem className="text-red-500" onClick={() => handleAction(expense.original, 'delete')}>
+                            {t('delete_expense')}
+                            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
             <div className="flex items-center justify-end">
