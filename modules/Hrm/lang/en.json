@@ -40,7 +40,24 @@
     "instructor_edit_succ": "The instructor has been updated succesfully",
     "edit_instructor_desc": "The form  below allows you to update the selected instructor",
     "instructor_delete_succ": "The instructor has been deleted succesfully",
-    "delete_instructor_desc": "By proceeding  the instructor will be deleted."
+    "delete_instructor_desc": "By proceeding  the instructor will be deleted.",
    
+
+    "mainData": "Main Data",
+    "transactions": "Transactions",
+    "courses": "Courses",
+    "ongoing": "Ongoing",
+    "progress": "Progress",
+    "nextLesson": "Next Lesson",
+    "continue": "Continue",
+    "certificate": "Certificate",
+    "by": "By",
+    "joined": "Joined",
+    "editProfile": "Edit Profile",
+    "totalCourses": "Total Courses",
+    "completedCourses": "Completed Courses",
+    "inProgress": "In Progress",
+    "totalSpent": "Total Spent",
+    "certified": "Certified"
 
 }

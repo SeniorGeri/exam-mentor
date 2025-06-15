@@ -18,7 +18,6 @@ final class InstructorProfileController
      */
     public function index(Instructor $instructor): Response
     {
-       
         $instructor->load([
             'country:id,country',
             'city:id,city',
