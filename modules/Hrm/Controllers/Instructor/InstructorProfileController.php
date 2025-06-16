@@ -23,10 +23,13 @@ final class InstructorProfileController
             'city:id,city',
             'gender:id,gender',
             'transactions',
-            'courses',
-            'activeCourses',
+            'courses.course',
+            'activeCourses.courseInstructor',
+            'activeCourses.student',
+            'activeCourses.status',
             'liquidations'
         ]);
+        // ->loadSum('transactions','amount');
         return Inertia::render('Hrm::instructors/profile/index',[
             'instructor' => $instructor
         ]);

@@ -2,6 +2,8 @@ import type { BreadcrumbItem } from '@/types';
 import { Row } from '@tanstack/react-table';
 import { route } from "ziggy-js";
 import { TranslatableField } from '@/types/helpers';
+import { CourseInstructor } from '../course-instructors/data';
+import { Student } from '@/modules/Hrm/resources/students/data';
 
 export const activeCourseBreadcrumbs: BreadcrumbItem[] = [
     {
@@ -22,10 +24,9 @@ export type ActiveCourse = {
     liquidation_percentage: number;
     description: string;
     title: TranslatableField;
-    course_instructor: {
-        title: TranslatableField;
-        image: string;
-    };
+    course_instructor: CourseInstructor;
+    student: Student;
+    status: ActiveCourseStatus;
 };
 
 export type ActiveCourseStatus = {

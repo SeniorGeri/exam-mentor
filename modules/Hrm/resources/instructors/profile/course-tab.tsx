@@ -3,17 +3,16 @@
 import { TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Star, Award } from "lucide-react";
+import {  Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { CourseInstructor } from "@/modules/Frontend/resources/data";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Link } from "@inertiajs/react";
 
-interface CourseData {
-    completedCourses: any[];
-}
+export default function CourseTab({ completedCourses }: {completedCourses: CourseInstructor[]}) {
 
-export default function CourseTab({ completedCourses }: CourseData) {
-
-    const {t} = useTranslation();
+    const {t} = useTranslation('Hrm');
 
     return (
         <TabsContent value="courses" className="space-y-4">
@@ -25,25 +24,39 @@ export default function CourseTab({ completedCourses }: CourseData) {
                 {completedCourses.map((course) => (
                     <Card key={course.id} className="border shadow-sm dark:bg-stone-950 dark:border-green-900">
                         <CardContent className="p-4">
-                            <div className="space-y-3">
-                                <div>
-                                    <h4 className="font-medium dark:text-white">{course.title}</h4>
-                                    <p className="text-sm text-gray-600 dark:text-gray-300">{t('by')} {course.instructor}</p>
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-1">
-                                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                                        <span className="text-sm font-medium dark:text-white">{course.rating}</span>
-                                    </div>
-                                    {course.certificate && (
-                                        <Badge variant="outline" className="text-green-900 border-gray-300">
+                            <div className="space-y-2 flex items-center justify-start gap-4">
+                                <Avatar className="h-28 w-28 border-4 border-white shadow-lg">
+                                    <AvatarImage src={course.course.image || "/placeholder.svg"} alt={course.course.title["en"]} />
+                                    <AvatarFallback className="text-xl font-semibold bg-gray-600 dark:bg-gray-500 text-white">
+                                        {course.course.title["en"]
+                                            .split(" ")
+                                            .map((n) => n[0])
+                                            .join("")}
+                                    </AvatarFallback>
+                                </Avatar>
+                                <div className="space-y-2">
+                                    <h4 className="font-medium dark:text-white">{course.course.title["en"]}</h4>
+                                    <Badge variant="outline" className="text-green-600 border-gray-300 mx-2">
                                             <Award className="h-3 w-3 mr-1" />
-                                            {t('certified')}
-                                        </Badge>
-                                    )}
+                                            {t('lessons')}: {course.lessons}
+                                    </Badge>
+                                    <Badge variant="outline" className="text-green-600 border-gray-300 mx-2">
+                                            <Award className="h-3 w-3 mr-1" />
+                                            {t('time')}: {course.longevity}
+                                    </Badge>
+                                    <Badge variant="outline" className="text-green-600 border-gray-300 mx-2">
+                                            <Award className="h-3 w-3 mr-1" />
+                                            {t('price')}: {course.price}
+                                    </Badge>
+                                 
                                 </div>
-                                <Progress value={course.completion} className="h-2" />
+                             
                             </div>
+                            <Button size="sm" className="mt-2 float-right" variant="outline">
+                                <Link href={route('frontend.course', course.id)} target="_blank">
+                                    {t('viewCourse')}
+                                </Link>
+                            </Button>
                         </CardContent>
                     </Card>
                 ))}
