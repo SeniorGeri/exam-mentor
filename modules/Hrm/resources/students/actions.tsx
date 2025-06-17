@@ -9,6 +9,7 @@ import {EditStudent} from "./edit.js";
 import {DeleteStudent} from "./delete.js";
 import { useTranslation } from 'react-i18next';
 import { usePermissions } from '@/hooks/use-permissions.js';
+import { router } from '@inertiajs/react';
 
 export function StudentActions({student}: StudentActionsProps) {
 
@@ -47,6 +48,8 @@ export function StudentActions({student}: StudentActionsProps) {
                             <DropdownMenuSeparator/>
                         </>
                     )}
+                    <DropdownMenuItem onClick={() =>  router.visit(route('student.profile', student.original.id))}>{t('profile_student')}</DropdownMenuItem>
+                    <DropdownMenuSeparator/>
                     {hasPermission('student.delete') && (
                         <DropdownMenuItem className="text-red-500" onClick={() => handleAction(student.original, 'delete')}>
                             {t('delete_student')}

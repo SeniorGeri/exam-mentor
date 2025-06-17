@@ -3,15 +3,12 @@
 import { Card } from "@/components/ui/card";
 import { CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Mail, MapPin, Calendar, Edit3 } from "lucide-react"
+import { Mail, MapPin, Calendar } from "lucide-react"
 import { useTranslation } from "react-i18next";
 import { Student } from "./data";
-import { useLocale } from "@/contexts/locale";
 
 export default function Header({ student }: { student: Student }) {
     const {t} = useTranslation('Hrm');
-    const { currentLocale } = useLocale();
 
     return (
         <Card className="mb-8 overflow-hidden border shadow-sm dark:bg-stone-950 dark:border-green-900">
@@ -29,7 +26,6 @@ export default function Header({ student }: { student: Student }) {
                     </Avatar>
                     <div className="flex-1 text-center sm:text-left mt-4 sm:mt-0">
                         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{student.name}</h1>
-                        <p className="text-gray-600 dark:text-gray-300 mt-1">{student.bio[currentLocale]}</p>
                         <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-4 text-sm text-gray-500 dark:text-gray-400">
                             <div className="flex items-center gap-1">
                                 <Mail className="h-4 w-4" />
@@ -44,12 +40,6 @@ export default function Header({ student }: { student: Student }) {
                                 {t('joined')} {Date.parse(student.created_at)}
                             </div>
                         </div>
-                    </div>
-                    <div className="flex gap-2 mt-4 sm:mt-0">
-                        <Button variant="outline" size="sm">
-                            <Edit3 className="h-4 w-4 mr-2" />
-                            {t('editProfile')}
-                        </Button>
                     </div>
                 </div>
             </CardContent>

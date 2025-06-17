@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Bell, BellRing, Book, BookOpen, CalendarArrowUp, CircleGauge, Cog, Coins, Euro, Folder, GraduationCap, HandCoins, Handshake, Landmark, Languages, Map, Megaphone, PiggyBank, ReceiptEuro, School, ShieldCheck, User, UserCheck, UsersRound, } from 'lucide-react';
+import { Bell, BellRing, Book, BookOpen, CalendarArrowUp, CircleGauge, Cog, Coins, Euro, Folder, GraduationCap, HandCoins, Handshake, Landmark, Languages, LogOut, Map, Megaphone, PiggyBank, ReceiptEuro, School, ShieldCheck, User, UserCheck, UsersRound, } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -190,7 +190,12 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems: NavItem[] = [
-
+    {
+        title: 'Main page',
+        href: route('frontend.index'),
+        icon: LogOut,
+        type: 'standalone',
+    }
 ];
 
 export function AppSidebar() {

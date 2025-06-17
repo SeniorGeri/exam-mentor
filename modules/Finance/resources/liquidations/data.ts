@@ -40,3 +40,7 @@ export type EditLiquidationProps = {
     isOpen: boolean;
     closeModal: () => void;
 };
+export type CreateLiquidationProps = {
+    isOpen: boolean;
+    closeModal: () => void;
+};

@@ -18,17 +18,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('test' , function () {
         
-        Permission::create(["name" => "active-course.lessons"]);
+        // Permission::create(["name" => "active-course.lessons"]);
 
         $role = Role::findByName(RolesEnum::INSTRUCTOR->value);
-        $role->givePermissionTo("active-course.lessons");
+        // $role->givePermissionTo("liquidation.create");
 
-        $role = Role::findByName(RolesEnum::STUDENT->value);
-        $role->givePermissionTo("active-course.read");
+        // $role = Role::findByName(RolesEnum::STUDENT->value);
+        // $role->givePermissionTo("active-course.read");
     
 
-        $role = Role::findByName(RolesEnum::ADMIN->value);
-        $role->givePermissionTo("active-course.lessons");
+        // $role = Role::findByName(RolesEnum::ADMIN->value);
+        // $role->givePermissionTo("active-course.lessons");
         
     return 'SUKSES FRATE';
      

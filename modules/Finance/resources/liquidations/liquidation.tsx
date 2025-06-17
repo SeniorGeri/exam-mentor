@@ -7,10 +7,18 @@ import { route } from 'ziggy-js';
 import { LiquidationColumns } from './columns';
 import { Liquidation } from './data';
 import { LiquidationActions } from './actions';
+import { CreateLiquidation } from './create';
+import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
-export default function LiquidationTable() {
+export default function LiquidationTable({canRequest}: {canRequest: boolean}) {
 
     const { hasPermission } = usePermissions();
+
+    const { t } = useTranslation('Finance');
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const columns: ColumnDef<Liquidation>[] = [
         ...LiquidationColumns(),
@@ -22,8 +30,11 @@ export default function LiquidationTable() {
     return (
 
         <DataTable urlPath={route('liquidation.load')} columns={columns}>
-            {hasPermission('liquidation.create') && (
-                <></>
+            {hasPermission('liquidation.create') && canRequest && (
+                <>
+                    <Button onClick={() => {setIsOpen(true)}}>{t('create_liquidation')}</Button>
+                    <CreateLiquidation isOpen={isOpen} closeModal={() => {setIsOpen(false)}} />
+                </>
             )}
 
         </DataTable>

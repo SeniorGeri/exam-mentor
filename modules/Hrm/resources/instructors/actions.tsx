@@ -9,6 +9,7 @@ import {EditInstructor} from "./edit.js";
 import {DeleteInstructor} from "./delete.js";
 import { useTranslation } from 'react-i18next';
 import { usePermissions } from '@/hooks/use-permissions.js';
+import { router } from '@inertiajs/react';
 
 export function InstructorActions({instructor}: InstructorActionsProps) {
 
@@ -47,6 +48,9 @@ export function InstructorActions({instructor}: InstructorActionsProps) {
                             <DropdownMenuSeparator/>
                         </>
                     )}
+                    <DropdownMenuItem onClick={() =>  router.visit(route('instructor.profile', instructor.original.id))}>{t('profile_instructor')}</DropdownMenuItem>
+                    <DropdownMenuSeparator/>
+                    
                     {hasPermission('instructor.delete') && (
                         <DropdownMenuItem className="text-red-500" onClick={() => handleAction(instructor.original, 'delete')}>
                             {t('delete_instructor')}

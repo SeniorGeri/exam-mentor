@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/react';
 import { liquidationBreadcrumbs } from './data';
 import LiquidationTable from './liquidation';
 
-export default function LiquidationIndex() {
+export default function LiquidationIndex({canRequest}: {canRequest: boolean}) {
 
 
 
@@ -13,7 +13,7 @@ export default function LiquidationIndex() {
         <AppLayout breadcrumbs={liquidationBreadcrumbs}>
             <Head title="Liquidations" />
                 <div className="flex flex-col gap-2 p-4 ">
-                    <LiquidationTable/>
+                    <LiquidationTable canRequest={canRequest}/>
                 </div>
         </AppLayout>
     );

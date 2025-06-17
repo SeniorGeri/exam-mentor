@@ -8,8 +8,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   User,
-  // CreditCard,
-  BookOpen,
   Clock,
 } from "lucide-react"
 import Header from './header';
@@ -34,7 +32,7 @@ export default function StudentProfile({ student }:   { student: Student }) {
             <Card className="border shadow-sm dark:bg-stone-950 dark:border-green-900">
               <Tabs defaultValue="main" className="w-full">
                 <CardHeader className="pb-4">
-                  <TabsList className="grid w-full grid-cols-2 bg-gray-50 dark:bg-green-900">
+                  <TabsList className="grid w-full grid-cols-2   bg-gray-50 dark:bg-green-900">
                     <TabsTrigger value="main" className="flex items-center gap-2">
                       <User className="h-4 w-4" />
                       {t('mainData')}

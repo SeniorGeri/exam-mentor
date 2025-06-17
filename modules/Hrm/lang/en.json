@@ -84,5 +84,7 @@
     "image": "Image",
     "title": "Title",
     "lessonsLeft": "Lessons Left",
-    "ongoingCourses": "Ongoing Courses"
+    "ongoingCourses": "Ongoing Courses",
+    "profile_instructor": "Instructor Profile",
+    "profile_student": "Student Profile"
 }

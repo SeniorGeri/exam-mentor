@@ -24,9 +24,10 @@ final class StudentProfileController
             'city:id,city',
             'gender:id,gender',
             'transactions',
-            'courses',
             'activeCourses',
-            'liquidations'
+            'activeCourses.courseInstructor',
+            'activeCourses.instructor',
+            'activeCourses.status',
         ]);
         return Inertia::render('Hrm::students/profile/index',[
             'student' => $student

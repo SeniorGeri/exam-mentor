@@ -32,8 +32,8 @@ export default function OngoingTab({ ongoingCourses }: {ongoingCourses: ActiveCo
                         <TableHead key={'status'}>
                            {t('status')}
                         </TableHead>
-                        <TableHead key={'student'}>
-                           {t('student')}
+                        <TableHead key={'instructor'}>
+                           {t('instructor')}
                         </TableHead>
                         <TableHead key={'lessons_left'}>
                            {t('lessonsLeft')}
@@ -59,8 +59,8 @@ export default function OngoingTab({ ongoingCourses }: {ongoingCourses: ActiveCo
                         <TableCell key={cell.status.status[currentLocale]}>
                             <Badge variant="secondary">{cell.status.status[currentLocale]}</Badge>
                         </TableCell>
-                        <TableCell key={cell.student.name}>
-                            {cell.student.name}
+                        <TableCell key={cell.instructor.name}>
+                            {cell.instructor.name}
                         </TableCell>
                         <TableCell key={cell.left}>
                             {cell.left}

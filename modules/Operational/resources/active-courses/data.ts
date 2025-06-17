@@ -4,6 +4,7 @@ import { route } from "ziggy-js";
 import { TranslatableField } from '@/types/helpers';
 import { CourseInstructor } from '../course-instructors/data';
 import { Student } from '@/modules/Hrm/resources/students/data';
+import { Instructor } from '@/modules/Frontend/resources/data';
 
 export const activeCourseBreadcrumbs: BreadcrumbItem[] = [
     {
@@ -26,6 +27,7 @@ export type ActiveCourse = {
     title: TranslatableField;
     course_instructor: CourseInstructor;
     student: Student;
+    instructor: Instructor;
     status: ActiveCourseStatus;
 };
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Hrm\Controllers\Instructor\InstructorController;
 use Modules\Hrm\Controllers\Instructor\InstructorProfileController;
 use Modules\Hrm\Controllers\Student\StudentController;
+use Modules\Hrm\Controllers\Student\StudentProfileController;
 
 Route::prefix('backoffice/')->group(function () {
 

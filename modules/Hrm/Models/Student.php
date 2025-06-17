@@ -8,7 +8,9 @@ use App\Enums\RolesEnum;
 use App\Models\User;
 use App\Traits\HasRoleBehaviorTrait;
 use App\Traits\HasTableFilterTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Operational\Models\ActiveCourse;
 
 final class Student extends User
 {
@@ -32,4 +34,9 @@ final class Student extends User
         "phone",
         "country_id"
     ];
+
+    public function activeCourses(): HasMany
+    {
+        return $this->hasMany(ActiveCourse::class, 'student_id');
+    }
 }

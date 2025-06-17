@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Operational\Models\CourseInstructor;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Operational\Models\ActiveCourseStatus;
+use Modules\Finance\Models\Liquidation;
 
 final class ActiveCourse extends Model
 {
@@ -46,5 +47,10 @@ final class ActiveCourse extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(ActiveCourseStatus::class);
+    }
+
+    public function liquidation(): BelongsTo
+    {
+        return $this->belongsTo(Liquidation::class);
     }
 }
