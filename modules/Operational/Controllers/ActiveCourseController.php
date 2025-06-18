@@ -77,11 +77,11 @@ final class ActiveCourseController
     {
         $user = Auth::user();
         $activeCourses = ActiveCourse::filter($request)
-        ->with(['courseInstructor', 'instructor', 'student', 'status'])
-        ->when($user->hasRole(RolesEnum::INSTRUCTOR->value), function ($query) {
+        ->with(['courseInstructor', 'instructor', 'student', 'status', 'liquidation'])
+        ->when($user->hasRole(RolesEnum::INSTRUCTOR->value), function ($query) use ($user) {
             $query->where('instructor_id', $user->id);
         })
-        ->when($user->hasRole(RolesEnum::STUDENT->value), function ($query) {
+        ->when($user->hasRole(RolesEnum::STUDENT->value), function ($query) use ($user) {
             $query->where('student_id', $user->id);
         })
         ->paginate($request->limit);

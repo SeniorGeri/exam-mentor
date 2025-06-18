@@ -13,7 +13,7 @@ Route::prefix('backoffice/')->group(function () {
 
         Route::get('/list', [LiquidationController::class, 'index'])->name('list')->permission('liquidation.read');
         Route::get('load', [LiquidationController::class, 'show'])->name('load')->permission('liquidation.read');
-        Route::post('list', [LiquidationController::class, 'store'])->name('store')->permission('liquidation.create');
+        Route::post('list/{liquidation}', [LiquidationController::class, 'store'])->name('store')->permission('liquidation.create');
         Route::put('/list/{liquidation}', [LiquidationController::class, 'update'])->name('update')->permission('liquidation.update');
         Route::delete('/list/{liquidation}', [LiquidationController::class, 'destroy'])->name('destroy')->permission('liquidation.delete');
     });

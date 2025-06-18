@@ -24,9 +24,8 @@ class InstructorPermissionsSeeder extends Seeder
 
 
         $role->givePermissionTo("course-instructor.create");
-        $role->givePermissionTo("course-instructor.read");
+        $role->givePermissionTo("course-instructor.read"); 
         $role->givePermissionTo("course-instructor.update");
-        $role->givePermissionTo("course-instructor.delete");
 
         $role->givePermissionTo("active-course.lessons");
         $role->givePermissionTo("active-course.read");

@@ -10,6 +10,7 @@ import { ActiveCourse } from './data';
 import { EditActiveCourse } from './edit';
 import { DeleteActiveCourse } from './delete';
 import { EditActiveCourseStatus } from './edit-status';
+import { CreateLiquidation } from './liquidation';
 import { router } from '@inertiajs/react';
 import { usePermissions } from '@/hooks/use-permissions.js';
 
@@ -20,9 +21,9 @@ export function ActiveCourseActions({activeCourse}: ActiveCourseActionsProps) {
 
     const [selectedCourse, setSelectedCourse] = useState<ActiveCourse| undefined>(undefined);
 
-    const [selectedAction, setSelectedAction] = useState<'edit-status' | 'edit' | 'finish_lesson' | 'delete' | null>(null);
+    const [selectedAction, setSelectedAction] = useState<'edit-status' | 'edit' | 'finish_lesson' | 'liquidation' | 'delete' | null>(null);
 
-    const handleAction = useCallback((course: ActiveCourse, action: 'edit-status' | 'edit' | 'finish_lesson' | 'delete') => {
+    const handleAction = useCallback((course: ActiveCourse, action: 'edit-status' | 'edit' | 'finish_lesson' | 'liquidation' | 'delete') => {
         setTimeout(() => {
             setSelectedCourse(course);
             setSelectedAction(action);
@@ -32,7 +33,7 @@ export function ActiveCourseActions({activeCourse}: ActiveCourseActionsProps) {
     if (!hasAnyPermission(['active-course.update', 'active-course.delete', 'active-course.lessons'])) {
         return null;
     }
-    
+    console.log(activeCourse.original);
     return (
         <>
             <DropdownMenu>
@@ -61,6 +62,13 @@ export function ActiveCourseActions({activeCourse}: ActiveCourseActionsProps) {
                             <DropdownMenuSeparator/>
                         </>
                     )}
+                    {hasPermission('liquidation.create') && activeCourse.original.status_id === 4 
+                    && activeCourse.original.liquidation === null && (
+                        <>
+                            <DropdownMenuItem onClick={() => handleAction(activeCourse.original, 'liquidation')}>{t('liquidation')}</DropdownMenuItem>
+                            <DropdownMenuSeparator/>
+                        </>
+                   )}
                     <DropdownMenuItem className="text-red-500" onClick={() => handleAction(activeCourse.original, 'delete')}>
                         {t('delete_course')}
                         <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
@@ -76,6 +84,9 @@ export function ActiveCourseActions({activeCourse}: ActiveCourseActionsProps) {
                 )}
                 {selectedCourse && selectedAction === 'edit' && (
                     <EditActiveCourse activeCourse={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
+                )}
+                {selectedCourse && selectedAction === 'liquidation' && (
+                    <CreateLiquidation activeCourse={selectedCourse} isOpen={true} closeModal={() => setSelectedCourse(undefined)}/>
                 )}
             </div>
         </>

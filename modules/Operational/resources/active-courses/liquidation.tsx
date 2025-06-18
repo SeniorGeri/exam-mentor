@@ -4,14 +4,14 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { useForm } from '@inertiajs/react';
 import { toast } from 'sonner';
 import { route } from "ziggy-js";
-import { CreateLiquidationProps } from "./data";
 import { useTranslation } from 'react-i18next';
 import CustomTextArea from '@/components/input/custom-textarea';
 import { FormEventHandler } from 'react';
+import { CreateLiquidationProps } from './data';
 
-export function CreateLiquidation({ isOpen, closeModal }: CreateLiquidationProps) {
+export function CreateLiquidation({ activeCourse, isOpen, closeModal }: CreateLiquidationProps) {
 
-    const { t } = useTranslation('Finance');
+    const { t } = useTranslation('Operational');
 
 
     const { data, setData, post, processing, reset, errors, clearErrors } = useForm({
@@ -20,7 +20,7 @@ export function CreateLiquidation({ isOpen, closeModal }: CreateLiquidationProps
 
     const createLiquidation: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('liquidation.store'), {
+        post(route('liquidation.store', activeCourse.id), {
             preserveScroll: true,
             onSuccess: () => liquidationCreated(),
             onFinish: () => closeModal(),

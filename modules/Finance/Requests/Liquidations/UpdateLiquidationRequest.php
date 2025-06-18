@@ -18,6 +18,8 @@ final class UpdateLiquidationRequest extends FormRequest
     {
         return [
             'approved' => ['required', 'boolean'],
+            'description' => ['required', 'string'],
+            'value' => ['required', 'numeric'],
         ];
     }
 }

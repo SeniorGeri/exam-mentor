@@ -5,6 +5,7 @@ import { TranslatableField } from '@/types/helpers';
 import { CourseInstructor } from '../course-instructors/data';
 import { Student } from '@/modules/Hrm/resources/students/data';
 import { Instructor } from '@/modules/Frontend/resources/data';
+import { Liquidation } from '@/modules/Finance/resources/liquidations/data';
 
 export const activeCourseBreadcrumbs: BreadcrumbItem[] = [
     {
@@ -29,6 +30,7 @@ export type ActiveCourse = {
     student: Student;
     instructor: Instructor;
     status: ActiveCourseStatus;
+    liquidation: Liquidation;
 };
 
 export type ActiveCourseStatus = {
@@ -58,4 +60,10 @@ export type Classification = {
     id: number;
     title: TranslatableField;
     className: string;
+};
+
+export type CreateLiquidationProps = {
+    activeCourse: ActiveCourse;
+    isOpen: boolean;
+    closeModal: () => void;
 };

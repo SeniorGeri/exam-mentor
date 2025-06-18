@@ -18,7 +18,6 @@ final class StoreLiquidationRequest extends FormRequest
     {
         return [
             'description' => ['required', 'string'],
-            'value' => ['required', 'integer'],
         ];
     }
 }

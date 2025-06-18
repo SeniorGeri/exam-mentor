@@ -38,5 +38,7 @@
     
     "course": "Course",
     "create_liquidation":"Create new liquidation request",
-    "create_liquidation_desc":"The form below allows you to create new liquidation requests"
+    "create_liquidation_desc":"The form below allows you to create new liquidation requests",
+    "approved": "Approved",
+    "update_liquidation":"Update liquidation"
 }

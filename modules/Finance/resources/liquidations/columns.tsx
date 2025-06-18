@@ -55,6 +55,20 @@ export const LiquidationColumns = (): ColumnDef<Liquidation>[] => {
             enableSorting: true,
         },
         {
+            accessorKey: 'approved',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('approved')}/>,
+            cell: ({row}) => {
+                const approved : boolean = row.getValue('approved')
+                return (
+                    <div className="flex space-x-2">
+                        <span className="max-w-[500px] truncate font-light">{approved ? t('yes') : t('no')}</span>
+                    </div>
+                );
+            },
+            enableColumnFilter: true,
+            enableSorting: true,
+        },
+        {
             accessorKey: 'description',
             header: ({column}) => <DataTableColumnHeader column={column} title={t('description')}/>,
             cell: ({row}) => {

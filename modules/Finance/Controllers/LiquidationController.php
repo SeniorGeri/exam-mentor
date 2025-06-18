@@ -14,6 +14,7 @@ use Modules\Finance\Requests\Liquidations\UpdateLiquidationRequest;
 use Modules\Operational\Models\ActiveCourse;
 use Inertia\Inertia;
 use Inertia\Response;
+use Modules\Finance\Requests\Liquidations\StoreLiquidationRequest;
 use Modules\Operational\Enums\CourseStatusEnum;
 use Modules\Operational\Models\ActiveCourseStatus;
 
@@ -27,24 +28,25 @@ final class LiquidationController
      */
     public function index(): Response
     {
-        $canRequest = false;
-        if(Auth::user()->hasRole(RolesEnum::INSTRUCTOR->value) && 
-            ActiveCourse::whereInstructorId(Auth::user()->id)
-            ->whereStatusId(CourseStatusEnum::FINISHED->value)
-            ->whereLiquidationId(null)
-            ->exists()
-        ) {
-            $canRequest = true;
-        }
-        return Inertia::render('Finance::liquidations/index', [
-            'canRequest' => $canRequest
-        ]);
+
+        return Inertia::render('Finance::liquidations/index');
     }
 
-    // public function store(LiquidationRequest $request): RedirectResponse
-    // {
-        
-    // }
+    public function store(StoreLiquidationRequest $request, int $activeCourse): RedirectResponse
+    {
+        $activeCourse = ActiveCourse::findOrFail($activeCourse);
+       Liquidation::create([
+           'description' => $request->description,
+           'active_course_id' => $activeCourse->id,
+           'created_by' => Auth::user()->id,
+           'winner_id' => $activeCourse->instructor_id,
+           'value' => $activeCourse->liquidation_percentage,
+       ]);
+
+        return to_route('liquidation.list');
+    }
+
+    
     /**
      * Load liquidations
      *

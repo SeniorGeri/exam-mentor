@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Operational\Models\CourseInstructor;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Operational\Models\ActiveCourseStatus;
 use Modules\Finance\Models\Liquidation;
 
@@ -49,8 +50,8 @@ final class ActiveCourse extends Model
         return $this->belongsTo(ActiveCourseStatus::class);
     }
 
-    public function liquidation(): BelongsTo
+    public function liquidation(): HasOne
     {
-        return $this->belongsTo(Liquidation::class);
+        return $this->hasOne(Liquidation::class, 'active_course_id', 'id');
     }
 }

@@ -43,7 +43,7 @@ export function LiquidationActions({liquidation}: LiquidationActionsProps) {
                 <DropdownMenuContent align="end" className="w-[160px]">
                     {hasPermission('liquidation.update') && (
                         <>
-                            <DropdownMenuItem onClick={() => handleAction(liquidation.original, 'edit')}>{t('edit_expense')}</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleAction(liquidation.original, 'edit')}>{t('update_liquidation')}</DropdownMenuItem>
                             <DropdownMenuSeparator/>
                         </>
                     )}
