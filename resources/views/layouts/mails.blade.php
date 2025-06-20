@@ -13,40 +13,38 @@
         }
     }
 </style>
-<table style="min-width: 100%;width: 100%; background: #ffffff;">
+<table style="max-width: 600px; width: 100%; margin:0 auto; background: #ffffff;">
+
     <tr>
-        <td>
-            <table style="min-width: 600px; width: 600px; max-width: 600px; margin:0 auto;">
-                <tr>
-                    <td dir=ltr style="border-bottom: 3px solid #19b1d3;">
-                        <img src="#" width="220"
-                             alt="Commerce">
-                    </td>
-                </tr>
-            </table>
+        <td dir=ltr style="border-bottom: 3px solid #68c198; display: flex; justify-content: center;">
+            <img src="{{ asset('images/favicon-no-bg.png') }}" width="220"
+                    alt="Commerce">
         </td>
     </tr>
+
 </table>
 
-{{ $slot }}
+<div style="text-align: center; color: #68c198;  max-width: 600px; width: 100%; margin:0 auto;">
+    {{ $slot }}
+</div>
 
-<table style="min-width: 600px; width: 600px; max-width: 600px; margin:0 auto;">
+<table style="max-width: 600px; width: 100%; margin:0 auto;">
     <tr>
         <td>
             <div
                 style="font-family: Roboto, Segoe UI, Helvetica Neue, Frutiger, Frutiger Linotype, Dejavu Sans, Trebuchet MS, Verdana, Arial, sans-serif;
-                color: #444444; font-size: 14px; font-weight: normal; line-height: 24px; margin: 0 auto; padding: 0; max-width: 600px;">
+                color: #68c198; font-size: 14px; font-weight: normal; line-height: 24px; margin: 0 auto; padding: 0; max-width: 600px;">
 
                 <div
-                    style="border-top: 3px solid #19b1d3; background-color: #f2f4f7; padding-top: 10px; padding-bottom: 10px; text-align:center; line-height: 21px; border-radius: 5px;">
+                    style="border-top: 3px solid #68c198; background-color: #abe6bf; padding-top: 10px; padding-bottom: 10px; text-align:center; line-height: 21px; border-radius: 5px;">
                     <div>
 
                         <div style="font-size: 12px; line-height: 18px; font-weight: bold;">
 
-                            Footer
+                            @lang('mails.footer')
 
                         </div>
-
+                            @lang('mails.footer_system')
                     </div>
 
                 </div>

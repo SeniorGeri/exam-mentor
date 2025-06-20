@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Modules\Finance\Models\Liquidation;
 
 final class LiquidationUpdateMail extends Mailable
 {
@@ -17,7 +18,10 @@ final class LiquidationUpdateMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(
+        private readonly Liquidation $liquidation
+
+    )
     {
         //
     }
@@ -39,6 +43,9 @@ final class LiquidationUpdateMail extends Mailable
     {
         return new Content(
             view: 'mails.liquidation-update',
+            with: [
+                'liquidation' => $this->liquidation->load(['activeCourse.courseInstructor.course', 'winner','activeCourse.student'])
+            ]
         );
     }
 

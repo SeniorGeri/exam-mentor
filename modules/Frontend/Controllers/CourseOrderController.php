@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Frontend\Controllers;
 
+use App\Mail\NewOrderMail;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,7 @@ use Inertia\Response;
 use Modules\Frontend\Models\ContactUs;
 use Modules\Frontend\Requests\ContactUsRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Modules\Frontend\Requests\CourseOrderRequest;
 use Modules\Hrm\Models\Student;
 use Modules\Notification\Models\Notification;
@@ -50,7 +52,7 @@ final class CourseOrderController
             $student_id = $student->id;
 
         }
-        ActiveCourse::create([...$request->validated(), 'student_id' => $student_id]);
+        $activeCourse = ActiveCourse::create([...$request->validated(), 'student_id' => $student_id]);
 
         Notification::create([
             'title' => __('notification.new_order'),
@@ -59,6 +61,9 @@ final class CourseOrderController
             'receiver_id' => User::first()->id,
             'sender_id' => $request->student_id,
         ]);
+            
+        Mail::to($request->email)->queue(new NewOrderMail($activeCourse));
+        Mail::to('ghoxha472@gmail.com')->queue(new NewOrderMail($activeCourse));
 
         DB::commit();
       

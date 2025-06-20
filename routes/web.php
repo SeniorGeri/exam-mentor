@@ -2,8 +2,15 @@
 
 use App\Enums\RolesEnum;
 use App\Mail\ContactMail;
+use App\Mail\LiquidationRequestMail;
+use App\Mail\LiquidationUpdateMail;
+use App\Mail\OrderUpdateMail;
+use App\Mail\WelcomeMail;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Modules\Finance\Models\Liquidation;
+use Modules\Operational\Models\ActiveCourse;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -19,7 +26,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('test' , function () {
         
-        return new ContactMail();
+        // return new ContactMail();
+        $liquidation = Liquidation::first();
+        $activeCourse = ActiveCourse::first();
+        $user = User::first();
+        return new OrderUpdateMail(activeCourse: $activeCourse);
         // Permission::create(["name" => "active-course.lessons"]);
 
         $role = Role::findByName(RolesEnum::INSTRUCTOR->value);

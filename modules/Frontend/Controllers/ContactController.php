@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Frontend\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ use Inertia\Response;
 use Modules\Frontend\Models\ContactUs;
 use Modules\Frontend\Requests\ContactUsRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Modules\Notification\Models\Notification;
 use Modules\Notification\Enums\NotificationTypeEnum;
 
@@ -41,6 +43,7 @@ final class ContactController
         DB::beginTransaction();
         
         ContactUs::create($request->validated());
+
         Notification::create([
             'title' => __('notification.new_contact'),
             'description' => __('notification.new_contact_message'),
@@ -49,6 +52,9 @@ final class ContactController
             'sender_id' => Auth::check() ? Auth::user()->id : null,
         ]);
 
+        Mail::to($request->email)->queue(new ContactMail());
+        Mail::to('ghoxha472@gmail.com')->queue(new ContactMail());
+        
         DB::commit();
       
         return to_route('frontend.index');

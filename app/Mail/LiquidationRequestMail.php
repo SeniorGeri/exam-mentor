@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Modules\Finance\Models\Liquidation;
 
 final class LiquidationRequestMail extends Mailable
 {
@@ -18,7 +19,9 @@ final class LiquidationRequestMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(
+        private readonly Liquidation $liquidation
+    )
     {
         //
     }
@@ -40,16 +43,10 @@ final class LiquidationRequestMail extends Mailable
     {
         return new Content(
             view: 'mails.liquidation-request',
+            with: [
+                'liquidation' => $this->liquidation->load(['activeCourse.courseInstructor.course', 'activeCourse.student'])
+            ]
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
 }

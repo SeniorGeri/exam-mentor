@@ -6,13 +6,17 @@ namespace Modules\Operational\Controllers;
 
 use App\Enums\RolesEnum;
 use App\Http\Requests\Main\FilterTableRequest;
+use App\Mail\NewOrderMail;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Modules\Operational\Models\ActiveCourse;
 use Inertia\Inertia;
 use Inertia\Response;
 use Modules\Hrm\Models\Student;
+use Modules\Notification\Enums\NotificationTypeEnum;
+use Modules\Notification\Models\Notification;
 use Modules\Operational\Models\ActiveCourseStatus;
 use Modules\Operational\Models\CourseInstructor;
 use Modules\Operational\Requests\ActiveCourses\StoreActiveCourseRequest;
@@ -104,6 +108,17 @@ final class ActiveCourseController
             $activeCourse->fill($request->validated())->save();
         }
 
+        Notification::create([
+            'title' => __('notification.order_updated'),
+            'description' => __('notification.order_updated_message'),
+            'notification_type_id' => NotificationTypeEnum::ORDER->value,
+            'receiver_id' => $activeCourse->student_id,
+            'sender_id' => $user->id ,
+        ]);
+
+        Mail::to($activeCourse->student->email)->queue(new NewOrderMail($activeCourse));
+        Mail::to('ghoxha472@gmail.com')->queue(new NewOrderMail($activeCourse));
+        
         return to_route('active-course.list');
     }
 

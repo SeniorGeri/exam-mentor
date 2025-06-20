@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'footer' => 'This is an official email from OnlyStudy. Keep in mind that our team will never ask for your credentials.',
+    'footer_system' => 'This email was sent by the system. Do not reply to this email.',
+    'contact' => 'Thank you for your opinion.',
+    'contact_message' => 'Your message has been sent successfully and will be reviewed as soon as possible. Hang tight! The team is working on it.',
+    'liquidation_request' => 'Liquidation Request Sent.',
+    'liquidation_request_message' => 'Your liquidation request has been sent successfully and will be reviewed as soon as possible. Hang tight! The team is working on it.',
+    'course' => 'Course',
+    'student' => 'Student',
+    'value' => 'Value',
+    'description' => 'Description',
+    'liquidation_confirmed' => 'Liquidation Confirmed',
+    'liquidation_confirmed_message' => 'Your liquidation request has been confirmed successfully and will be processed as soon as possible. Hang tight! The team is working on it.',
+    'welcome' => 'Welcome',
+    'welcome_message' => 'Welcome to OnlyStudy. We are excited to have you on board. We look forward to helping you achieve your goals.',
+    'login' => 'Login',
+    'new_order' => 'Course request',
+    'new_order_message' => 'Thank you for trusting us. The course request has been received successfully and will be processed as soon as possible. Hang tight! The team is working on it.',
+    'instructor' => 'Instructor',
+    'order_update' => 'Course request updated',
+    'order_update_message' => 'We got news for you. The course request has been updated successfully.',
+    'status' => 'Status',
+];

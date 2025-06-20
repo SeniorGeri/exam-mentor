@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Modules\Operational\Models\ActiveCourse;
 
 final class OrderUpdateMail extends Mailable
 {
@@ -17,7 +18,10 @@ final class OrderUpdateMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(
+        private readonly ActiveCourse $activeCourse
+
+    )
     {
         //
     }
@@ -39,6 +43,9 @@ final class OrderUpdateMail extends Mailable
     {
         return new Content(
             view: 'mails.order-update',
+            with: [
+                'activeCourse' => $this->activeCourse->load(['courseInstructor.course', 'instructor', 'status'])
+            ]
         );
     }
 
