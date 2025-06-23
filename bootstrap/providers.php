@@ -10,4 +10,5 @@ return [
     Modules\Frontend\FrontendServiceProvider::class,
     Modules\Notification\NotificationServiceProvider::class,
     Modules\Auth\AuthServiceProvider::class,
+    Modules\Storage\StorageServiceProvider::class,
 ];

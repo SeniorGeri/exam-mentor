@@ -7,6 +7,7 @@ use App\Mail\LiquidationUpdateMail;
 use App\Mail\OrderUpdateMail;
 use App\Mail\WelcomeMail;
 use App\Models\User;
+use App\Http\Controllers\Main\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Modules\Finance\Models\Liquidation;
@@ -20,9 +21,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');  
+    // Route::get('dashboard', function () {
+    //     return Inertia::render('dashboard');
+    // })->name('dashboard');  
+
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'); 
 
     Route::get('test' , function () {
         

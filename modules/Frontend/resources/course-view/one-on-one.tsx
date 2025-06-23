@@ -8,7 +8,6 @@ import { useLocale } from "@/contexts/locale";
 import { CourseInstructor } from "../data";
 import { Curriculum } from "@/modules/Operational/resources/course-instructors/data"
 import { OrderModal } from "../components/order-modal"
-import { Link } from "@inertiajs/react"
 
 export default function OneOnOne({ course }: { course: CourseInstructor }) {
     const { t } = useTranslation('Frontend');

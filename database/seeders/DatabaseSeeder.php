@@ -10,7 +10,7 @@ use Modules\Settings\database\seeders\SettingsSeeder;
 use Modules\Hrm\database\seeders\HrmSeeder;
 use Modules\Notification\database\seeders\NotificationSeeder;
 use Modules\Operational\database\seeders\OperationalSeeder;
-
+use Modules\Storage\database\seeders\StorageSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             $this->call(OperationalSeeder::class);
             $this->call(FinanceSeeder::class);
             $this->call(NotificationSeeder::class);
+            $this->call(StorageSeeder::class);
 
     }
 }

@@ -1,0 +1,16 @@
+{
+    "top_5_instructors": "Top 5 Instructors",
+    "top_5_students": "Top 5 Students",
+    "students": "Students",
+    "instructors": "Instructors",
+    "courses": "Courses",
+    "active_courses": "Active Courses",
+    "instructor_list": "Instructor List",
+    "student_list": "Student List",
+    "total": "Total",
+    "total_active": "Total Active",
+    "total_requested": "Total Requested",
+    "total_rejected": "Total Rejected",
+    "total_approved": "Total Approved",
+    "total_finished": "Total Finished"
+}
