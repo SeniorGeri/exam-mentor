@@ -11,4 +11,5 @@ export type ActiveCourseDashboardData = {
     total_rejected: number;
     total_approved: number;
     total_finished: number;
+    total_price: number;
 }

@@ -11,6 +11,7 @@ import SqFrontend from '../../modules/Frontend/lang/sq.json'
 import EnNotification from '../../modules/Notification/lang/en.json'
 import EnAuth from '../../modules/Auth/lang/en.json'
 import EnMain from './lang/en.json'
+import EnStorage from '../../modules/Storage/lang/en.json'
 
 i18n
     .use(initReactI18next)
@@ -25,7 +26,8 @@ i18n
                 Frontend: EnFrontend,
                 Notification: EnNotification,
                 Auth: EnAuth,
-                Main: EnMain
+                Main: EnMain,
+                Storage: EnStorage
             },
             sq: {
                 Frontend: SqFrontend

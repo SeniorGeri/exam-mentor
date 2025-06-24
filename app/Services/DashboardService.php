@@ -54,13 +54,8 @@ class DashboardService
 
         $courses = CourseInstructor::whereInstructorId($user->id)->count();
 
-        $activeCourses = ActiveCourse::whereCourseInstructorId($user->id)->select([
+        $activeCourses = ActiveCourse::whereInstructorId($user->id)->select([
             DB::raw('COUNT(*) as total'),
-            DB::raw('
-            SUM(CASE WHEN status_id = ' . CourseStatusEnum::FINISHED->value . ' 
-            OR WHEN status_id = ' . CourseStatusEnum::ACTIVE->value . ' 
-            OR WHEN status_id = ' . CourseStatusEnum::APPROVED->value . ' 
-            THEN value ELSE 0 END) as total_price'),
             DB::raw('SUM(CASE WHEN status_id = ' . CourseStatusEnum::FINISHED->value . ' THEN 1 ELSE 0 END) as total_finished'),
             DB::raw('SUM(CASE WHEN status_id = ' . CourseStatusEnum::ACTIVE->value . ' THEN 1 ELSE 0 END) as total_active'),
             DB::raw('SUM(CASE WHEN status_id = ' . CourseStatusEnum::REQUESTED->value . ' THEN 1 ELSE 0 END) as total_requested'),
@@ -88,6 +83,11 @@ class DashboardService
 
         $activeCourses = ActiveCourse::whereStudentId($user->id)->select([
             DB::raw('COUNT(*) as total'),
+            DB::raw('
+            SUM(CASE WHEN status_id = ' . CourseStatusEnum::FINISHED->value . ' 
+            OR status_id = ' . CourseStatusEnum::ACTIVE->value . ' 
+            OR status_id = ' . CourseStatusEnum::APPROVED->value . ' 
+            THEN value ELSE 0 END) as total_price'),
             DB::raw('SUM(CASE WHEN status_id = ' . CourseStatusEnum::FINISHED->value . ' THEN 1 ELSE 0 END) as total_finished'),
             DB::raw('SUM(CASE WHEN status_id = ' . CourseStatusEnum::ACTIVE->value . ' THEN 1 ELSE 0 END) as total_active'),
             DB::raw('SUM(CASE WHEN status_id = ' . CourseStatusEnum::REQUESTED->value . ' THEN 1 ELSE 0 END) as total_requested'),

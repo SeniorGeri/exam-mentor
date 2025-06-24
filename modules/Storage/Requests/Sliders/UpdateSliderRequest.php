@@ -20,9 +20,6 @@ final class UpdateSliderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:100'],
-            'subtitle' => ['required', 'string', 'max:100'],
-            'button_text' => ['required', 'string', 'max:100'],
             'button_url' => ['required', 'string', 'max:100'],
             'image' => ['required', 'string', 'max:100'],
             'active' => ['required', 'boolean'],

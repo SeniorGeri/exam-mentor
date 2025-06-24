@@ -7,6 +7,7 @@ namespace Modules\Frontend\Controllers;
 use Inertia\Inertia;
 use Inertia\Response;
 use Modules\Operational\Models\CourseInstructor;
+use Modules\Storage\Models\Slider;
 
 final class MainController
 {
@@ -31,9 +32,12 @@ final class MainController
         ->orderBy('created_at', 'desc')
         ->limit(4)
         ->get();
-
+        
+        $sliders = Slider::whereActive(true)->get();
+        
         return Inertia::render('Frontend::main', [
             'courses' => $courses,
+            'sliders' => $sliders,
         ]);
 
     }

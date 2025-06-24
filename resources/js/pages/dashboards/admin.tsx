@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { Award, Star, UserPen, Users } from 'lucide-react';
+import { Award, UserPen, Users, ContactRound, GraduationCap, BookOpenCheck } from 'lucide-react';
 import { ActiveCourseDashboardData, UserDashboardData } from './data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -26,7 +26,7 @@ export default function Dashboard({ instructors, students, courses, activeCourse
                 <div className="grid auto-rows-min gap-4 md:grid-cols-4">
                     <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
                         <div className="flex h-full items-center justify-around gap-4">
-                            <UserPen className="h-20 w-20" />
+                            <ContactRound className="h-20 w-20" />
                             <div className="flex flex-col gap-2">
                                 <p className="text-center text-lg font-semibold">{t('instructors')}</p>
                                 <p className="text-center text-lg">{t('total')}: {instructors.total}</p>
@@ -46,7 +46,7 @@ export default function Dashboard({ instructors, students, courses, activeCourse
                     </div>
                     <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
                         <div className="flex h-full items-center justify-around gap-4">
-                            <UserPen className="h-20 w-20" />
+                            <GraduationCap className="h-20 w-20" />
                             <div className="flex flex-col gap-2">
                                 <p className="text-center text-lg font-semibold">{t('courses')}</p>
                                 <p className="text-center text-lg">{t('total')}: {courses}</p>
@@ -55,7 +55,7 @@ export default function Dashboard({ instructors, students, courses, activeCourse
                     </div>
                     <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
                         <div className="flex h-full items-center justify-around gap-4">
-                            <UserPen className="h-20 w-20" />
+                            <BookOpenCheck className="h-20 w-20" />
                             <div className="flex flex-col">
                                 <p className="text-center text-lg font-semibold">{t('active_courses')}</p>
                                 <p className="text-center text-sm">{t('total')}: {activeCourses.total}</p>

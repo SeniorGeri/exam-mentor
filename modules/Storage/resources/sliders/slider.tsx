@@ -4,29 +4,29 @@ import { usePermissions } from '@/hooks/use-permissions';
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTable } from '@/components/data-table/data-table';
 import { route } from 'ziggy-js';
-import { CountryColumns } from './columns';
-import { Country } from './data';
-import { CountryActions } from './actions';
-import { CreateCountry } from './create';
+import { Slider } from './data';
+import { SliderActions } from './actions';
+import { CreateSlider } from './create';
 import { useLocale } from '@/contexts/locale';
+import { SliderColumns } from './columns';
 
-export default function CountryTable() {
+export default function SliderTable() {
 
     const { hasPermission } = usePermissions();
     const { currentLocale } = useLocale();
 
-    const columns: ColumnDef<Country>[] = [
-        ...CountryColumns(currentLocale),
+    const columns: ColumnDef<Slider>[] = [
+        ...SliderColumns(currentLocale),
         {
             id: 'actions',
-            cell: ({ row }) => <CountryActions country={row} />
+            cell: ({ row }) => <SliderActions slider={row} />
         }
     ];
     return (
 
-        <DataTable urlPath={route('country.load')} columns={columns}>
-            {hasPermission('country.create') && (
-                <CreateCountry />
+        <DataTable urlPath={route('slider.load')} columns={columns}>
+            {hasPermission('slider.create') && (
+                <CreateSlider />
             )}
 
         </DataTable>

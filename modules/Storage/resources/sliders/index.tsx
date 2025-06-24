@@ -2,18 +2,18 @@
 
 import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
-import { countryBreadcrumbs } from './data';
-import CountryTable from './slider';
+import { sliderBreadcrumbs } from './data';
+import SliderTable from './slider';
 
-export default function CountryIndex() {
+export default function SliderIndex() {
 
 
 
     return (
-        <AppLayout breadcrumbs={countryBreadcrumbs}>
-            <Head title="Countries" />
+        <AppLayout breadcrumbs={sliderBreadcrumbs}>
+            <Head title="Sliders" />
                 <div className="flex flex-col gap-2 p-4 ">
-                    <CountryTable/>
+                    <SliderTable/>
                 </div>
         </AppLayout>
     );

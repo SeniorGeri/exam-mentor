@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Bell, BellRing, Book, BookOpen, CalendarArrowUp, CircleGauge, Cog, Coins, Euro, Folder, GraduationCap, HandCoins, Handshake, Landmark, Languages, LogOut, Map, Megaphone, PiggyBank, ReceiptEuro, School, ShieldCheck, User, UserCheck, UsersRound, } from 'lucide-react';
+import { Bell, BellRing, Book, BookOpen, CalendarArrowUp, CircleGauge, Cog, Coins, Euro, Folder, GraduationCap, HandCoins, Handshake, Images, Landmark, Languages, LogOut, Map, Megaphone, PiggyBank, ReceiptEuro, School, ShieldCheck, Sliders, User, UserCheck, UsersRound, } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -116,6 +116,22 @@ const mainNavItems: NavItem[] = [
                 type: 'standalone',
                 permission: 'student.read',
             }
+        ]
+    },
+    {
+        title: 'Media',
+        href: 'media',
+        icon: Images,
+        type: 'dropdown',
+        permissions: ['slider.read'],
+        subItems: [
+            {
+                title: 'Slider',
+                href: route('slider.list'),
+                icon: Sliders,
+                type: 'standalone',
+                permission: 'slider.read',
+            },
         ]
     },
     {

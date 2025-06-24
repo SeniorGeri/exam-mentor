@@ -12,5 +12,8 @@
     "total_requested": "Total Requested",
     "total_rejected": "Total Rejected",
     "total_approved": "Total Approved",
-    "total_finished": "Total Finished"
+    "total_finished": "Total Finished",
+    "total_invested": "Total Invested",
+    "total_courses": "Total Courses"
+
 }

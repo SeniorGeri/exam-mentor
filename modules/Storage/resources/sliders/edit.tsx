@@ -3,7 +3,7 @@ import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Dia
 import {useForm} from '@inertiajs/react';
 import {FormEventHandler, useEffect} from 'react';
 import {toast} from 'sonner';
-import {EditCountryProps} from "./data";
+import {EditSliderProps} from "./data";
 import {route} from "ziggy-js";
 import { useLocale } from '@/contexts/locale';
 import { Languages } from '@/components/languages';
@@ -11,36 +11,41 @@ import { useTranslation } from 'react-i18next';
 import FileInput from '@/modules/Media/resources/js/file-input';
 import CustomInput from '@/components/input/custom-input';
 import CustomTextarea from '@/components/input/custom-textarea';
+import CustomSwitch from '@/components/input/custom-switch';
 
-export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
+export function EditSlider({slider, isOpen, closeModal}: EditSliderProps) {
 
-    const { t } = useTranslation('Settings');
+    const { t } = useTranslation('Storage');
 
     const { currentLocale } = useLocale();
 
     const {data, setData, put, processing, reset, errors, clearErrors} = useForm({
-        id: country?.id,
-        country: country?.country ? country?.country[currentLocale] : '',
-        description: country?.description,
-        flag: country?.flag,
+        id: slider?.id,
+        title: slider?.title ? slider?.title[currentLocale] : '',
+        subtitle: slider?.subtitle ? slider?.subtitle[currentLocale] : '',
+        button_text: slider?.button_text ? slider?.button_text[currentLocale] : '',
+        button_url: slider?.button_url,
+        active: slider?.active,
+        description: slider?.description,
+        image: slider?.image,
         locale: currentLocale ?? null
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() =>setData('country', country?.country[data.locale] || '') , [data.locale]);
+    useEffect(() =>setData('title', slider?.title[data.locale] || '') , [data.locale]);
 
-    const updateCountry: FormEventHandler = (e) => {
+    const updateSlider: FormEventHandler = (e) => {
         e.preventDefault();
-        put(route('country.update', country.id), {
+        put(route('slider.update', slider.id), {
             preserveScroll: true,
-            onSuccess: () => updatedCountry(),
+            onSuccess: () => updatedSlider(),
             onError: (error) => toast(error.description, {position: 'top-right', duration: 2000}),
             onFinish: () => reset(),
         });
     };
 
-    const updatedCountry = () => {
-        toast(t('country_edit_succ'), {position: 'top-right', duration: 2000});
+    const updatedSlider = () => {
+        toast(t('slider_edit_succ'), {position: 'top-right', duration: 2000});
         clearErrors();
         reset();
         closeModal();
@@ -50,24 +55,55 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
     return (
         <Dialog open={isOpen} modal={true}>
             <DialogContent>
-                <DialogTitle>{t('edit_country')}</DialogTitle>
+                <DialogTitle>{t('edit_slider')}</DialogTitle>
                 <DialogDescription>
-                    {t('edit_country_desc')}
+                    {t('edit_slider_desc')}
                 </DialogDescription>
 
-                <form className="space-y-6" onSubmit={updateCountry}>
+                <form className="space-y-6" onSubmit={updateSlider}>
                     <Languages currentLocale={data.locale} setData={setData}/>
 
                      <CustomInput
-                        id="country"
-                        value={data.country}
+                        id="title"
+                        value={data.title}
                         setFormData={setData}
-                        placeholder={t('country')}
-                        errorMessage={errors.country}
+                        placeholder={t('title')}
+                        errorMessage={errors.title}
                     />
 
-                    <FileInput defaultValue={[data.flag]} inputName='flag' setFormData={setData} />
 
+                    <CustomInput
+                        id="subtitle"
+                        value={data.subtitle}
+                        setFormData={setData}
+                        placeholder={t('subtitle')}
+                        errorMessage={errors.subtitle}
+                    />
+
+                    <CustomInput
+                        id="button_text"
+                        value={data.button_text}
+                        setFormData={setData}
+                        placeholder={t('button_text')}
+                        errorMessage={errors.button_text}
+                    />
+
+                    <CustomInput
+                        id="button_url"
+                        value={data.button_url}
+                        setFormData={setData}
+                        placeholder={t('button_url')}
+                        errorMessage={errors.button_url}
+                    />
+
+                    <FileInput defaultValue={[data.image]} inputName='image' setFormData={setData} />
+
+                    <CustomSwitch
+                        id="active"
+                        is_checked={data.active}
+                        setFormData={setData}
+                        placeholder={t('active')}
+                    />
 
                     <CustomTextarea
                         id="description"
@@ -85,7 +121,7 @@ export function EditCountry({country, isOpen, closeModal}: EditCountryProps) {
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">{t('edit_country')}</button>
+                            <button type="submit">{t('edit_slider')}</button>
                         </Button>
                     </DialogFooter>
                 </form>

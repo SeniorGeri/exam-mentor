@@ -4,23 +4,23 @@ import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, A
 import {router} from '@inertiajs/react';
 import {toast} from 'sonner';
 import {route} from "ziggy-js";
-import {DeleteCountryProps} from "./data";
+import {DeleteSliderProps} from "./data";
 import { useTranslation } from 'react-i18next';
 
-export function DeleteCountry({country, isOpen, closeModal}: DeleteCountryProps) {
+export function DeleteSlider({slider, isOpen, closeModal}: DeleteSliderProps) {
 
-    const { t } = useTranslation('Settings');
+    const { t } = useTranslation('Storage');
 
-    const destroyCountry = () => {
-        router.delete(route('country.destroy', country.id), {
+    const destroySlider = () => {
+        router.delete(route('slider.destroy', slider.id), {
             preserveScroll: true,
-            onSuccess: () => countryDeleted(),
+            onSuccess: () => sliderDeleted(),
             onFinish: () => closeModal(),
         });
     };
 
-    const countryDeleted = () => {
-        toast(t('country_delete_succ'), {position: 'top-right', duration: 2000});
+    const sliderDeleted = () => {
+        toast(t('slider_delete_succ'), {position: 'top-right', duration: 2000});
         closeModal();
     };
 
@@ -28,14 +28,14 @@ export function DeleteCountry({country, isOpen, closeModal}: DeleteCountryProps)
         <AlertDialog open={isOpen}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{t('delete_country')}?</AlertDialogTitle>
+                    <AlertDialogTitle>{t('delete_slider')}?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        {t('delete_country_desc')}
+                        {t('delete_slider_desc')}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel onClick={closeModal}>{t('close')}</AlertDialogCancel>
-                    <AlertDialogAction onClick={destroyCountry}>{t('delete')}</AlertDialogAction>
+                    <AlertDialogAction onClick={destroySlider}>{t('delete')}</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

@@ -3,36 +3,40 @@ import {Row} from '@tanstack/react-table';
 import {route} from "ziggy-js";
 import { TranslatableField } from '@/types/helpers';
 
-export const countryBreadcrumbs: BreadcrumbItem[] = [
+export const sliderBreadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
         href: route('dashboard'),
     },
     {
-        title: 'Country',
-        href: route('country.list'),
+        title: 'Slider',
+        href: route('slider.list'),
     },
 ];
 
-export type Country = {
+export type Slider = {
     id: number;
-    country: TranslatableField;
+    title: TranslatableField;
+    subtitle: TranslatableField;
+    button_text: TranslatableField;
+    button_url: string;
+    active: boolean;
     description: string;
-    flag: string;
+    image: string;
 };
 
-export type CountryActionsProps = {
-    country: Row<Country>;
+export type SliderActionsProps = {
+    slider: Row<Slider>;
 };
 
-export type DeleteCountryProps = {
-    country: Country;
+export type DeleteSliderProps = {
+    slider: Slider;
     isOpen: boolean;
     closeModal: () => void;
 };
 
-export type EditCountryProps = {
-    country: Country;
+export type EditSliderProps = {
+    slider: Slider;
     isOpen: boolean;
     closeModal: () => void;
 };

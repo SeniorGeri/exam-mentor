@@ -10,27 +10,32 @@ import {FormEventHandler, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import {toast} from 'sonner';
 import {route} from "ziggy-js";
+import CustomSwitch from '@/components/input/custom-switch';
 
 
-export function CreateCountry() {
+export function CreateSlider() {
 
-    const { t } = useTranslation('Settings');
+    const { t } = useTranslation('Storage');
 
 
     const [open, setOpen] = useState(false);
 
     const {data, setData, post, processing, reset, errors, clearErrors} = useForm({
-        country: '',
+        title: '',
+        subtitle: '',
+        button_text: '',
+        button_url: '',
+        active: false,
         description: '',
-        flag: ''
+        image: ''
     });
 
-    const storeCountCreateCountry: FormEventHandler = (e) => {
+    const storeSliderCreateSlider: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('country.store'), {
+        post(route('slider.store'), {
             preserveScroll: true,
-            onSuccess: () => countryCreated(),
-            // onFinish: () => reset(),
+            onSuccess: () => sliderCreated(),
+            onFinish: () => reset(),
         });
     };
 
@@ -40,8 +45,8 @@ export function CreateCountry() {
         setOpen(false);
     };
 
-    const countryCreated = () => {
-        toast(t('country_created_succ'), {position: 'top-right', duration: 2000});
+    const sliderCreated = () => {
+        toast(t('slider_created_succ'), {position: 'top-right', duration: 2000});
         closeModal();
     };
 
@@ -49,26 +54,56 @@ export function CreateCountry() {
         <Dialog open={open} modal={true}>
             <DialogTrigger asChild>
                 <Button variant="default" size="sm" onClick={() => setOpen(true)}>
-                    {t('create_country')}
+                    {t('create_slider')}
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle>{t('create_country')}</DialogTitle>
+                <DialogTitle>{t('create_slider')}</DialogTitle>
                 <DialogDescription>
-                    {t('create_country_desc')}
+                    {t('create_slider_desc')}
                 </DialogDescription>
-                <form className="space-y-6" onSubmit={storeCountCreateCountry}>
+                <form className="space-y-6" onSubmit={storeSliderCreateSlider}>
 
                     <CustomInput
-                        id="country"
-                        value={data.country}
+                        id="title"
+                        value={data.title}
                         setFormData={setData}
-                        placeholder={t('country')}
-                        errorMessage={errors.country}
+                        placeholder={t('title')}
+                        errorMessage={errors.title}
                     />
 
-                    <FileInput inputName='flag' setFormData={setData} />
+                    <CustomInput
+                        id="subtitle"
+                        value={data.subtitle}
+                        setFormData={setData}
+                        placeholder={t('subtitle')}
+                        errorMessage={errors.subtitle}
+                    />
 
+                    <CustomInput
+                        id="button_text"
+                        value={data.button_text}
+                        setFormData={setData}
+                        placeholder={t('button_text')}
+                        errorMessage={errors.button_text}
+                    />
+
+                    <CustomInput
+                        id="button_url"
+                        value={data.button_url}
+                        setFormData={setData}
+                        placeholder={t('button_url')}
+                        errorMessage={errors.button_url}
+                    />
+
+                    <FileInput inputName='image' setFormData={setData} />
+
+                    <CustomSwitch
+                        id="active"
+                        is_checked={data.active}
+                        setFormData={setData}
+                        placeholder={t('active')}
+                    />
                     <CustomTextarea
                            id="description"
                            value={data.description}
@@ -85,7 +120,7 @@ export function CreateCountry() {
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">{t('add_country')}</button>
+                            <button type="submit">{t('add_slider')}</button>
                         </Button>
                     </DialogFooter>
                 </form>

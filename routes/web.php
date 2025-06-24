@@ -29,6 +29,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('test' , function () {
         
+        Permission::create(["name" => "slider.create"]);
+        Permission::create(["name" => "slider.read"]);
+        Permission::create(["name" => "slider.update"]);
+        Permission::create(["name" => "slider.delete"]);
+
+        $role = Role::findByName(RolesEnum::ADMIN->value);
+
+        $role->givePermissionTo("slider.create");
+        $role->givePermissionTo("slider.read");
+        $role->givePermissionTo("slider.update");
+        $role->givePermissionTo("slider.delete");
+        return;
         // return new ContactMail();
         $liquidation = Liquidation::first();
         $activeCourse = ActiveCourse::first();
