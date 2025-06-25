@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'footer' => 'Questa è un\'email ufficiale di OnlyStudy. Tieni presente che il nostro team non ti chiederà mai le tue credenziali.',
+    'footer_system' => 'Questa email è stata inviata dal sistema. Non rispondere a questa email.',
+    'contact' => 'Grazie per la tua opinione.',
+    'contact_message' => 'Il tuo messaggio è stato inviato con successo e sarà esaminato il prima possibile. Attendi! Il team ci sta lavorando.',
+    'liquidation_request' => 'Richiesta di liquidazione inviata.',
+    'liquidation_request_message' => 'La tua richiesta di liquidazione è stata inviata con successo e sarà esaminata il prima possibile. Attendi! Il team ci sta lavorando.',
+    'course' => 'Corso',
+    'student' => 'Studente',
+    'value' => 'Valore',
+    'description' => 'Descrizione',
+    'liquidation_confirmed' => 'Liquidazione confermata',
+    'liquidation_confirmed_message' => 'La tua richiesta di liquidazione è stata confermata con successo e sarà elaborata il prima possibile. Attendi! Il team ci sta lavorando.',
+    'welcome' => 'Benvenuto',
+    'welcome_message' => 'Benvenuto su OnlyStudy. Siamo entusiasti di averti a bordo. Non vediamo l\'ora di aiutarti a raggiungere i tuoi obiettivi.',
+    'login' => 'Accedi',
+    'new_order' => 'Richiesta corso',
+    'new_order_message' => 'Grazie per averci dato fiducia. La richiesta del corso è stata ricevuta con successo e sarà elaborata il prima possibile. Attendi! Il team ci sta lavorando.',
+    'instructor' => 'Istruttore',
+    'order_update' => 'Richiesta corso aggiornata',
+    'order_update_message' => 'Abbiamo novità per te. La richiesta del corso è stata aggiornata con successo.',
+    'status' => 'Stato',
+];

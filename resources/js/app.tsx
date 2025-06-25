@@ -8,7 +8,7 @@ import { initializeTheme } from './hooks/use-appearance';
 const appName = import.meta.env.VITE_APP_NAME || 'OnlyStudy';
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${title} ${title ? '-' : ''} ${appName}`,
     resolve: (name: string) => {
         const [module, page] = name.includes('::') ? name.split('::') : [null, name];
 

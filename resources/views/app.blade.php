@@ -30,7 +30,8 @@
             }
         </style>
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'OnlyStudy') }}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon-no-bg.png') }}">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />

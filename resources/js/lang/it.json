@@ -1,0 +1,18 @@
+{
+    "top_5_instructors": "I 5 migliori istruttori",
+    "top_5_students": "I 5 migliori studenti",
+    "students": "Studenti",
+    "instructors": "Istruttori",
+    "courses": "Corsi",
+    "active_courses": "Corsi attivi",
+    "instructor_list": "Elenco istruttori",
+    "student_list": "Elenco studenti",
+    "total": "Totale",
+    "total_active": "Totale attivi",
+    "total_requested": "Totale richiesti",
+    "total_rejected": "Totale rifiutati",
+    "total_approved": "Totale approvati",
+    "total_finished": "Totale completati",
+    "total_invested": "Totale investito",
+    "total_courses": "Corsi totali"
+}

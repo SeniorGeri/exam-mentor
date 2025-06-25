@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
+use App\Models\User;
 
 trait HasRoleBehaviorTrait
 {
@@ -14,10 +15,11 @@ trait HasRoleBehaviorTrait
             $query->role(static::$role);
         });
 
-        static::creating(function ($model): void
+        static::created(function ($model): void
         {
             if (! $model->hasRole(static::$role)) {
                 $model->assignRole(static::$role);
+                User::find($model->id)->assignRole(static::$role);
             }
         });
     }

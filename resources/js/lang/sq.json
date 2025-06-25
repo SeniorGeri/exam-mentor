@@ -1,0 +1,18 @@
+{
+    "top_5_instructors": "5 instruktorët më të mirë",
+    "top_5_students": "5 studentët më të mirë",
+    "students": "Studentë",
+    "instructors": "Instruktorë",
+    "courses": "Kurse",
+    "active_courses": "Kurse aktive",
+    "instructor_list": "Lista e instruktorëve",
+    "student_list": "Lista e studentëve",
+    "total": "Total",
+    "total_active": "Total aktivë",
+    "total_requested": "Total të kërkuar",
+    "total_rejected": "Total të refuzuar",
+    "total_approved": "Total të aprovuar",
+    "total_finished": "Total të përfunduar",
+    "total_invested": "Total i investuar",
+    "total_courses": "Kurse gjithsej"
+}

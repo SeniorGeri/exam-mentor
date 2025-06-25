@@ -1,0 +1,17 @@
+{
+    "preview": "Anteprima",
+    "leave_file_here": "Trascina i file qui",
+    "drag_drop_files": "Trascina e rilascia i file qui",
+    "media": "Media",
+    "media_description": "Carica file",
+    "loading": "Caricamento",
+    "load_more": "Carica altro",
+    "close": "Chiudi",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "image_data": "Dati immagine",
+    "image_data_desc": "Qui sotto puoi modificare i dati dell'immagine",
+    "image_update_succ": "Immagine aggiornata con successo",
+    "image_delete_succ": "Immagine eliminata con successo",
+    "click_to_select_image": "Clicca per selezionare l'immagine"
+}

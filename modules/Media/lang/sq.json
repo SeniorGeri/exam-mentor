@@ -1,0 +1,17 @@
+{
+    "preview": "Parapamje",
+    "leave_file_here": "Lëshoni skedarët këtu",
+    "drag_drop_files": "Zvarrit dhe lësho skedarët këtu",
+    "media": "Media",
+    "media_description": "Ngarko skedarët",
+    "loading": "Duke u ngarkuar",
+    "load_more": "Ngarko më shumë",
+    "close": "Mbyll",
+    "edit": "Edito",
+    "delete": "Fshi",
+    "image_data": "Të dhënat e imazhit",
+    "image_data_desc": "Më poshtë mund të editoni të dhënat e imazhit",
+    "image_update_succ": "Imazhi u përditësua me sukses",
+    "image_delete_succ": "Imazhi u fshi me sukses",
+    "click_to_select_image": "Kliko për të zgjedhur imazhin"
+}
