@@ -6,6 +6,7 @@ namespace Modules\Settings\database\seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Settings\Models\Gender;
+use Modules\Settings\Models\Language;
 
 final class SettingsSeeder extends Seeder
 {
@@ -28,5 +29,32 @@ final class SettingsSeeder extends Seeder
             'sq' => 'Femer',
             'it' => 'femmina',
         ]]);
+
+        Language::create([
+            'language' => [
+                'en' => 'English',
+                'sq' => 'Anglisht',
+                'it' => 'Inglese',
+            ],
+            'language_code' => 'en',
+        ]);
+
+        Language::create([
+            'language' => [
+                'en' => 'Albanian',
+                'sq' => 'Shqip',
+                'it' => 'Albanese',
+            ],
+            'language_code' => 'sq',
+        ]);
+
+        Language::create([
+            'language' => [
+                'en' => 'Italian',
+                'sq' => 'Italiaisht',
+                'it' => 'Italiano',
+            ],
+            'language_code' => 'it',
+    ]);
     }
 }

@@ -6,7 +6,7 @@ namespace Modules\Storage\database\seeders;
 
 use Illuminate\Database\Seeder;
 
-final class SettingsSeeder extends Seeder
+final class StorageSeeder extends Seeder
 {
     /**
      * Seed the application's database.
