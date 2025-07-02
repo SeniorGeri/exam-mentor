@@ -76,6 +76,12 @@ final class MainController
         ]);
     }
 
+    
+    /**
+     * Return view of course page
+     *
+     * @return Response
+     */
     public function show(int $courseInstructor): Response
     {  
         $course = CourseInstructor::whereId($courseInstructor)

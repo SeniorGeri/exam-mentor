@@ -91,5 +91,7 @@
     "price": "Price",
     "registered_succesfully_hold_tight": "You have been registered successfully, hold tight! A team member will contact you soon.",
     "close": "Close and cancel !",
-    "panel": "Dashboard"
+    "panel": "Dashboard",
+    "success": "Request sent successfully",
+    "success_description": "Your request has been sent successfully. Our team will contact you soon. Thank you for your request."
 }

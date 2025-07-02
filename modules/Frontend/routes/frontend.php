@@ -19,5 +19,6 @@ Route::middleware('web')->group(function () {
     Route::get('/frontend/course/{course}', [MainController::class, 'show'])->name('frontend.course');
 
     Route::post('/frontend/order', [CourseOrderController::class, 'store'])->name('frontend.order.store');
+    Route::get('/frontend/success', [CourseOrderController::class, 'success'])->name('frontend.success');
 
 });

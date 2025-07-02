@@ -6,16 +6,12 @@ namespace Modules\Frontend\Controllers;
 
 use App\Mail\NewOrderMail;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use Inertia\Response;
-use Modules\Frontend\Models\ContactUs;
-use Modules\Frontend\Requests\ContactUsRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Inertia\Inertia;
+use Inertia\Response;
 use Modules\Frontend\Requests\CourseOrderRequest;
-use Modules\Hrm\Models\Student;
 use Modules\Notification\Models\Notification;
 use Modules\Notification\Enums\NotificationTypeEnum;
 use Modules\Operational\Models\ActiveCourse;
@@ -29,7 +25,7 @@ final class CourseOrderController
     /**
      * Store contact form data
      *
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(CourseOrderRequest $request): RedirectResponse
     {
@@ -39,7 +35,7 @@ final class CourseOrderController
         $student_id = $request->student_id;
         if(!$student_id) {
 
-            $student = Student::updateOrCreate([
+            $student = User::updateOrCreate([
                 'email' => $request->email,
             ], [
                 'name' => $request->name,
@@ -70,5 +66,20 @@ final class CourseOrderController
         return redirect()->route('frontend.course', $request->course_instructor_id);
 
     }
+    
+
+       /**
+     * Store contact form data
+     *
+     * @return Response
+     */
+    public function success(): Response
+    {
+
+       
+        return Inertia::render('Frontend::success');
+
+    }
+    
 
 }

@@ -85,5 +85,7 @@
     "price": "Prezzo",
     "registered_succesfully_hold_tight": "Registrazione avvenuta con successo, tieni duro! Un membro del team ti contatterà a breve.",
     "close": "Chiudi e annulla!",
-    "panel": "Dashboard"
+    "panel": "Dashboard",
+    "success": "Richiesta inviata con successo",
+    "success_description": "La tua richiesta è stata inviata con successo. Il nostro team ti contatterà presto. Grazie per la tua richiesta."
 }

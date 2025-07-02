@@ -22,6 +22,7 @@ import { route } from "ziggy-js"
 import type { CourseInstructor } from "../data"
 import CustomInput from "@/components/input/custom-input"
 import { useLocale } from "@/contexts/locale"
+import { router } from "@inertiajs/react"
 
 export function OrderModal({ courseInstructor }: { courseInstructor: CourseInstructor }) {
   const { t } = useTranslation("Frontend")
@@ -56,6 +57,7 @@ export function OrderModal({ courseInstructor }: { courseInstructor: CourseInstr
 
   const instructorCreated = () => {
     toast(t("registered_succesfully_hold_tight"), { position: "top-right", duration: 2000 })
+    router.visit(route("frontend.success"));
     closeModal()
   }
 

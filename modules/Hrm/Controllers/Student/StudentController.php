@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Hrm\Controllers\Student;
 
 use App\Http\Requests\Main\FilterTableRequest;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Modules\Hrm\Models\Student;
@@ -15,6 +16,7 @@ use Inertia\Response;
 use Modules\Settings\Models\City;
 use Modules\Settings\Models\Country;
 use Modules\Settings\Models\Gender;
+use App\Enums\RolesEnum;
 
 final class StudentController
 {
@@ -46,7 +48,7 @@ final class StudentController
      */
     public function show(FilterTableRequest $request): JsonResponse
     {
-        $students = Student::filter($request)->paginate($request->limit);
+        $students = User::filter($request)->role(RolesEnum::STUDENT->value)->paginate($request->limit);
 
         return response()->json(['data' => $students]);
     }

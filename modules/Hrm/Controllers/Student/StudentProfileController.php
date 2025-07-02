@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Hrm\Controllers\Student;
 
+use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
-use Modules\Hrm\Models\Student;
 
 final class StudentProfileController
 {
@@ -16,7 +16,7 @@ final class StudentProfileController
      *
      * @return Response
      */
-    public function index(Student $student): Response
+    public function index(User $student): Response
     {
        
         $student->load([

@@ -85,5 +85,7 @@
   "price": "Çmimi",
   "registered_succesfully_hold_tight": "Jeni regjistruar me sukses, prisni pak! Një anëtar i ekipit do t'ju kontaktojë së shpejti.",
   "close": "Mbyll dhe anullo!",
-  "panel": "Paneli"
+  "panel": "Paneli",
+  "success": "Kerkesa u krye me sukses",
+  "success_description": "Kerkesa juaj u dergua me sukses. Stafi ynë do tju kontaktoj së shpejti. Faleminderit për mirkuptimin."
 }

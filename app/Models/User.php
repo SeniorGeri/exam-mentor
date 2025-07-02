@@ -21,11 +21,13 @@ use Modules\Settings\Models\Country;
 use Modules\Settings\Models\Gender;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
+use App\Traits\HasTableFilterTrait;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, HasPermissions, SoftDeletes;
+    use HasTableFilterTrait;
 
 
     /**
