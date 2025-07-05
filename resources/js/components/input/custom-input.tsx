@@ -18,7 +18,7 @@ export default function CustomInput({
 }: InputInterface) {
 
   return (
-      <div className={cn('grid gap-2', className)}>
+      <div className={cn('grid gap-2 mb-2', className)}>
           <Label htmlFor={id}>{placeholder}</Label>
 
           <Input

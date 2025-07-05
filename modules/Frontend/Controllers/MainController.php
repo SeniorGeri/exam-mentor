@@ -22,7 +22,7 @@ final class MainController
 
         $courses = CourseInstructor::with([
             'course:id,title,image',
-            'pricingType:id,name',
+            'pricingType:id,type',
             'instructor:id,name',
             'language:id,language',
             'course.grades',
@@ -51,7 +51,7 @@ final class MainController
     {
         $courses = CourseInstructor::with([
             'course:id,title,image',
-            'pricingType:id,name',
+            'pricingType:id,type',
             'instructor:id,name',
             'language:id,language',
             'course.grades',
@@ -87,7 +87,7 @@ final class MainController
         $course = CourseInstructor::whereId($courseInstructor)
         ->with([
             'course:id,title,image,description',
-            'pricingType:id,name',
+            'pricingType:id,type',
             'instructor:id,name,profile_pic,specialization',
             'language:id,language',
             'course.grades',

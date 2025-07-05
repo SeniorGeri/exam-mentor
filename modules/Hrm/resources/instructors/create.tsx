@@ -76,7 +76,7 @@ export function CreateInstructor() {
                     {t('create_instructor_desc')}
                 </DialogDescription>
                 <form className="space-y-6" onSubmit={storeCountCreateInstructor}>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3 space-y-3">
 
                         <CustomInput
                             id="name"
@@ -117,7 +117,7 @@ export function CreateInstructor() {
                         />    
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 md:gap-3 space-y-3">
 
                         <CustomSelect
                             id="country_id"
