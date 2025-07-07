@@ -30,7 +30,7 @@ final class MainController
             'course.schools',
         ])
         ->orderBy('created_at', 'desc')
-        ->limit(4)
+        ->limit(3)
         ->get();
         
         $sliders = Slider::whereActive(true)->get();
