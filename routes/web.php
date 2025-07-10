@@ -1,62 +1,25 @@
 <?php
 
-use App\Enums\RolesEnum;
-use App\Mail\ContactMail;
-use App\Mail\LiquidationRequestMail;
-use App\Mail\LiquidationUpdateMail;
-use App\Mail\OrderUpdateMail;
-use App\Mail\WelcomeMail;
-use App\Models\User;
 use App\Http\Controllers\Main\DashboardController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use Modules\Finance\Models\Liquidation;
-use Modules\Operational\Models\ActiveCourse;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use Modules\Operational\Models\ActiveCourseStatus;
 
-Route::get('/', fn () => redirect()->route('frontend.index'))->name('home');
+
+Route::get('/home', fn () => redirect()->route('frontend.index'))->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-
-
-    // Route::get('dashboard', function () {
-    //     return Inertia::render('dashboard');
-    // })->name('dashboard');  
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'); 
 
     Route::get('test' , function () {
         
-        Permission::create(["name" => "slider.create"]);
-        Permission::create(["name" => "slider.read"]);
-        Permission::create(["name" => "slider.update"]);
-        Permission::create(["name" => "slider.delete"]);
-
-        $role = Role::findByName(RolesEnum::ADMIN->value);
-
-        $role->givePermissionTo("slider.create");
-        $role->givePermissionTo("slider.read");
-        $role->givePermissionTo("slider.update");
-        $role->givePermissionTo("slider.delete");
-        return;
-        // return new ContactMail();
-        $liquidation = Liquidation::first();
-        $activeCourse = ActiveCourse::first();
-        $user = User::first();
-        return new OrderUpdateMail(activeCourse: $activeCourse);
-        // Permission::create(["name" => "active-course.lessons"]);
-
-        $role = Role::findByName(RolesEnum::INSTRUCTOR->value);
-        $role->givePermissionTo("liquidation.create");
-
-        // $role = Role::findByName(RolesEnum::STUDENT->value);
-        // $role->givePermissionTo("active-course.read");
-    
-
-        // $role = Role::findByName(RolesEnum::ADMIN->value);
-        // $role->givePermissionTo("active-course.lessons");
+       
+        ActiveCourseStatus::find(1)->setTranslation('status', 'sq','Kerkuar');
+        ActiveCourseStatus::find(2)->setTranslation('status', 'sq','Aprovuar');
+        ActiveCourseStatus::find(3)->setTranslation('status', 'sq','Aktiv');
+        ActiveCourseStatus::find(4)->setTranslation('status', 'sq','Perfunduar');
+        ActiveCourseStatus::find(5)->setTranslation('status', 'sq','Refuzuar');
         
     return 'SUKSES FRATE';
      
