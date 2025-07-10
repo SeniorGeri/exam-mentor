@@ -13,11 +13,13 @@ import { SelectItem } from '@/components/ui/select';
 import CustomInput from '@/components/input/custom-input';
 import CustomTextarea from '@/components/input/custom-textarea';
 import { Button } from '@/components/ui/button';
+import { usePage } from '@inertiajs/react';
+import { InertiaLangPageProps } from '@/types/helpers';
 
 export default function CreateActiveCourse({ statuses, students, courseInstructors }: { statuses: ActiveCourseStatus[], students: User[], courseInstructors: CourseInstructor[] }) {
     const { t } = useTranslation('Operational');
 
-    console.log(statuses, students, courseInstructors);
+    const { languages } = usePage<InertiaLangPageProps>().props;
     
     const { data, setData, post, processing, errors } = useForm({
         status_id: '',
@@ -53,14 +55,14 @@ export default function CreateActiveCourse({ statuses, students, courseInstructo
                             id="status_id"
                             className='col-span-1'
                             value={data.status_id.toString()}
-                            text={statuses.find((count: ActiveCourseStatus) => count.id.toString() === data.status_id.toString())?.status['en'] || t('select_status')}
+                            text={statuses.find((count: ActiveCourseStatus) => count.id.toString() === data.status_id.toString())?.status[languages.main] || t('select_status')}
                             setFormData={setData}
                             placeholder={t('status')}
                             errorMessage={errors.status_id}
                         >
                             <>
                                 {statuses.map((status: ActiveCourseStatus) => (
-                                    <SelectItem key={status.id} value={status.id.toString()}>{status.status['en']}</SelectItem>
+                                    <SelectItem key={status.id} value={status.id.toString()}>{status.status[languages.main]}</SelectItem>
                                 ))}
                             </>
                         </CustomSelect>
@@ -83,14 +85,14 @@ export default function CreateActiveCourse({ statuses, students, courseInstructo
                             id="course_instructor_id"
                             className='col-span-1'
                             value={data.course_instructor_id.toString()}
-                            text={courseInstructors.find((count: CourseInstructor) => count.id.toString() === data.course_instructor_id.toString())?.course.title['en']  || t('select_course_instructor')}
+                            text={courseInstructors.find((count: CourseInstructor) => count.id.toString() === data.course_instructor_id.toString())?.course.title[languages.main]  || t('select_course_instructor')}
                             setFormData={setData}
                             placeholder={t('course_instructor')}
                             errorMessage={errors.course_instructor_id}
                         >
                             <>
                                 {courseInstructors.map((courseInstructor: CourseInstructor) => (
-                                    <SelectItem key={courseInstructor.id} value={courseInstructor.id.toString()}>{courseInstructor.course.title['en'] + ' - ' + courseInstructor.instructor.name}</SelectItem>
+                                    <SelectItem key={courseInstructor.id} value={courseInstructor.id.toString()}>{courseInstructor.course.title[languages.main] + ' - ' + courseInstructor.instructor.name}</SelectItem>
                                 ))}
                             </>
                         </CustomSelect>
