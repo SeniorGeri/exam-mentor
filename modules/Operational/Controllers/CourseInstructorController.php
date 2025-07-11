@@ -134,8 +134,9 @@ final class CourseInstructorController
 
         $courseInstructor->fill($request->validated())->save();
         
+
         CourseCurriculum::where("course_instructor_id", $courseInstructor->id)
-        ->whereNotIn('id', array_column($request->validated()['curricula'], 'id'))
+        ->whereNotIn('id',   array_filter(array_column($request->validated()['curricula'], 'id'), fn($value) => is_numeric($value)) )
         ->forceDelete();
 
         array_map(function ($curriculum) use ($courseInstructor) {
@@ -147,7 +148,7 @@ final class CourseInstructorController
         }, $request->validated()['curricula']);
 
         CourseIncludes::where("course_instructor_id", $courseInstructor->id)
-        ->whereNotIn('id', array_column($request->validated()['includes'], 'id'))
+        ->whereNotIn('id', array_filter(array_column($request->validated()['includes'], 'id'), fn($value) => is_numeric($value)) )
         ->forceDelete();
 
         array_map(function ($include) use ($courseInstructor) {
