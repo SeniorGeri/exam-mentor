@@ -122,7 +122,7 @@ export function OrderModal({ courseInstructor }: { courseInstructor: CourseInstr
               <div>
                 <p className="text-sm text-muted-foreground">{t("duration")}</p>
                 <p className="font-medium">
-                  {courseInstructor?.longevity || "0"} {t("hours")}
+                  {courseInstructor?.longevity || "0"} 
                 </p>
               </div>
             </div>
