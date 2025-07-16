@@ -64,6 +64,16 @@ export type Curriculum = {
     description: TranslatableField;
 }
 
+export type Video = {
+    id: number;
+    title: TranslatableField;
+    video_url: string;
+    is_free: boolean;
+    description: TranslatableField;
+}
+
+
+
 export type Include = {
     id: number;
     title: TranslatableField;

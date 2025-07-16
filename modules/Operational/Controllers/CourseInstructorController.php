@@ -18,6 +18,7 @@ use Modules\Finance\Models\PricingType;
 use Modules\Operational\Models\Course;
 use Modules\Operational\Models\CourseCurriculum;
 use Modules\Operational\Models\CourseIncludes;
+use Modules\Operational\Models\CourseInstructorVideo;
 use Modules\Operational\Requests\CourseInstructor\StoreCourseInstructorRequest;
 use Modules\Operational\Requests\CourseInstructor\UpdateCourseInstructorRequest;
 use Modules\Settings\Models\Language;
@@ -46,7 +47,7 @@ final class CourseInstructorController
         $courses = Course::all(['id', 'title']);
         $instructors = User::all(['id', 'name']);
         $pricingTypes = PricingType::all(['id', 'type']);
-        return Inertia::render('Operational::course-instructors/create', [
+        return Inertia::render('Operational::course-instructors/create/index', [
             'courses' => $courses,
             'instructors' => $instructors,
             'pricingTypes' => $pricingTypes,
@@ -63,6 +64,7 @@ final class CourseInstructorController
     {
         DB::beginTransaction();
         $courseInstructor = CourseInstructor::create($request->validated());
+
         array_map(function ($curriculum) use ($courseInstructor) {
             CourseCurriculum::create([
                 'course_instructor_id' => $courseInstructor->id,
@@ -70,12 +72,23 @@ final class CourseInstructorController
                 'description' => $curriculum['description'],
             ]);
         }, $request->validated()['curricula']);
+
         array_map(function ($include) use ($courseInstructor) {
             CourseIncludes::create([
                 'course_instructor_id' => $courseInstructor->id,
                 'title' => $include['title'],
             ]);
         }, $request->validated()['includes']);
+
+        array_map(function ($video) use ($courseInstructor) {
+            CourseInstructorVideo::create([
+                'course_instructor_id' => $courseInstructor->id,
+                'title' => $video['title'],
+                'video_url' => $video['video_url'],
+                'is_free' => $video['is_free'],
+                'description' => $video['description'],
+            ]);
+        }, $request->validated()['videos']);
         DB::commit();
 
         return to_route('course-instructor.list');

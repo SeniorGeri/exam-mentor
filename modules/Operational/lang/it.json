@@ -103,5 +103,9 @@
     "left": "Lezioni rimanenti",
     "liquidation": "Liquidazione",
     "create_liquidation": "Crea nuova richiesta di liquidazione",
-    "create_liquidation_desc": "Il modulo sottostante ti permette di creare nuove richieste di liquidazione"
+    "create_liquidation_desc": "Il modulo sottostante ti permette di creare nuove richieste di liquidazione",
+    "is_free": "Is gratis",
+    "video_url": "Video URL",
+    "videos": "Videos",
+    "add_video": "Add video"
 }

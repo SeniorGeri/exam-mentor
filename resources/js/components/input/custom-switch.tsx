@@ -12,7 +12,8 @@ export default function CustomSwitch({
     setFormData
 }: SwitchInterface) {
     return (
-        <div className={cn('grid gap-2', className)}>
+        <div className={cn('grid gap-2 flex flex-row items-center', className)}>
+            <Label htmlFor={id} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{placeholder}</Label>
             <Switch
                 id={id}
                 name={id}
@@ -20,7 +21,6 @@ export default function CustomSwitch({
                 checked={is_checked}
                 onCheckedChange={(checked: boolean) => setFormData(id, checked)}
             />
-            <Label htmlFor={id}>{placeholder}</Label>
         </div>
     );
 }

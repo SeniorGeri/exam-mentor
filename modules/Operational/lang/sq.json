@@ -103,5 +103,9 @@
     "left": "Mësime të mbetura",
     "liquidation": "Likuidimi",
     "create_liquidation": "Krijo kërkesë të re likuidimi",
-    "create_liquidation_desc": "Formulari më poshtë ju lejon të krijoni kërkesa të reja likuidimi"
+    "create_liquidation_desc": "Formulari më poshtë ju lejon të krijoni kërkesa të reja likuidimi",
+    "is_free": "Eshte free",
+    "video_url": "Video URL",
+    "videos": "Videos",
+    "add_video": "Add video"
 }
