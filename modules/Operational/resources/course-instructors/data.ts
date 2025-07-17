@@ -43,6 +43,7 @@ export type CourseInstructor = {
     image: string;
     curricula: Curriculum[];
     includes: Include[];
+    videos: Video[];
 }
 
 export type FormCurriculum = {
@@ -66,10 +67,10 @@ export type Curriculum = {
 
 export type Video = {
     id: number;
-    title: TranslatableField;
+    title: string;
     video_url: string;
     is_free: boolean;
-    description: TranslatableField;
+    description: string;
 }
 
 

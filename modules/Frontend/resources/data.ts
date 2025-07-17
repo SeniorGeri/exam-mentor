@@ -1,4 +1,4 @@
-import { Curriculum, Include } from '@/modules/Operational/resources/course-instructors/data';
+import { Curriculum, Include, Video } from '@/modules/Operational/resources/course-instructors/data';
 import { Grade } from '@/modules/Operational/resources/grades/data';
 import { School } from '@/modules/Operational/resources/schools/data';
 import { Subject } from '@/modules/Operational/resources/subjects/data';
@@ -34,6 +34,7 @@ export type CourseInstructor = {
     curricula: Curriculum[];
     course_active_count: number;
     description: string;
+    videos: Video[];
 }
 
 export type PricingType = {

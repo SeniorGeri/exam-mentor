@@ -15,6 +15,9 @@ use Modules\Operational\Models\CourseInstructor;
 use Inertia\Inertia;
 use Inertia\Response;
 use Modules\Finance\Models\PricingType;
+use Modules\Operational\Actions\AddCourseInstructorCurricula;
+use Modules\Operational\Actions\AddCourseInstructorIncludes;
+use Modules\Operational\Actions\AddCourseInstructorVideos;
 use Modules\Operational\Models\Course;
 use Modules\Operational\Models\CourseCurriculum;
 use Modules\Operational\Models\CourseIncludes;
@@ -65,30 +68,10 @@ final class CourseInstructorController
         DB::beginTransaction();
         $courseInstructor = CourseInstructor::create($request->validated());
 
-        array_map(function ($curriculum) use ($courseInstructor) {
-            CourseCurriculum::create([
-                'course_instructor_id' => $courseInstructor->id,
-                'title' => $curriculum['title'],
-                'description' => $curriculum['description'],
-            ]);
-        }, $request->validated()['curricula']);
+        AddCourseInstructorCurricula::execute($request, $courseInstructor);
+        AddCourseInstructorIncludes::execute($request, $courseInstructor);
+        AddCourseInstructorVideos::execute($request, $courseInstructor);
 
-        array_map(function ($include) use ($courseInstructor) {
-            CourseIncludes::create([
-                'course_instructor_id' => $courseInstructor->id,
-                'title' => $include['title'],
-            ]);
-        }, $request->validated()['includes']);
-
-        array_map(function ($video) use ($courseInstructor) {
-            CourseInstructorVideo::create([
-                'course_instructor_id' => $courseInstructor->id,
-                'title' => $video['title'],
-                'video_url' => $video['video_url'],
-                'is_free' => $video['is_free'],
-                'description' => $video['description'],
-            ]);
-        }, $request->validated()['videos']);
         DB::commit();
 
         return to_route('course-instructor.list');
@@ -127,7 +110,7 @@ final class CourseInstructorController
         $pricingTypes = PricingType::all(['id', 'type']);
         
         return Inertia::render('Operational::course-instructors/edit/index', [
-            'courseInstructor' => $courseInstructor->load(['curricula', 'includes']),
+            'courseInstructor' => $courseInstructor->load(['curricula', 'includes', 'videos']),
             'courses' => $courses,
             'instructors' => $instructors,
             'pricingTypes' => $pricingTypes,
@@ -147,29 +130,10 @@ final class CourseInstructorController
 
         $courseInstructor->fill($request->validated())->save();
         
+        AddCourseInstructorCurricula::edit($request, $courseInstructor);
+        AddCourseInstructorIncludes::edit($request, $courseInstructor);
+        AddCourseInstructorVideos::edit($request, $courseInstructor);
 
-        CourseCurriculum::where("course_instructor_id", $courseInstructor->id)
-        ->whereNotIn('id',   array_filter(array_column($request->validated()['curricula'], 'id'), fn($value) => is_numeric($value)) )
-        ->forceDelete();
-
-        array_map(function ($curriculum) use ($courseInstructor) {
-            CourseCurriculum::updateOrCreate(['id' => $curriculum['id']], [
-                'course_instructor_id' => $courseInstructor->id,
-                'title' => $curriculum['title'],
-                'description' => $curriculum['description'],
-            ]);
-        }, $request->validated()['curricula']);
-
-        CourseIncludes::where("course_instructor_id", $courseInstructor->id)
-        ->whereNotIn('id', array_filter(array_column($request->validated()['includes'], 'id'), fn($value) => is_numeric($value)) )
-        ->forceDelete();
-
-        array_map(function ($include) use ($courseInstructor) {
-            CourseIncludes::updateOrCreate(['id' => $include['id']], [
-                'course_instructor_id' => $courseInstructor->id,
-                'title' => $include['title'],
-            ]);
-        }, $request->validated()['includes']);
         DB::commit();
 
         return to_route('course-instructor.list');

@@ -33,7 +33,7 @@ final class StoreCourseInstructorRequest extends FormRequest
             'price' => ['required', 'integer'],
             'longevity' => ['required', 'string'],
             'lessons' => ['required', 'integer'],
-            'description' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
             'image' => ['nullable', 'string'],
             'curricula' => ['nullable', 'array'],
             'includes' => ['nullable', 'array'],

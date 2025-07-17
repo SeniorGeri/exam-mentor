@@ -6,7 +6,7 @@ import { Clock, BookOpen, Award, Users, CheckCircle, MessageCircleMore } from "l
 import { useTranslation } from 'react-i18next';
 import { useLocale } from "@/contexts/locale";
 import { CourseInstructor } from "../data";
-import { Curriculum } from "@/modules/Operational/resources/course-instructors/data"
+import { Curriculum, Video } from "@/modules/Operational/resources/course-instructors/data"
 import { OrderModal } from "../components/order-modal"
 
 export default function OneOnOne({ course }: { course: CourseInstructor }) {
@@ -23,11 +23,21 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                 <div className="md:col-span-2 space-y-6">
                     {/* Course Image */}
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                        <img
-                            src={course.image ?? course.course.image}
-                            alt="Course thumbnail"
-                            className="w-full h-full object-cover"
-                        />
+                        {course.videos.length > 0 ? (
+
+                        <iframe className="w-full h-full object-cover"  
+                            src={course.videos[0].video_url+'?modestbranding=1&rel=0'} 
+                            title={course.videos[0].title}
+                            allow="accelerometer; autoplay; encrypted-media; picture-in-picture;" 
+                            allowFullScreen>
+                        </iframe>
+                        ): (
+                            <img
+                                src={course.image ?? course.course.image}
+                                alt="Course thumbnail"
+                                className="w-full h-full object-cover"
+                            />
+                        )}    
                     </div>
 
                     {/* Course Title and Instructor */}
@@ -130,10 +140,45 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                             </Accordion>
                         </div>
                     )}
+
+                    {course.videos.length > 1 && (
+                           <div className="space-y-4">
+                           <h2 className="text-2xl font-semibold">{t('course_videos')}</h2>
+                           <Accordion type="single" collapsible className="w-full">
+                               {course.videos.slice(1).map((video: Video) => (
+                                   <AccordionItem value={`video-${video.id}`}>
+                                       <AccordionTrigger>
+                                           <div className="flex justify-between w-full pr-4">
+                                               <span>{video.title}</span>
+                                               {/* <span className="text-sm text-muted-foreground">5 lessons • 3.5 hours</span> */}
+                                           </div>
+                                       </AccordionTrigger>
+                                       <AccordionContent>
+                                       <iframe className="w-full h-full object-cover min-h-[360px]"  
+                                            src={video.video_url+'?modestbranding=1&rel=0'} 
+                                            title={video.title}
+                                            allow="accelerometer; autoplay; encrypted-media; picture-in-picture;" 
+                                            allowFullScreen>
+                                        </iframe>
+                                       </AccordionContent>
+                                   </AccordionItem>
+                               ))}
+                           </Accordion>
+                       </div>
+                    )}
                 </div>
 
                 {/* Purchase Card */}
                 <div className="md:col-span-1">
+                    {course.videos.length > 0 && (
+                        <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-6">
+                            <img
+                                src={course.image ?? course.course.image}
+                                alt="Course thumbnail"
+                                className="w-full h-full object-cover"
+                        />
+                        </div>
+                    )}    
                     <div className="sticky top-8 border rounded-xl p-6 shadow-sm space-y-6">
                         <div className="text-3xl font-bold">{formattedPrice}</div>
                         <div className="space-y-2">

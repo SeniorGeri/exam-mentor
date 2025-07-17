@@ -37,7 +37,9 @@ final class UpdateCourseInstructorRequest extends FormRequest
             'description' => ['required', 'string'],
             'image' => ['nullable', 'string'],
             'curricula' => ['nullable', 'array'],
-            'includes' => ['nullable', 'array']
+            'includes' => ['nullable', 'array'],
+            'videos' => ['nullable', 'array'],
+                
         ];
     }
 }

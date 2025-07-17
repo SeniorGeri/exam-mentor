@@ -58,6 +58,11 @@ final class CourseInstructor extends Model
         return $this->hasMany(CourseCurriculum::class);
     }
 
+    public function videos(): HasMany
+    {
+        return $this->hasMany(CourseInstructorVideo::class);
+    }
+
     public function includes(): HasMany
     {
         return $this->hasMany(CourseIncludes::class);

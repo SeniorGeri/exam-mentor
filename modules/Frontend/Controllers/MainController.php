@@ -87,6 +87,7 @@ final class MainController
         $course = CourseInstructor::whereId($courseInstructor)
         ->with([
             'course:id,title,image,description',
+            'videos' => fn($query) => $query->whereIsFree(true),
             'pricingType:id,type',
             'instructor:id,name,profile_pic,specialization',
             'language:id,language',
