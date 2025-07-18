@@ -43,7 +43,7 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                     {/* Course Title and Instructor */}
                     <div>
                         <h1 className="text-3xl font-bold mb-4">{course.course.title[currentLocale]}</h1>
-                        <div className="flex items-center gap-3 mb-4">
+                        {/* <div className="flex items-center gap-3 mb-4">
                             <Avatar>
                                 <AvatarImage src={course.instructor?.profile_pic} alt="Instructor" />
                                 <AvatarFallback>{course.instructor.name.charAt(0)}</AvatarFallback>
@@ -52,7 +52,7 @@ export default function OneOnOne({ course }: { course: CourseInstructor }) {
                                 <p className="font-medium">{course.instructor.name}</p>
                                 <p className="text-sm text-muted-foreground">{course.instructor.specialization}</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Course Tags */}

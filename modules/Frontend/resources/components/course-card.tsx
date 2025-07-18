@@ -46,10 +46,10 @@ export default function CourseCard({
           <div className="space-y-4">
             <div className="space-y-2">
               <h3 className="font-serif font-semibold text-2xl leading-tight tracking-tight">{course.title[currentLocale]}</h3>
-              <div className="flex items-center gap-2 text-white/80">
+              {/* <div className="flex items-center gap-2 text-white/80">
                 <User className="h-4 w-4" />
                 <span className="text-sm font-medium">{instructor.name}</span>
-              </div>
+              </div> */}
             </div>
 
             <div className="pt-3 border-t border-white/20">
